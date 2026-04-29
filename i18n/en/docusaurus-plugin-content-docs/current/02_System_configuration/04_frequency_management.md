@@ -10,9 +10,6 @@ import TabItem from '@theme/TabItem';
 
 
 
-:::info Note
-The following information does not apply to the `RDK Ultra` development board.
-:::
 
 ## X3 Thermal Control
 
@@ -112,7 +109,7 @@ sudo bash -c "echo 1000000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_set
 #### CPU Overclocking
 
 :::info NOTE
-The following content applies to the `RDK X3` and `RDK X3 Module` development boards, but not to the `RDK Ultra` board.
+The following content applies to the `RDK X3` and `RDK X3 Module` development boards.
 :::
 
 <!-- Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=14 -->

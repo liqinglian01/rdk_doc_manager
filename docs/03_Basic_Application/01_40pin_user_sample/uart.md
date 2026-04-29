@@ -8,8 +8,6 @@ RDK X3 在 40PIN 上默认使能 UART3，物理管脚号 8 和 10，IO电压 3.3
 
 RDK X5 在 40PIN 上默认使能 UART1，物理管脚号 8 和 10，IO电压 3.3V。
 
-RDK Ultra 在 40PIN 上默认使能 UART2，物理管脚号 8 和 10，IO电压 3.3V。
-
 请参阅 `/app/40pin_samples/test_serial.py`了解如何使用串口的详细信息。
 
 ## 回环测试
@@ -24,7 +22,7 @@ RDK Ultra 在 40PIN 上默认使能 UART2，物理管脚号 8 和 10，IO电压 
 ### 测试过程
 
 - 运行 `python3 /app/40pin_samples/test_serial.py`
-- 从打印的串口设备（其中 /dev/ttyS0 是系统调试口，不建议对它进行测试，除非你完全明白它的作用）中选择总线号和片选号作为输入选项，例如 RDK X3 选择测试 `/dev/ttyS3`，RDK X5 选择测试 `/dev/ttyS1`，RDK Ultra 选择测试 `/dev/ttyS2` 按回车键确认，并输入波特率参数：
+- 从打印的串口设备（其中 /dev/ttyS0 是系统调试口，不建议对它进行测试，除非你完全明白它的作用）中选择总线号和片选号作为输入选项，例如 RDK X3 选择测试 `/dev/ttyS3`，RDK X5 选择测试 `/dev/ttyS1`，按回车键确认，并输入波特率参数：
 
 ```
 List of enabled UART:

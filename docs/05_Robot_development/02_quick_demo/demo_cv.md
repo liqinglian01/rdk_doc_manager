@@ -387,7 +387,6 @@ ros2 launch hobot_cv hobot_cv_crop.launch.py
 | ------- | ------------- |
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
 | RDK X5, RDK X5 Module, RDK S100 | Ubuntu 22.04 (Humble) |
-| RDK Ultra| Ubuntu 20.04 (Foxy)  |
 | X86     | Ubuntu 20.04 (Foxy) |
 
 ### 准备工作

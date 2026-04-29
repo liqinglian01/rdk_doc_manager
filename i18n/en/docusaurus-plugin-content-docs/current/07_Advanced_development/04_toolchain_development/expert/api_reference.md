@@ -85,7 +85,7 @@ default_qat_8bit_lsq_quant_qconfig = get_default_qconfig(
     )
 ```
 
-**RDK Ultra**
+**RDK X5**
 
 ```python
 

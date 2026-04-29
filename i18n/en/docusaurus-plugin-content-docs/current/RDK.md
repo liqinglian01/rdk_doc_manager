@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # D-Robotics RDK Suite
 
-This document is the user manual for the D-Robotics RDK Suite. It provides developers with usage instructions and development guidance for products such as RDK X3 (Sunrise X3 Pi), RDK X3 Module (Sunrise X3 Module), RDK X5, RDK X5 Module (Sunrise X5 Module), and RDK Ultra. The content covers hardware design, system customization, application development, algorithm toolchains, and more.
+This document is the user manual for the D-Robotics RDK Suite. It provides developers with usage instructions and development guidance for products such as RDK X3 (Sunrise X3 Pi), RDK X3 Module (Sunrise X3 Module), RDK X5, and RDK X5 Module (Sunrise X5 Module). The content covers hardware design, system customization, application development, algorithm toolchains, and more.
 
 :::tip 💾 Download Resources Summary
 
@@ -31,7 +31,7 @@ To check your system version, use the command `cat /etc/version`. For version 2.
 
 ## Overview of D-Robotics RDK Suite
 
-**D-Robotics Developer Kits** (RDK Suite) are developer kits based on D-Robotics intelligent chips, including RDK X3 (Sunrise X3 Pi), RDK X3 Module (Sunrise X3 Module), RDK X5, and RDK Ultra.
+**D-Robotics Developer Kits** (RDK Suite) are developer kits based on D-Robotics intelligent chips, including RDK X3 (Sunrise X3 Pi), RDK X3 Module (Sunrise X3 Module), and RDK X5.
 
 With the TogetheROS.Bot robot middleware, the RDK Suite helps developers quickly build robot prototypes for evaluation and validation.
 

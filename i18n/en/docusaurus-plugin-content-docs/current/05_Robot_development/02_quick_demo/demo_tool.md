@@ -27,12 +27,10 @@ Code repository: (https://github.com/D-Robotics/hobot_image_publisher.git)
 | ------- | ------------ |
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
 | RDK X5, RDK X5 Module, RDK S100 | Ubuntu 22.04 (Humble) |
-| RDK Ultra | Ubuntu 20.04 (Foxy) |
 | X86     | Ubuntu 20.04 (Foxy) |
 
 :::caution
-The X86 platform does not support decoding H.264 or H.265 videos into NV12 format; therefore, H.264/H.265 video publishing functionality cannot be demonstrated on X86 platforms.  
-RDK Ultra does not support decoding H.264 videos into NV12 format; therefore, H.264 video publishing functionality cannot be demonstrated on RDK Ultra platforms.
+The X86 platform does not support decoding H.264 or H.265 videos into NV12 format; therefore, H.264/H.265 video publishing functionality cannot be demonstrated on X86 platforms.
 :::
 
 ### Prerequisites

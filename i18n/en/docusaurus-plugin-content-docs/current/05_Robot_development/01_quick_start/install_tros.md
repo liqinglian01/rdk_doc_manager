@@ -27,7 +27,7 @@ Before installing TogetheROS, confirm your system version and download the lates
 
 
 <Tabs groupId="tros-distro">
-<TabItem value="RDK X3/X5/Ultra" label="RDK X3/X5/Ultra">
+<TabItem value="RDK X3/X5" label="RDK X3/X5">
 
 **Note for RDK X3 platform users:**
 

@@ -9,7 +9,7 @@ RDK uses the configuration file `config.txt` to set system configurations during
 
 :::info Note
 
-1. The `config.txt` configuration file is only applicable to the `RDK X3`、`RDK X5` and `RDK X3 Module` development boards and not for the `RDK Ultra` development board.
+1. The `config.txt` configuration file is only applicable to the `RDK X3`, `RDK X5`, and `RDK X3 Module` development boards.
 
 2. The system version must be at least `2.1.0`.
 

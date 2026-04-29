@@ -17,7 +17,6 @@ sidebar_position: 0
 - RDK X3（旭日 X3 派）
 - RDK X3 Module（旭日 X3 模组）
 - RDK X5
-- RDK Ultra
 - RDK S100 系列
 
 搭配 TogetheROS.Bot 机器人中间件，RDK 套件可以帮助发者快速搭建机器人原型，开展评测和验证工作。

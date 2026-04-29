@@ -37,10 +37,6 @@ Code repositories:
 | RDK X3, RDK X3 Module             | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
 | RDK X5, RDK X5 Module, RDK S100   | Ubuntu 22.04 (Humble)                |
 
-:::caution
-***The RDK Ultra platform supports zero-copy data communication, but the zero-copy performance benchmarking package is not yet available.***
-:::
-
 ### Preparation
 
 #### RDK

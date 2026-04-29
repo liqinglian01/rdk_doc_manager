@@ -13,7 +13,7 @@ Many issues can be resolved through system updates. For related download resourc
 For certified accessories and purchase links, please refer to the [Certified Accessories List](https://developer.d-robotics.cc/rdk_doc/Advanced_development/hardware_development/rdk_x3/accessory).
 
 ### Q1: What is the D-Robotics RDK Kit?
-**A:** D-Robotics Developer Kits, abbreviated as [D-Robotics RDK Kits](https://developer.d-robotics.cc/rdk_doc/), are robot developer kits based on D-Robotics intelligent chips. The main series currently include **RDK X3 (Sunrise X3 Pi)**, **RDK X3 Module**, **RDK X5**, **RDK X5 Module**, **RDK Ultra** and **RDK S100**.
+**A:** D-Robotics Developer Kits, abbreviated as [D-Robotics RDK Kits](https://developer.d-robotics.cc/rdk_doc/), are robot developer kits based on D-Robotics intelligent chips. The main series currently include **RDK X3 (Sunrise X3 Pi)**, **RDK X3 Module**, **RDK X5**, **RDK X5 Module**, and **RDK S100**.
 
 ### Q2: How to check the system version of an RDK board?
 **A:** After logging into the RDK board, you can use the following commands:
@@ -788,7 +788,7 @@ Which method(s) to use depends on the specific error, available resources, and b
 **A:** To cross-compile applications for RDK boards (usually ARM architecture), you generally need to set up a cross-compilation toolchain and the corresponding target system SDK (sysroot) on an x86 Linux development host (Ubuntu LTS versions like 20.04 or 22.04 are recommended). The specific steps depend on the type of program you want to compile (e.g., regular Linux C/C++ programs, ROS/TROS packages) and the target RDK model and system version.
 
 1.  **Compiling regular Linux C/C++ applications:**
-    * **Obtain the cross-compilation toolchain:** D-Robotics provides a toolchain for each RDK series (e.g., X3, X5, Ultra), usually as part of the SDK or as a separate download. The toolchain includes `aarch64-linux-gnu-gcc`, `aarch64-linux-gnu-g++`, etc.
+    * **Obtain the cross-compilation toolchain:** D-Robotics provides a toolchain for each RDK series (e.g., X3, X5), usually as part of the SDK or as a separate download. The toolchain includes `aarch64-linux-gnu-gcc`, `aarch64-linux-gnu-g++`, etc.
     * **Install and configure the toolchain:** Follow the official docs to extract the toolchain to a suitable path (e.g., `/opt/toolchains/`). Add the toolchain's `bin` directory to your host's `PATH` so the system can find the cross-compilation commands.
     * **Prepare the sysroot:** Cross-compilation requires not only the compiler but also the target board's libraries (glibc, libstdc++, and other dependencies) and headers. This collection is called the sysroot. You can extract it from the official RDK SDK or copy it from a flashed RDK board's root filesystem. Specify the sysroot path with the compiler's `--sysroot=<path_to_sysroot>` parameter.
     * **Using CMake for cross-compilation:** If your project uses CMake, create a toolchain file (e.g., `aarch64-rdk.cmake`) specifying:

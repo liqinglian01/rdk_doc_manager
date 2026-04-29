@@ -22,7 +22,6 @@ Code repository: (https://github.com/D-Robotics/hobot_vio.git)
 | ------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
 | RDK X3, RDK X3 Module     | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) | Uses RealSense camera images and IMU data as algorithm inputs; outputs the robot’s trajectory, which can be visualized in rviz2 on a PC |
 | RDK X5, RDK X5 Module     | Ubuntu 22.04 (Humble)                      | Uses RealSense camera images and IMU data as algorithm inputs; outputs the robot’s trajectory, which can be visualized in rviz2 on a PC |
-| RDK Ultra                 | Ubuntu 20.04 (Foxy)                        | Uses RealSense camera images and IMU data as algorithm inputs; outputs the robot’s trajectory, which can be visualized in rviz2 on a PC |
 
 ## Prerequisites
 

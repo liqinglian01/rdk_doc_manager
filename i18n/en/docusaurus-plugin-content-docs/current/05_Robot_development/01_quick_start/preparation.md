@@ -20,7 +20,7 @@ The following sections describe environment preparation details for the RDK and 
 Before installing tros.b, we recommend upgrading your RDK system image to the latest version. Instructions for flashing Ubuntu 20.04/Ubuntu 22.04 images are as follows:
 
 <Tabs groupId="tros-distro">
-<TabItem value="RDK X3/X5/Ultra" label="RDK X3/X5/Ultra">
+<TabItem value="RDK X3/X5" label="RDK X3/X5">
 
 [Ubuntu Image Flashing Guide](/install_os/)
 
@@ -54,7 +54,7 @@ To ensure smooth installation and use of tros.b later on, please log in using th
 During development and testing, you will frequently need to access the RDK via commands like `scp`/`ssh` using its IP address. Therefore, we recommend configuring the network dynamically, as described below:
 
 <Tabs groupId="tros-distro">
-<TabItem value="RDK X3/X5/Ultra" label="RDK X3/X5/Ultra">
+<TabItem value="RDK X3/X5" label="RDK X3/X5">
 
 [Network Configuration](../../02_System_configuration/01_network_blueteeth.md)
 

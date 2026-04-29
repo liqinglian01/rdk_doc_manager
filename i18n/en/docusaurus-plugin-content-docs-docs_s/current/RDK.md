@@ -17,7 +17,6 @@ To check the system version number, users can run the command `cat /etc/version`
 - RDK X3 (Sunrise X3 Pi)
 - RDK X3 Module (Sunrise X3 Module)
 - RDK X5
-- RDK Ultra
 - RDK S100 Series
 
 Combined with the TogetherROS.Bot robot middleware, the RDK Kits enable developers to rapidly build robot prototypes and carry out evaluation and validation tasks.

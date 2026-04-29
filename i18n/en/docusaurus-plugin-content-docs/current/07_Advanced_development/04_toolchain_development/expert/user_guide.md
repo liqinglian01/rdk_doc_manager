@@ -744,7 +744,7 @@ def convert_fx(
 
    - For non-`module` operations, if separate `qconfig` settings or specifying running on CPU is required, they need to be encapsulated into a `module`. Please refer to `_SeluModule` in the example for details.
 
-2. Set `march`. Set `bernoulli2` for **RDK X3** and set `bayes` for **RDK Ultra**.
+2. Set `march`. Set `bernoulli2` for **RDK X3** and set `bayes` for **RDK X5**.
 
 3. Set `qconfig`. Retain the configuration method of setting `qconfig` within `module` in non-heterogeneous mode. In addition to this, `qconfig` can also be passed through the `qconfig_dict` parameter of the `prepare_qat_fx` interface. For detailed usage, please refer to the interface parameter description.
 
@@ -756,7 +756,7 @@ def convert_fx(
 
 :::caution Note
 
-Currently, only the **RDK Ultra** with the BPU architecture set to `BAYES` supports setting the `int16` quantization.
+Currently, only the **RDK X5** with the BPU architecture set to `BAYES` supports setting the `int16` quantization.
 :::
 
 4. Set `hybrid_dict`. Optional, for detailed usage, please refer to the interface parameter description. If there are no explicitly specified CPU ops, `hybrid_dict` does not need to be set.
@@ -841,7 +841,7 @@ x = self.conv4(x)
 x = self.selu(x)
 return self.dequant(x)
 
-# Set march **RDK X3** to BERNOULLI2, and set **RDK Ultra** to BAYES.
+# Set march **RDK X3** to BERNOULLI2, and set **RDK X5** to BAYES.
 set_march(March.BAYES)
 data_shape = [1, 3, 224, 224]
 data = torch.rand(size=data_shape)
@@ -1184,7 +1184,7 @@ class TestFuseNet(nn.Module):
         x = self.relu(x)
         return self.dequant(x)
 
-# **RDK X3** sets BERNOULLI2, **RDK Ultra** sets BAYES.
+# **RDK X3** sets BERNOULLI2, **RDK X5** sets BAYES.
 set_march(March.BAYES)
 device = torch.device("cpu")
 data = torch.arange(1 * 3 * 4 * 4) / 100 + 1
@@ -1621,7 +1621,7 @@ class TestFuseNet(nn.Module):
 
 float_net = TestFuseNet(3)
 
-# **RDK X3** set BERNOULLI2, **RDK Ultra** set BAYES
+# **RDK X3** set BERNOULLI2, **RDK X5** set BAYES
 set_march(March.BAYES)
 
 # Manually construct unsupported or special cases
@@ -1873,7 +1873,7 @@ class Net(nn.Module):
             x = self.float_ops(x)
         return x
 
-# **RDK X3** set BERNOULLI2， **RDK Ultra** set as BAYES。
+# **RDK X3** set BERNOULLI2， **RDK X5** set as BAYES。
 set_march(March.BAYES)
 device = torch.device("cuda")
 float_net = Net(quant=True, share_op=True).to(device)
@@ -2023,7 +2023,7 @@ class Net(nn.Module):
             x = self.float_ops(x)
         return x
 
-# **RDK X3** set BERNOULLI2， **RDK Ultra** set as BAYES。
+# **RDK X3** set BERNOULLI2， **RDK X5** set as BAYES。
 set_march(March.BAYES)
 device = torch.device("cuda")
 float_net = Net(quant=True, share_op=True).to(device)
@@ -2145,7 +2145,7 @@ Calculate the numerical features `min/max/mean/var/scale` for each layer's input
 
 :::caution Note
 
-Currently, only the **RDK Ultra** with BPU architecture set to `BAYES` supports setting `int16` quantization.
+Currently, only the **RDK X5** with BPU architecture set to `BAYES` supports setting `int16` quantization.
 :::
 
 ```python
@@ -2290,7 +2290,7 @@ class Net(nn.Module):
             x = self.float_ops(x)
         return x
 
-# **RDK X3** set BERNOULLI2, **RDK Ultra** set BAYES.
+# **RDK X3** set BERNOULLI2, **RDK X5** set BAYES.
 set_march(March.BAYES)
 device = torch.device("cuda")
 float_net = Net(quant=True, share_op=True).to(device)
@@ -2325,7 +2325,7 @@ After running, the following files will be generated in the current directory or
 
 :::caution Note
 
-Currently, only the **RDK Ultra** with BPU architecture set to "BAYES" supports setting "int16" quantization.
+Currently, only the **RDK X5** with BPU architecture set to "BAYES" supports setting "int16" quantization.
 :::
 
 ```
@@ -2340,7 +2340,7 @@ Currently, only the **RDK Ultra** with BPU architecture set to "BAYES" supports 
 
 :::caution Note
 
-Currently, only **RDK Ultra** with BPU architecture set to "BAYES" supports "int16" quantization.
+Currently, only **RDK X5** with BPU architecture set to "BAYES" supports "int16" quantization.
 :::
 
 Under normal circumstances, the statistic.txt file will contain two tables in the above format, one is the statistics of each layer printed in the order of the model forward; the other is the statistics of each layer printed in descending order of the quantization data range, which is convenient for you to quickly locate the layers with large value ranges. If there are NaN or inf in some layers of the model, the statistic.txt file will also include an additional table indicating which layers have NaN or inf, and this table will be printed on the screen to remind you to check these abnormal layers.
@@ -2526,7 +2526,7 @@ from torch.quantization import DeQuantStub, QuantStub
 # Resnet18 definition is omitted here
 float_net = Resnet18().to(device)
 
-# Set BERNOULLI2 for **RDK X3**, Set BAYES for **RDK Ultra**.
+# Set BERNOULLI2 for **RDK X3**, Set BAYES for **RDK X5**.
 set_march(March.BAYES)
 float_net.qconfig = get_default_qat_qconfig()
 float_net2 = deepcopy(float_net)
@@ -2649,7 +2649,7 @@ class HyperQuantModel(nn.Module):
 shape = np.random.randint(10, 20, size=4).tolist()
 data = torch.rand(size=shape)
 
-# Set BERNOULLI2 for **RDK X3** and BAYES for **RDK Ultra**.
+# Set BERNOULLI2 for **RDK X3** and BAYES for **RDK X5**.
 set_march(March.BAYES)
 model = HyperQuantModel(shape[1])
 
@@ -2832,7 +2832,7 @@ model = TestFuseNet(3)
 set_preserve_qat_mode(float_net, ("convmod1"), ())
 model.convmod1.preserve_qat_mode = True
 
-# Set BERNOULLI2 for **RDK X3** and BAYES for **RDK Ultra**.
+# Set BERNOULLI2 for **RDK X3** and BAYES for **RDK X5**.
 set_march(March.BAYES)
 qat_net = prepare_qat_fx(model, {"": default_qat_8bit_fake_quant_qconfig})
 quant_model = horizon.quantization.convert_fx(qat_net)
@@ -2936,7 +2936,7 @@ class HybridModel(nn.Module):
         return self.dequant(x)     
         
 
-# **RDK X3** set BERNOULLI2, **RDK Ultra** set to BAYES.
+# **RDK X3** set BERNOULLI2, **RDK X5** set to BAYES.
 set_march(March.BAYES)
 shape = np.random.randint(10, 20, size=4).tolist()
 infer_shape = [1] + shape[1:]
@@ -3023,7 +3023,7 @@ Parameters:
     example_inputs: Model inputs.
     out_dir: The path to save the results. If None, it will be saved in the current path. Default is None.
     march: BPU architecture to use. If None, it will automatically use get_march() to get the current specified architecture.
-        Default is None. For **RDK X3**, set to BERNOULLI2, for **RDK Ultra**, set to BAYES.
+        Default is None. For **RDK X3**, set to BERNOULLI2, for **RDK X5**, set to BAYES.
     mark_node_func: Function to mark which nodes in the ScriptModule need to save results.
         If None, use the default marking function. Default is None.
     compare_with_hbdk_parser: Whether to compare the results of each op in the ScriptModule with the results parsed by HBDK.
@@ -3097,7 +3097,7 @@ class Net(nn.Module):
         x = self.dequant_stub(x)
         return x
 
-# Set BERNOULLI2 for RDK X3 and BAYES for RDK Ultra.
+# Set BERNOULLI2 for RDK X3 and BAYES for RDK X5.
 set_march(March.BAYES)
 device = torch.device("cpu")
 data = torch.rand((1, 10, 5, 5), device=device)
@@ -3110,7 +3110,7 @@ qat_net(*data)
 bpu_net = convert_fx(qat_net)
 script_module = torch.jit.trace(bpu_net.eval(), data)
 
-# Set BERNOULLI2 for RDK X3 and BAYES for RDK Ultra.
+# Set BERNOULLI2 for RDK X3 and BAYES for RDK X5.
 script_profile(bpu_net, data, march=March.BAYES)
 ```
 
@@ -3166,7 +3166,7 @@ Parameters:
     model2: ScriptModule generated by another version of horizon_plugin_pytorch.
     example_inputs: Model inputs.
     march: BPU architecture to use. If None, it will automatically use get_march() to get the current specified architecture.
-        Default is None. For **RDK X3**, set to BERNOULLI2, for **RDK Ultra**, set to BAYES.
+        Default is None. For **RDK X3**, set to BERNOULLI2, for **RDK X5**, set to BAYES.
 """
 ```
 
@@ -3229,7 +3229,7 @@ class Net(nn.Module):
         x = self.dequant_stub(x)
         return x
 
-# **RDK X3** set BERNOULLI2， **RDK Ultra** set BAYES。
+# **RDK X3** set BERNOULLI2， **RDK X5** set BAYES。
 set_march(March.BAYES)
 device = torch.device("cpu")
 data = torch.rand((1, 10, 5, 5), device=device)
@@ -3464,7 +3464,7 @@ We recommend the following steps to identify layers that may have insufficient q
 
      :::caution Note
 
-     Currently, only the **RDK Ultra** with BPU architecture as "BAYES" supports setting "int16" quantization.
+     Currently, only the **RDK X5** with BPU architecture as "BAYES" supports setting "int16" quantization.
      :::
 
      Taking image input as an example, since the original image (whether it is RGB or YUV) has a range of [0, 255], it is not suitable for symmetric quantization. After normalization with respect to 0, the input range becomes [-1, 1], and it can be directly quantized using a fixed scale of 1/128.0.
@@ -3483,7 +3483,7 @@ We recommend the following steps to identify layers that may have insufficient q
 
     :::caution Note
 
-        Currently, only **RDK Ultra** with BPU architecture "BAYES" supports setting "int16" quantization.
+        Currently, only **RDK X5** with BPU architecture "BAYES" supports setting "int16" quantization.
     :::
 
     :::caution Note
@@ -3505,7 +3505,7 @@ We recommend the following steps to identify layers that may have insufficient q
 
             :::caution Note
 
-                Currently, only **RDK Ultra** with BPU architecture "BAYES" supports setting "int16" quantization.
+                Currently, only **RDK X5** with BPU architecture "BAYES" supports setting "int16" quantization.
             :::
 
             3. If encountering patterns like conv-[bn]-[add]-relu, trying to specify the use of relu6 in the QAT stage may be effective (not guaranteed).
@@ -3537,7 +3537,7 @@ We recommend the following steps to identify layers that may have insufficient q
 
                 :::caution Caution
 
-                    Currently, only the **RDK Ultra** with "BAYES" as the BPU architecture supports setting "int16" quantization.
+                    Currently, only the **RDK X5** with "BAYES" as the BPU architecture supports setting "int16" quantization.
                 :::
 
         2. Non-linear activation operators, such as "reciprocal". If the operator itself has large fluctuations in certain interval values, it is generally implemented through table lookup. Due to the limited number of table entries, insufficient resolution may occur when the output is in a steep range. Try the following improvements:
@@ -3550,7 +3550,7 @@ We recommend the following steps to identify layers that may have insufficient q
 
                 :::caution Caution
 
-                    Currently, only the **RDK Ultra** with "BAYES" as the BPU architecture supports setting "int16" quantization.
+                    Currently, only the **RDK X5** with "BAYES" as the BPU architecture supports setting "int16" quantization.
                 :::
 
             4. If the QAT precision is normal but the quantized precision is insufficient, try manually adjusting the table lookup parameters.
@@ -3563,7 +3563,7 @@ We recommend the following steps to identify layers that may have insufficient q
 
     :::caution Caution
 
-        Currently, only the **RDK Ultra** with "BAYES" as the BPU architecture supports setting "int16" quantization.
+        Currently, only the **RDK X5** with "BAYES" as the BPU architecture supports setting "int16" quantization.
 
         Debug cost: If it is necessary to adjust the input range or operator in the above three cases, retraining float is required. If int16 quantization is to be used, retraining QAT is required. If only manually adjusting the table lookup parameters, it is only necessary to convert the QAT model to the quantized model again.
     :::
@@ -3582,14 +3582,14 @@ We recommend the following steps to identify layers that may have insufficient q
 
   :::caution Caution
 
-    Currently, only the **RDK Ultra** with BPU architecture as "BAYES" supports setting int16 quantization.
+    Currently, only the **RDK X5** with BPU architecture as "BAYES" supports setting int16 quantization.
 
     Debug cost: Re-training QAT is needed after using int16 quantization.
   :::
 
 :::info Note
 
-Currently, only the **RDK Ultra** with BPU architecture as "BAYES" supports setting int16 quantization.
+Currently, only the **RDK X5** with BPU architecture as "BAYES" supports setting int16 quantization.
 
 1. Using int16 will reduce deployment performance. Please choose according to the specific situation;
 2. Some operators do not support int16 quantization, see the operator support list for details;
@@ -3820,7 +3820,7 @@ The `march` is not set correctly, which may cause the model compilation failure 
 Correct approach: Select the correct BPU architecture based on the processor to be deployed, for example:
 
 ```python
-## For RDK Ultra, use Bayes
+## For RDK X5, use Bayes
 horizon.march.set_march(horizon.march.March.Bayes)
 
 ## For RDK X3, use Bernoulli2

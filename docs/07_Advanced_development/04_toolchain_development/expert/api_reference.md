@@ -93,7 +93,7 @@ default_qat_8bit_lsq_quant_qconfig = get_default_qconfig(
 ```
 
 
-- **RDK Ultra** 和 **RDK X5** 使用示例如下：
+- **RDK X5** 使用示例如下：
 
 ```python
 

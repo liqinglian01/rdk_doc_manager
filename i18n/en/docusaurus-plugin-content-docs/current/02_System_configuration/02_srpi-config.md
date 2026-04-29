@@ -4,7 +4,7 @@ sidebar_position: 2
 # 2.2 srpi-config Configuration Tool User Guide
 
 :::info Note
-The `srpi-config` configuration tool is only applicable to the `RDK X3`、`RDK X5` and `RDK X3 Module` development boards and is not suitable for the `RDK Ultra` development board.
+The `srpi-config` configuration tool is only applicable to the `RDK X3`, `RDK X5`, and `RDK X3 Module` development boards.
 :::
 
 ## Introduction

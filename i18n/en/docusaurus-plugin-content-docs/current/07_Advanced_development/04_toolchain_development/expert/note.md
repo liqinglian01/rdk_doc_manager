@@ -317,7 +317,7 @@ qat_model = load_model()
 #### Set BPU architecture {#set-bpu}
 
 ```python
-# Set march to BERNOULLI2 for **RDK X3** and BAYES for **RDK Ultra**.
+# Set march to BERNOULLI2 for **RDK X3** and BAYES for **RDK X5**.
 horizon.march.set_march(horizon.march.March.BAYES)
 ```
 

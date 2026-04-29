@@ -37,7 +37,7 @@ import TabItem from '@theme/TabItem';
 </Tabs>
 
 ### Q1: 什么是D-Robotics RDK套件？
-**A:** D-Robotics Developer Kits，简称[D-Robotics RDK套件](https://developer.d-robotics.cc/rdk_doc/)，是基于D-Robotics智能芯片打造的机器人开发者套件，目前主要包括**RDK X3（旭日X3派）**、**RDK X3 Module（旭日X3模组）**、**RDK X5**、**RDK X5 Module（旭日X5模组）**、**RDK Ultra**、**RDK S100**等系列。
+**A:** D-Robotics Developer Kits，简称[D-Robotics RDK套件](https://developer.d-robotics.cc/rdk_doc/)，是基于D-Robotics智能芯片打造的机器人开发者套件，目前主要包括**RDK X3（旭日X3派）**、**RDK X3 Module（旭日X3模组）**、**RDK X5**、**RDK X5 Module（旭日X5模组）**、**RDK S100**等系列。
 
 ### Q2: 如何查看RDK板卡的系统版本号？
 **A:** 登录到RDK板卡的系统后，您可以使用以下命令：
@@ -909,7 +909,7 @@ no mmc device at slot X
 **A:** 为RDK板卡（通常是ARM架构）上的应用程序进行交叉编译，一般需要在x86架构的Linux开发主机（推荐使用Ubuntu LTS版本，如Ubuntu 20.04或22.04）上配置交叉编译工具链和相应的目标系统SDK（Sysroot）。具体配置步骤会因您要编译的程序类型（例如，普通的Linux C/C++程序、ROS/TROS功能包）以及目标RDK的型号和系统版本而有所不同。
 
 1.  **编译普通Linux C/C++应用程序：**
-    * **获取交叉编译工具链：** 地瓜机器人官方会为每个RDK系列（如X3、X5、Ultra）提供相应的交叉编译工具链（例如，包含`aarch64-linux-gnu-gcc`, `aarch64-linux-gnu-g++`等工具）。这个工具链可能作为SDK的一部分提供，或者需要从开发者社区单独下载。
+    * **获取交叉编译工具链：** 地瓜机器人官方会为每个RDK系列（如X3、X5）提供相应的交叉编译工具链（例如，包含`aarch64-linux-gnu-gcc`, `aarch64-linux-gnu-g++`等工具）。这个工具链可能作为SDK的一部分提供，或者需要从开发者社区单独下载。
     * **安装与配置工具链：** 按照官方文档的指引，将下载的工具链压缩包解压到您开发主机上的一个合适路径（例如 `/opt/toolchains/`）。然后，需要将工具链的 `bin` 目录（包含编译器等可执行文件）添加到您开发主机的 `PATH` 环境变量中，这样系统才能找到这些交叉编译命令。
     * **准备Sysroot：** 交叉编译不仅需要编译器，还需要目标板卡系统环境中的库文件（如glibc, libstdc++, 以及其他依赖库）和头文件。这部分内容集合称为Sysroot。Sysroot可以从官方提供的RDK SDK中提取，或者从一个已经烧录好系统的RDK板卡的根文件系统中复制得到。在编译时，需要通过编译器的 `--sysroot=<path_to_sysroot>` 参数来指定Sysroot的路径。
     * **使用CMake进行交叉编译：** 如果您的项目使用CMake作为构建系统，推荐创建一个CMake工具链配置文件（toolchain file，例如 `aarch64-rdk.cmake`）。在这个文件中，您需要指定：

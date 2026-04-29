@@ -254,7 +254,6 @@ Feature Changes:
 
 New Features:
 
-- Added support for the `RDK Ultra` platform.
 - Introduced new nodes including `hobot_trigger` and `hobot_visualization` for triggering events, capturing, and visualizing rosbag data—helping users diagnose, reproduce, and visualize perception and planning/control issues in robotic scenarios. Users can also extend these nodes for custom data-triggering, recording, and real-time transmission features.
 - The USB camera capture node now auto-detects USB camera device IDs, lowering the barrier to using USB cameras.
 - Added a Visual Inertial Odometry (VIO) algorithm node, enabling low-cost, robust, high-precision robot localization based on visual inputs.

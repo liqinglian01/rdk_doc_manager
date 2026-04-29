@@ -19,7 +19,7 @@ This section primarily covers the operators supported by the D-Robotics Processo
 
 - For all BPU in RDK X3, there is a general restriction: input_batch ≤ 128.
 
-- On RDK Ultra BPU, restrictions apply:
+- On Bayes BPU targets, restrictions apply:
   1. Input and output dimensions must be 4D; support for non-four-dimensional ops is indicated explicitly.
   2. Shape: H, W, C ∈ [1, 65536], N ≤ 4096; and N x C x H x W ≤ 1GB.
   3. Supports Caffe 1.0 base operators and common extended operators, as well as ONNX opsets 10 and 11. Ops not meeting BPU acceleration constraints fallback to ARM CPU.
@@ -252,9 +252,9 @@ This section primarily covers the operators supported by the D-Robotics Processo
 
 
 
-## RDK Ultra Supported Caffe Operators List
+## Bayes BPU Supported Caffe Operators List
 
-| **Caffe Operator Name**         | **CPU Computation/BPU Acceleration** | **RDK Ultra BPU Constraints** | **CPU Constraints** |
+| **Caffe Operator Name**         | **CPU Computation/BPU Acceleration** | **Bayes BPU Constraints** | **CPU Constraints** |
 | -------------------------------- | --------------------------------- | --------------------------- | ------------------ |
 | Convolution                     | BPU Accelerated                    | - `Kernel width and height: <= 32`<br/> - `Input/output channels (for one group): <= 8192 (or <= 65536 if last in quantized graph)`<br/> - `Stride: Unrestricted, stride for Conv followed by Add (ResNet shortcut-connection) should be {1, 2}`<br/> - `Dilation: <= 16`<br/> - `Only supports dilation=1 when dilation != 1`<br/> - `Axis default: 1`<br/> | - 4D Convolution only<br/> - auto_pad attribute not supported<br/> - Type constraints: float, int32, int8<br/> - Pads attribute constraint: [Hstart, Wstart, Hend, Wend] (4 elements) with Hstart==Hend and Wstart==Wend. |
 | Deconvolution                   | BPU Accelerated                    | - `kernel >= stride`<br/> - `Input/output featuremaps <= 2048`<br/> - `pad <= kernel` / stride<br/> - out_pad < 2<br/> - `stride: 14 >= stride >= 1`, but stride_h and stride_w cannot both be 1<br/> - Axis configuration not supported | - Shape constraint: 4D Tensor computation only<br/> - Type constraint: float only<br/> - Attribute constraints: dilations, group, output_padding, pads, strides attributes<br/> - Pads attribute constraint: [hstart, wstart, hend, wend] must satisfy (hstart==hend and wstart==wend). |
@@ -302,9 +302,9 @@ This section primarily covers the operators supported by the D-Robotics Processo
 
 
 
-## RDK Ultra-supported ONNX Operators List
+## Bayes BPU ONNX Operators List
 
-| **ONNX Operator Name** | **CPU/CPU Acceleration** | **RDK Ultra BPU Constraints** | **CPU Constraints** |
+| **ONNX Operator Name** | **CPU/CPU Acceleration** | **Bayes BPU Constraints** | **CPU Constraints** |
 | ----------------- | --------------------- | --------------------------- | ------------------ |
 | Abs                | BPU Accelerated         | 1. Supports int16 input/output.<br/>2. Input/output dimensions up to 10D, with max dimensions in [1, 4096] and others in [1, 65536]. | Type constraint: only supports float types. |
 | Acos               | CPU Computation         | --                          | Type constraint: only supports float types. |

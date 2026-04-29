@@ -14,7 +14,7 @@ sidebar_position: 5
 
 ### Q1: 使用算法工具链遇到问题，在提问时需要提供哪些信息？
 **A:** 当您在使用地瓜机器人算法工具链遇到问题并寻求技术支持时，为了帮助快速定位问题，请尽量提供以下完整信息：
-1.  **目标RDK硬件平台及处理器架构：** 例如 RDK X3 (BPU Bernoulli2), RDK Ultra (BPU Bayes), RDK X5 (BPU Bayes-e), Super100 (BPU Nash-e), Super100P (BPU Nash-m)。
+1.  **目标RDK硬件平台及处理器架构：** 例如 RDK X3 (BPU Bernoulli2), RDK X5 (BPU Bayes-e), Super100 (BPU Nash-e), Super100P (BPU Nash-m)。
 2.  **算法工具链转换环境信息：**
     * `horizon_nn` 包版本 (通过 `pip list | grep horizon` 查看)。
     * Python 版本 (例如 Py3.8, Py3.10)。
@@ -53,13 +53,6 @@ sidebar_position: 5
 * **RDK X3 OpenExplore 产品发布及相关资源帖：**
     [https://developer.d-robotics.cc/forumDetail/136488103547258769](https://developer.d-robotics.cc/forumDetail/136488103547258769)
 
-### Q4: RDK Ultra平台有哪些社区算法资源和工具链手册？
-**A:** 针对RDK Ultra平台的算法开发，可以参考以下OpenExplorer社区资源：
-* **RDK Ultra 算法工具链社区手册 (OpenExplorer)：**
-    [https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/index.html](https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/index.html)
-* **RDK Ultra OpenExplore 产品发布及相关资源帖：**
-    [https://developer.d-robotics.cc/forumDetail/118363912788935318](https://developer.d-robotics.cc/forumDetail/118363912788935318)
-
 ### Q5: RDK X5平台有哪些社区算法资源和工具链手册？
 **A:** 针对RDK X5平台的算法开发，可以参考以下OpenExplorer社区资源：
 * **RDK X5 算法工具链社区手册 (OpenExplorer)：**
@@ -85,7 +78,7 @@ sidebar_position: 5
 * **YOLOv8 在RDK X3平台的部署：**
     * **Python多进程刷满30fps参考：** [CSDN博客 - YOLOv8 RDK X3部署](https://blog.csdn.net/SA2672873269/article/details/139780749)
 
-* **YOLOv10 在Bayes架构平台（如RDK X5/Ultra）的部署：**
+* **YOLOv10 在Bayes架构平台（如RDK X5）的部署：**
     * **Python多线程刷满30fps参考：** [CSDN博客 - YOLOv10 Bayes平台部署](https://blog.csdn.net/SA2672873269/article/details/139224272)
 
 * **通用资源：** 强烈建议查阅 **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo))，其中包含了多种YOLO版本（及其他主流模型）的官方部署示例、预处理/后处理代码、以及性能优化技巧。
@@ -1847,166 +1840,6 @@ compiler_parameters:
 
 ```
 
-##### RDK Ultra Caffe模型量化yaml文件模板{#rdk_ultra_caffe_yaml_template}
-
-请新建 caffe_config.yaml 文件，并直接拷贝以下内容，然后只需填写标记为 **``必选参数``** 的参数即可进行模型转换，若需了解更多参数的使用说明，可参考 [yaml配置文件详解](https://developer.d-robotics.cc/rdk_doc/Advanced_development/toolchain_development/intermediate/ptq_process#model_conversion) 章节内容。
-
-```python
-
-# Copyright (c) 2020 D-Robotics.All Rights Reserved.
-
-# 模型转化相关的参数
-model_parameters:
-
-  # 必选参数
-  # Caffe浮点网络数据模型文件, 例如：caffe_model: './horizon_ultra_caffe.caffemodel'
-  caffe_model: ''  
-
-  # 必选参数
-  # Caffe网络描述文件, 例如：prototxt: './horizon_ultra_caffe.prototxt'
-  prototxt: ''
-
-  march: "bayes"
-  layer_out_dump: False
-  working_dir: 'model_output'
-  output_model_file_prefix: 'horizon_ultra'
-
-# 模型输入相关参数
-input_parameters:
-
-  input_name: ""
-  input_shape: ''
-  input_type_rt: 'nv12'
-  input_layout_rt: ''
-
-  # 必选参数
-  # 原始浮点模型训练框架中所使用训练的数据类型，可选的值为rgb/bgr/gray/featuremap/yuv444, 例如：input_type_train: 'bgr'
-  input_type_train: ''
-
-  # 必选参数
-  # 原始浮点模型训练框架中所使用训练的数据排布, 可选值为 NHWC/NCHW, 例如：input_layout_train: 'NHWC'
-  input_layout_train: ''
-
-  #input_batch: 1
-  
-  # 必选参数  
-  # 原始浮点模型训练框架中所使用数据预处理方法，可配置：no_preprocess/data_mean/data_scale/data_mean_and_scale
-  # no_preprocess 不做任何操作，对应的 mean_value  或者 scale_value 均无需配置
-  # data_mean 减去通道均值mean_value，对应的 mean_value 需要配置，并注释掉scale_value
-  # data_scale 对图像像素乘以data_scale系数，对应的 scale_value需要配置，并注释掉mean_value
-  # data_mean_and_scale 减去通道均值后再乘以scale系数，标识下方对应的 mean_value  和 scale_value 均需配置
-  norm_type: ''
-
-  # 必选参数
-  # 图像减去的均值, 如果是通道均值，value之间必须用空格分隔
-  # 例如：mean_value: 128.0 或者 mean_value: 111.0 109.0 118.0 
-  mean_value: 
-
-  # 必选参数
-  # 图像预处理缩放比例，如果是通道缩放比例，value之间必须用空格分隔，计算公式：scale = 1/std
-  # 例如：scale_value: 0.0078125 或者 scale_value: 0.0078125 0.001215 0.003680
-  scale_value: 
-
-# 模型量化相关参数
-calibration_parameters:
-
-  # 必选参数
-  # 模型量化的参考图像的存放目录，图片格式支持Jpeg、Bmp等格式，图片来源一般是从测试集中选择100张图片，并要覆盖典型场景，不要是偏僻场景，如过曝光、饱和、模糊、纯黑、纯白等图片 
-  # 请根据 02_preprocess.sh 脚本中的文件夹路径来配置，例如：cal_data_dir: './calibration_data_yuv_f32'
-  cal_data_dir: ''
-
-  cal_data_type: 'float32'
-  calibration_type: 'default'
-  # max_percentile: 0.99996
-
-# 编译器相关参数
-compiler_parameters:
-
-  compile_mode: 'latency'
-  debug: False
-  # core_num: 2
-  optimize_level: 'O3'
-
-```
-
-##### RDK Ultra ONNX模型量化yaml文件模板{#rdk_ultra_onnx_yaml_template}
-
-请新建 onnx_config.yaml 文件，并直接拷贝以下内容，然后只需填写标记为 **``必选参数``** 的参数即可进行模型转换，若需了解更多参数的使用说明，可参考 [yaml配置文件详解](https://developer.d-robotics.cc/rdk_doc/Advanced_development/toolchain_development/intermediate/ptq_process#model_conversion) 章节内容。
-
-```python
-
-# Copyright (c) 2020 D-Robotics.All Rights Reserved.
-
-# 模型转化相关的参数
-model_parameters:
-
-  # 必选参数
-  # Onnx浮点网络数据模型文件, 例如：onnx_model: './horizon_ultra_onnx.onnx'
-  onnx_model: ''
-
-  march: "bayes"
-  layer_out_dump: False
-  working_dir: 'model_output'
-  output_model_file_prefix: 'horizon_ultra'
-
-# 模型输入相关参数
-input_parameters:
-
-  input_name: ""
-  input_shape: ''
-  input_type_rt: 'nv12'
-  input_layout_rt: ''
-
-  # 必选参数
-  # 原始浮点模型训练框架中所使用训练的数据类型，可选的值为rgb/bgr/gray/featuremap/yuv444, 例如：input_type_train: 'bgr'
-  input_type_train: ''
-
-  # 必选参数
-  # 原始浮点模型训练框架中所使用训练的数据排布, 可选值为 NHWC/NCHW, 例如：input_layout_train: 'NHWC'
-  input_layout_train: ''
-
-  #input_batch: 1
-  
-  # 必选参数  
-  # 原始浮点模型训练框架中所使用数据预处理方法，可配置：no_preprocess/data_mean/data_scale/data_mean_and_scale
-  # no_preprocess 不做任何操作，对应的 mean_value  或者 scale_value 均无需配置
-  # data_mean 减去通道均值mean_value，对应的 mean_value 需要配置，并注释掉scale_value
-  # data_scale 对图像像素乘以data_scale系数，对应的 scale_value需要配置，并注释掉mean_value
-  # data_mean_and_scale 减去通道均值后再乘以scale系数，标识下方对应的 mean_value  和 scale_value 均需配置
-  norm_type: ''
-
-  # 必选参数
-  # 图像减去的均值, 如果是通道均值，value之间必须用空格分隔
-  # 例如：mean_value: 128.0 或者 mean_value: 111.0 109.0 118.0 
-  mean_value: 
-
-  # 必选参数
-  # 图像预处理缩放比例，如果是通道缩放比例，value之间必须用空格分隔，计算公式：scale = 1/std
-  # 例如：scale_value: 0.0078125 或者 scale_value: 0.0078125 0.001215 0.003680
-  scale_value: 
-
-# 模型量化相关参数
-calibration_parameters:
-
-  # 必选参数
-  # 模型量化的参考图像的存放目录，图片格式支持Jpeg、Bmp等格式，图片来源一般是从测试集中选择100张图片，并要覆盖典型场景，不要是偏僻场景，如过曝光、饱和、模糊、纯黑、纯白等图片 
-  # 请根据 02_preprocess.sh 脚本中的文件夹路径来配置，例如：cal_data_dir: './calibration_data_yuv_f32'
-  cal_data_dir: ''
-
-  cal_data_type: 'float32'
-  calibration_type: 'default'
-  # max_percentile: 0.99996
-
-# 编译器相关参数
-compiler_parameters:
-
-  compile_mode: 'latency'
-  debug: False
-  # core_num: 2
-  optimize_level: 'O3'
-
-```
-
 ##### RDK X5 Caffe模型量化yaml文件模板{#rdk_x5_caffe_yaml_template}
 
 请新建 caffe_config.yaml 文件，并直接拷贝以下内容，然后只需填写标记为 **``必选参数``** 的参数即可进行模型转换，若需了解更多参数的使用说明，可参考  [yaml配置文件详解](https://developer.d-robotics.cc/rdk_doc/Advanced_development/toolchain_development/intermediate/ptq_process#model_conversion)章节内容。
@@ -2019,11 +1852,11 @@ compiler_parameters:
 model_parameters:
 
   # 必选参数
-  # Caffe浮点网络数据模型文件, 例如：caffe_model: './horizon_ultra_caffe.caffemodel'
+  # Caffe浮点网络数据模型文件, 例如：caffe_model: './horizon_model_caffe.caffemodel'
   caffe_model: ''  
 
   # 必选参数
-  # Caffe网络描述文件, 例如：prototxt: './horizon_ultra_caffe.prototxt'
+  # Caffe网络描述文件, 例如：prototxt: './horizon_model_caffe.prototxt'
   prototxt: ''
 
   march: "bayes-e"
@@ -2101,7 +1934,7 @@ compiler_parameters:
 model_parameters:
 
   # 必选参数
-  # Onnx浮点网络数据模型文件, 例如：onnx_model: './horizon_ultra_onnx.onnx'
+  # Onnx浮点网络数据模型文件, 例如：onnx_model: './horizon_model_onnx.onnx'
   onnx_model: ''
 
   march: "bayes-e"

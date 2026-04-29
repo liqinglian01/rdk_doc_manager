@@ -133,9 +133,6 @@ All operations in this section are performed inside the Docker container on the 
 ## Build tros.b for X3 using build.sh
 bash ./robot_dev_config/build.sh -p X3
 
-## Build tros.b for RDK Ultra using build.sh
-bash ./robot_dev_config/build.sh -p Rdkultra
-
 ## Build tros.b for X5 using build.sh
 bash ./robot_dev_config/build.sh -p X5
 

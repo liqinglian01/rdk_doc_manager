@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # 1.7 下载资源汇总
 
-本文汇总了 D-Robotics RDK 套件的相关下载资源，旨在为用户提供便捷、全面的资源获取渠道。涵盖了 RDK X3（旭日 X3 派）、RDK X3 Module（旭日 X3 模组）、RDK X5、RDK X5 Module 以及 RDK Ultra 等系列产品的各类相关资源下载目录。
+本文汇总了 D-Robotics RDK 套件的相关下载资源，旨在为用户提供便捷、全面的资源获取渠道。涵盖了 RDK X3（旭日 X3 派）、RDK X3 Module（旭日 X3 模组）、RDK X5、RDK X5 Module 等系列产品的各类相关资源下载目录。
 
 :::tip 快速导航
 - 📦 [系统与手册资源](#系统与手册资源汇总)
@@ -41,7 +41,6 @@ sidebar_position: 7
       <th>📦 产品类别</th>
       <th>RDK X5(Module)</th>
       <th>RDK X3(Module)</th>
-      <th>RDK Ultra</th>
       <th>说明</th>
     </tr>
   </thead>
@@ -50,28 +49,24 @@ sidebar_position: 7
       <td>🖥️ **系统镜像**</td>
       <td><a href="https://archive.d-robotics.cc/downloads/os_images/rdk_x5/">RDK X5 镜像</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/os_images/rdk_x3/">RDK X3 镜像</a></td>
-      <td><a href="https://archive.d-robotics.cc/downloads/os_images/rdk_ultra/">RDK Ultra 镜像</a></td>
       <td>操作系统镜像文件，包含完整的软件环境</td>
     </tr>
     <tr>
       <td>🚀 **MiniBoot**</td>
       <td><a href="https://archive.d-robotics.cc/downloads/miniboot/rdk_x5/">RDK X5 MiniBoot</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/miniboot/">RDK X3 MiniBoot</a></td>
-      <td>-</td>
       <td>轻量级启动程序，用于引导操作系统，一般不需要手动安装</td>
     </tr>
     <tr>
       <td>🔬 **OpenExplore**</td>
       <td>[RDK X5 OpenExplore](../07_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-x5)</td>
       <td>[RDK X3 OpenExplore](../07_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-x3)</td>
-      <td>[RDK Ultra OpenExplore](../07_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-ultra)</td>
       <td>包含大量转化示例和源码，搭配Docker在x86开发机上使用</td>
     </tr>
     <tr>
       <td>📚 **算法工具链手册**</td>
       <td><a href="https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html">RDK X5 手册</a></td>
       <td><a href="https://developer.d-robotics.cc/api/v1/fileData/horizon_xj3_open_explorer_cn_doc/index.html">RDK X3 手册</a></td>
-      <td><a href="https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/index.html">RDK Ultra 手册</a></td>
       <td>OpenExplore商业算法手册，建议优先查阅社区手册</td>
     </tr>
   </tbody>
@@ -151,7 +146,6 @@ sidebar_position: 7
       <th>RDK X5 Module</th>
       <th>RDK X3</th>
       <th>RDK X3 Module</th>
-      <th>RDK Ultra</th>
       <th>说明</th>
     </tr>
   </thead>
@@ -162,7 +156,6 @@ sidebar_position: 7
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/drobotics_rdk_x5_module_zh_v1_2.pdf">RDK X5 Module 规格书</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK%20X3.pdf">RDK X3 规格书</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3_module/RDK%20X3%20MD.pdf">RDK X3 Module 规格书</a></td>
-      <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_ultra/RDK_Ultra_Product_Brief.pdf">开发套件规格书</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_ultra/RDK_Ultra_Module_Product_Brief.pdf">Module规格书</a></td>
       <td>产品规格、特色、尺寸及型号等详细信息</td>
     </tr>
     <tr>
@@ -171,7 +164,6 @@ sidebar_position: 7
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/RDK X5 Module Carrier Board V1P1.pdf">官方底板原理图</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK_X3_2.0_IO_Schematics.pdf">RDK X3-2.0 原理图</a></td>
       <td>N/A</td>
-      <td>暂不开放</td>
       <td>电路设计原理图，供参考设计使用</td>
     </tr>
     <tr>
@@ -179,7 +171,6 @@ sidebar_position: 7
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5/RDK_X5_LPDDR4_4266MHz_V1P0_top_dxf.dxf">2D top</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5/RDK_X5_LPDDR4_4266MHz_V1P0_bottom_dxf.dxf">2D bottom</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p1_dxf.zip">模组结构图_V1P1</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p2_dxf.zip">模组结构图_V1P2</a><br/></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK_X3_2D_2.0.pdf">RDK X3-2.0 2D</a></td>
-      <td>暂不开放</td>
       <td>暂不开放</td>
       <td> 2D 图纸</td>
     </tr>
@@ -189,7 +180,6 @@ sidebar_position: 7
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p0_0708.stp">模组结构图_V1P0</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p1-0709.stp">模组结构图_V1P1</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/RDK X5 Module V1P2 3D.stp">模组结构图_V1P2</a><br/></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK_X3_3D_Step_Models.STEP">RDK X3-2.0 3D</a></td>
       <td>暂不开放</td>
-      <td>暂不开放</td>
       <td>三维模型</td>
     </tr>
     <tr>
@@ -198,7 +188,6 @@ sidebar_position: 7
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/RDK X5 Module Hardware Design Guide V1P1.pdf">硬件设计指南</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/RDK X5 Module Pinout Description and Application Note V1P1.xlsx">接口定义文档</a></td>
       <td>N/A</td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3_module/reference_design">设计资料</a></td>
-      <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_ultra/reference_design">设计资料</a></td>
       <td>硬件原理图、PCB、3D模型、BOM、gerber等技术资料</td>
     </tr>
   </tbody>

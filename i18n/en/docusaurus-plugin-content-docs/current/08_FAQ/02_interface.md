@@ -177,14 +177,14 @@ After plugging in the camera, run `ls /dev/video*` to check the actual device no
 ### Display Interface
 
 #### Q13: What resolutions does the board's HDMI interface support?
-**A:** Supported HDMI resolutions depend on the **board model (RDK X3, X5, Ultra, etc.), SoC, and RDK OS version**.
+**A:** Supported HDMI resolutions depend on the **board model (e.g. RDK X3, X5), SoC, and RDK OS version**.
 * **General support:** Most RDK boards support common resolutions such as:
     * 1920x1080 (1080p) @ 60Hz/50Hz/30Hz
     * 1280x720 (720p) @ 60Hz/50Hz
     * Lower resolutions like 640x480, 800x600, etc.
 * **Specific models/versions:**
     * Newer RDK OS versions (e.g., RDK X3 v2.1.0+) may support more resolutions and refresh rates.
-    * Higher-end boards (RDK X5, Ultra) may support higher resolutions (e.g., 4K).
+    * Higher-end boards (e.g., RDK X5) may support higher resolutions (e.g., 4K).
 * **How to check:**
     1.  **Official docs:** The most accurate info is in your board's User Manual or Hardware Specification, in the "[HDMI Interface](../01_Quick_start/hardware_introduction/rdk_x3.md)" or display subsystem section (replace with the actual valid doc path).
     2.  **In-system (if display connected):**

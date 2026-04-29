@@ -53,27 +53,8 @@ To obtain the horizon_runtime_sample package, please refer to the [Deliverables 
   │   │   ├── lenet_gray
   │   │   └── resnet_feature
   │   ├── CMakeLists.txt
-  │   ├── build_ultra.sh                        # Script for aarch64 compilation on RDK Ultra
   │   ├── build_xj3.sh                          # Script for aarch64 compilation on RDK X3
   │   └── deps_gcc9.3                           # Third-party dependencies required for the sample code. Users should replace or trim as needed for their own projects.
-  ├── ultra
-  │   ├── data                                  # Preloaded data files
-  │   │   ├── cls_images
-  │   │   ├── custom_identity_data
-  │   │   ├── det_images
-  │   │   └── misc_data
-  │   ├── model
-  │   │   ├── README.md
-  │   │   └── runtime -> ../../../model_zoo/runtime/horizon_runtime_sample   # Soft link pointing to the model in the OE package. Board-side runtime environment requires users to specify the model path manually.
-  │   ├── script                                # aarch64 sample execution scripts
-  │   │   ├── 00_quick_start
-  │   │   ├── 01_api_tutorial
-  │   │   ├── 02_advanced_samples
-  │   │   ├── 03_misc
-  │   │   └── README.md
-  │   └── script_x86                            # x86 sample execution scripts
-  │       ├── 00_quick_start
-  │       └── README.md
   ├── xj3
   │   ├── data                                  # Preloaded data files
   │   │   ├── cls_images
@@ -98,9 +79,7 @@ To obtain the horizon_runtime_sample package, please refer to the [Deliverables 
 - **02_advanced_samples**: Special feature examples, such as **custom_identity**, **multi_input**, **multi_model_batch**, and **nv12_batch** functionality.
 - **03_misc**: Miscellaneous examples for non-NV12 input models.
 - **xj3**: RDK X3 development board sample execution scripts, preloaded with data and related models.
-- **ultra**: RDK Ultra development board sample execution scripts, preloaded with data and related models.
 - **build_xj3.sh**: One-click compilation script for RDK X3.
-- **build_ultra.sh**: One-click compilation script for RDK Ultra.
 - **deps/deps_gcc9.3**: Third-party dependencies required for the sample code. Users should replace or trim as needed for their own projects.
 
 
@@ -121,11 +100,11 @@ To obtain the horizon_runtime_sample package, please refer to the [Deliverables 
 #### Compilation
 
 Compilation requires the installation of cross-compilation tools: ``aarch64-linux-gnu-g++``, ``aarch64-linux-gnu-gcc``. Please use the D-Robotics provided development machine Docker image for compilation directly. Please read the [**Environment Installation**](../intermediate/environment_config.md) chapter for obtaining and using the development machine Docker environment;
-According to the situation of the development board used, please use the ``build_xj3.sh`` or ``build_ultra.sh`` script under the horizon_runtime_sample/code directory to compile the executable program in the development board environment with one click. The executable program and corresponding dependencies will be automatically copied to the ``xj3/script`` directory under the ``aarch64`` directory or the ``ultra/script`` directory under the ``aarch64`` directory.
+Please use the ``build_xj3.sh`` script under the horizon_runtime_sample/code directory to compile the executable program in the development board environment with one click. The executable program and corresponding dependencies will be automatically copied to the ``xj3/script`` directory under the ``aarch64`` directory.
 
 :::info Note
   The project specifies the path of the cross-compilation tool by obtaining the environment variable ``LINARO_GCC_ROOT``, users can check whether the local environment variable is the target cross-compilation tool before use.
-  If you need to specify the path of the cross-compilation tool, you can set the environment variable ``LINARO_GCC_ROOT``, or directly modify the script ``build_xj3.sh`` or ``build_ultra.sh``, specify the variables ``CC`` and ``CXX``.
+  If you need to specify the path of the cross-compilation tool, you can set the environment variable ``LINARO_GCC_ROOT``, or directly modify the script ``build_xj3.sh``, specify the variables ``CC`` and ``CXX``.
 :::
 
 ```shell
@@ -181,7 +160,7 @@ The model inference​ example script is mainly in the xj3/script and xj3/script
       │       └── libopencv_world.so.3.4
       └── README.md
 
-    # RDK Ultra Script Information
+    # Script information
     ├─script
       ├── 00_quick_start
       │   ├── README.md
@@ -257,7 +236,7 @@ The `api_tutorial` directory contains examples demonstrating how to use embedded
 
 :::caution Caution
 
-The following example logs are based on actual testing on the **RDK X3** development board. Results may differ when using the **RDK Ultra** board; please refer to your specific test results.
+The following example logs are based on actual testing on the **RDK X3** development board. Please refer to your specific test results.
 :::
 
 ```shell
@@ -276,7 +255,7 @@ I0108 04:19:27.246139 24638 model_example.cc:189] [mobilenetv1_nv12] Model Info:
 
 :::caution Caution
 
-The following example logs are based on the **RDK X3** development board. Results may vary for the **RDK Ultra** board; please refer to your actual test results.
+The following example logs are based on the **RDK X3** development board. Please refer to your actual test results.
 :::
 
 ```shell
@@ -297,7 +276,7 @@ After execution, the `resize_bgr.jpg` image will be successfully saved in the cu
 
 :::caution Caution
 
-Logs are from the **RDK X3** development board. Results may vary for the **RDK Ultra** board; please refer to your actual test results.
+Logs are from the **RDK X3** development board. Please refer to your actual test results.
 :::
 
 ```shell
@@ -323,7 +302,7 @@ After execution, the `resize_y.jpg` image will be successfully saved in the curr
 
 :::caution Caution
 
-Logs are from the **RDK X3** development board. Results may vary for the **RDK Ultra** board; please refer to your actual test results.
+Logs are from the **RDK X3** development board. Please refer to your actual test results.
 :::
 
 ```shell
@@ -350,7 +329,7 @@ The examples under the 02_advanced_samples directory are used to demonstrate the
 
 :::caution Note
 
-The following example logs are the results of actual tests using **RDK X3** development board. The log information may vary if using the **RDK Ultra** development board. Please refer to specific tests for accuracy!
+The following example logs are the results of actual tests using **RDK X3** development board. Please refer to specific tests for accuracy!
 :::
 
 ```shell
@@ -380,7 +359,7 @@ The output data of the first model is saved in the `output0.txt` file.
 
 :::caution Note
 
-The following example logs are the results of actual tests using **RDK X3** development board. The log information may vary if using the **RDK Ultra** development board. Please refer to specific tests for accuracy!
+The following example logs are the results of actual tests using **RDK X3** development board. Please refer to specific tests for accuracy!
 :::
 
 ```shell
@@ -418,7 +397,7 @@ The `03_misc` directory contains examples for using models with non-nv12 inputs.
 
 :::caution Note
 
-  The following example logs are from actual tests on an **RDK X3** development board. Logs may differ for an **RDK Ultra** board; refer to your specific test results!
+  The following example logs are from actual tests on an **RDK X3** development board. Refer to your specific test results!
 :::
 
 ```shell
@@ -545,7 +524,6 @@ To obtain the ai_benchmark example package for public model accuracy and perform
 ```bash
   ai_benchmark/code                     # Example source code folder
   ├── build_ptq_xj3.sh                  # for RDK X3
-  ├── build_ptq_ultra.sh                # for RDK Ultra
   ├── CMakeLists.txt
   ├── deps/deps_gcc9.3                  # Third-party dependency library, gcc9.3 is deps_gcc9.3
   │   ├── aarch64
@@ -619,71 +597,13 @@ To obtain the ai_benchmark example package for public model accuracy and perform
       └── tools                         # Accuracy evaluation tools
           ├── python_tools
           └── README.md
-
-  ai_benchmark/ultra                       # Example package runtime environment
-  └── ptq                               # PTQ solution model examples
-      ├── data                          # Model accuracy evaluation datasets
-      ├── mini_data                     # Model performance evaluation datasets
-      │   ├── cifar10
-      │   ├── cityscapes
-      │   ├── coco
-      │   ├── culane
-      │   ├── flyingchairs
-      │   ├── imagenet
-      │   ├── kitti3d
-      │   ├── mot17
-      │   ├── nuscenes
-      │   ├── nuscenes_lidar
-      │   └── voc
-      ├── model                         # PTQ solution nv12 model
-      │   │   ├── README.md
-      │   │   └── runtime -> ../../../../model_zoo/runtime/ai_benchmark/ptq   # Symbolic link to the model in the OE package, the model path needs to be specified separately in the board-side runtime environment
-      ├── README.md
-      ├── script                        # Execution scripts│   ├── aarch64                   # Compiled executable files and dependency libraries
-      │   ├── classification            # Classification model examples
-      │   │   ├── efficientnasnet_m
-      │   │   ├── efficientnasnet_s
-      │   │   ├── efficientnet_lite0
-      │   │   ├── efficientnet_lite1
-      │   │   ├── efficientnet_lite2
-      │   │   ├── efficientnet_lite3
-      │   │   ├── efficientnet_lite4
-      │   │   ├── googlenet
-      │   │   ├── mobilenetv1
-      │   │   ├── mobilenetv2
-      │   │   ├── resnet18
-      │   │   └── vargconvnet
-      │   ├── config                    # Model inference configuration files
-      │   │   └── model  
-      │   ├── detection                 # Detection model examples
-      │   │   ├── centernet_resnet101
-      │   │   ├── preq_qat_fcos_efficientnetb0
-      │   │   ├── preq_qat_fcos_efficientnetb2
-      │   │   ├── preq_qat_fcos_efficientnetb3
-      │   │   ├── ssd_mobilenetv1
-      │   │   ├── yolov2_darknet19
-      │   │   ├── yolov3_darknet53
-      │   │   ├── yolov3_vargdarknet
-      │   │   └── yolov5x
-      │   ├── segmentation              # Segmentation model examples
-      │   │   ├── deeplabv3plus_efficientnetb0
-      │   │   ├── deeplabv3plus_efficientnetm1
-      │   │   ├── deeplabv3plus_efficientnetm2
-      │   │   └── fastscnn_efficientnetb0
-      │   ├── env.sh                    # Environment script
-      │   └── README.md
-      └── tools                         # Accuracy assessment tools
-            ├── python_tools
-            └── README.md
 ```
 
 
 
 - **code**: This directory contains the source code for the model evaluation program, used to assess model performance and accuracy.
 - **xj3**: Provides pre-compiled applications and various benchmark scripts to test the performance and accuracy of multiple models on the D-Robotics BPU, specifically for **RDK X3**.
-- **ultra**: Offers pre-compiled applications and benchmark scripts to evaluate the performance and accuracy of various models on the D-Robotics BPU, designed for **RDK Ultra**.
 - **build_ptq_xj3.sh**: One-click build script for the development board program (for **RDK X3**).
-- **build_ptq_ultra.sh**: One-click build script for the development board program (for **RDK Ultra**).
 - **deps/deps_gcc9.3**: Dependencies required for the example code, primarily including:
 ```bash
   gflags  glog  hobotlog nlohmann opencv  rapidjson
@@ -752,10 +672,10 @@ Please download them in a Linux environment using the following links:
 #### Compiler Environment Preparation
 
 The compilation requires the installation of the cross-compilation tool `gcc-ubuntu-9.3.0-2020.03-x86_64-aarch64-linux-gnu` in the current environment. Please use the Docker image provided by D-Robotics for development machine, and directly compile and use it. Read the chapter [**Environment Installation**](../intermediate/environment_config.md) for obtaining and using the development machine Docker environment;
-Please use the script `build_ptq_xj3.sh` or `build_ptq_ultra.sh` under the code directory to compile the executable program in the development board environment. The executable program and its corresponding dependencies will be automatically copied to the directory `xj3/ptq/script` under the `aarch64` directory or the directory `ultra/ptq/script` under the `aarch64` directory.
+Please use the `build_ptq_xj3.sh` script under the code directory to compile the executable program in the development board environment. The executable program and its corresponding dependencies will be automatically copied to the directory `xj3/ptq/script` under the `aarch64` directory.
 
 :::info Note
-  Please note that the position of the cross-compilation toolchain specified in the script `build_ptq_xj3.sh` and `build_ptq_ultra.sh` is in the directory `/opt`. If the user installs it in another location, the script can be manually modified.
+  Please note that the position of the cross-compilation toolchain specified in the script `build_ptq_xj3.sh` is in the directory `/opt`. If the user installs it in another location, the script can be manually modified.
 :::
 ```shell
   export CC=/opt/gcc-ubuntu-9.3.0-2020.03-x86_64-aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
@@ -772,7 +692,7 @@ The evaluation example scripts are mainly located in the `script` and `tools` di
 
 :::caution Note
 
-The following examples are based on the testing results of the **RDK X3** development board. If using the **RDK Ultra** development board, there may be differences in information. Please refer to the specific testing results.
+The following examples are based on the testing results of the **RDK X3** development board. Please refer to the specific testing results.
 :::
 
 ```shell
@@ -845,7 +765,7 @@ Before evaluation, execute the following commands to copy the `ptq` directory to
 
 :::caution Caution
 
-The following examples are the test results using the **RDK X3** development board. If the **RDK Ultra** development board is used, the information may vary. Please refer to the specific test results!
+The following examples are the test results using the **RDK X3** development board. Please refer to the specific test results!
 :::
 
 ```shell
@@ -867,7 +787,7 @@ Enter the directory of the model to be evaluated and execute `sh latency.sh` to 
 
 :::caution Caution
 
-The following examples are the test results using the **RDK X3** development board. If the **RDK Ultra** development board is used, the information may vary. Please refer to the specific test results!
+The following examples are the test results using the **RDK X3** development board. Please refer to the specific test results!
 :::
 
 ```shell
@@ -883,7 +803,7 @@ Enter the directory of the model to be evaluated and execute `sh fps.sh` to test
 
 :::caution Caution
 
-The following examples are the test results using the **RDK X3** development board. If the **RDK Ultra** development board is used, the information may vary. Please refer to the specific test results!
+The following examples are the test results using the **RDK X3** development board. Please refer to the specific test results!
 :::
 
 ```shell
@@ -899,7 +819,7 @@ The following examples are the test results using the **RDK X3** development boa
 
 :::caution Note
 
-  The following example is based on the test results using **RDK X3** development board. If using **RDK Ultra** development board, the information may vary. Please refer to specific test results for accuracy.
+  The following example is based on the test results using **RDK X3** development board. Please refer to specific test results for accuracy.
 :::
 
 Content of `fps.sh` script:
@@ -1165,7 +1085,7 @@ Here we recommend placing it in the same directory as the "script" folder, as fo
   |   |-- script
   |   |   |-- ...
 
-  # For RDK Ultra, use the following format:
+  # Use the following format:
   |-- ptq
   |   |-- data
   |   |   |-- cityscapes
@@ -1230,7 +1150,7 @@ To generate the corresponding lst files, refer to the following method:
 ```shell
 
   # For RDK X3, please use the following command:
-  find ../../../data/coco/fcos -name "*bin*" > ../../../data/coco/coco.lst# RDK Ultra Please use the following command:
+  find ../../../data/coco/fcos -name "*bin*" > ../../../data/coco/coco.lst  # Use the following command:
   find ../../../data/coco/pre_centernet_resnet101 -name "*bin*" > ../../../data/coco/pre_centernet_resnet101.lst
 
 ```
@@ -1261,7 +1181,7 @@ The /nfs folder on the PC side is mounted to the /mnt folder on the board side. 
 
 :::caution Note
 
-  The following example is the actual test result using **RDK X3** development board. If using **RDK Ultra** development board, there may be differences in the information. Please refer to the specific test for accuracy!
+  The following example is the actual test result using **RDK X3** development board. Please refer to the specific test for accuracy!
 :::
 
 After mounting the data, please log in to the development board. For the login method, please read the [**development board login**](../../../01_Quick_start/remote_login.md) section. After successful login, execute the `accuracy.sh` script in the `fcos_efficientnetb0/` directory as shown below:
@@ -1360,7 +1280,7 @@ Model post-processing integration mainly consists of 2 steps, taking centernet_r
 
 :::caution Note
 
-  The following example is based on the RDK X3 development board. If you are using the RDK Ultra development board, the information may vary. Please refer to the specific instructions.
+  The following example is based on the RDK X3 development board. Please refer to the specific instructions.
 :::
 
 The post-processing code file can be directly reused from any post-processing file in the src/method directory. The main modifications are the `InitFromJsonString` function and the `PostProcess` function.
@@ -1441,7 +1361,7 @@ The type and value of this variable are described as follows:
 
 :::caution Note
 
-  The following example uses **RDK X3** development board as an example. If using **RDK Ultra** development board, there may be differences in the information. Please refer to the specific board used!
+  The following example uses **RDK X3** development board as an example. Please refer to the specific board used!
 :::
 
 The following code block takes the mobilenetv1 model as an example, starts running the model with a single thread, and sets ``export HB_DNN_PROFILER_LOG_PATH=./``. The statistical output information is as follows:
@@ -1590,7 +1510,7 @@ This section describes the specific usage of the three subfunctions of the ``hrt
 
 This parameter is used to obtain model information. The supported models are QAT models and PTQ models.
 This parameter is used together with ``model_file`` to obtain detailed information about the model;
-The model information includes the model's input and output information ``hbDNNTensorProperties`` and the model's segment information ``stage``; The model's segment information is: a picture can be inferred in multiple stages. The stage information is [x1, y1, x2, y2], which are the coordinates of the top left and bottom right corners of the picture inference. Currently, D-Robotics RDK Ultra's Bayes architecture supports inference of such segmented models, and the models on RDK X3 are all 1-stage models.
+The model information includes the model's input and output information ``hbDNNTensorProperties`` and the model's segment information ``stage``; The model's segment information is: a picture can be inferred in multiple stages. The stage information is [x1, y1, x2, y2], which are the coordinates of the top left and bottom right corners of the picture inference. Currently, the Bayes BPU architecture supports inference of such segmented models on applicable platforms, and the models on RDK X3 are all 1-stage models.
 
 :::tip Tips
 
@@ -1794,7 +1714,7 @@ bpu status information---->
 
 :::info Remarks
 
-The above example shows the output log of the **RDK X3** development board. If using the **RDK Ultra** development board, simply use the above command to obtain the output.
+The above example shows the output log of the **RDK X3** development board. On other supported boards, use the same command to obtain the output.
 In "perf" mode, the latency measurement of a single thread represents the actual on-board performance of the model, while the latency data of multiple threads represents the processing time of each thread per frame, which is longer than that of a single thread. However, the overall processing time of multiple threads is reduced, and the frame rate is improved.
 :::
 

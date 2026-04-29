@@ -75,7 +75,7 @@ Before calling the `prepare_qat_fx` interface, users must set the global march a
 - Similar to `fuse_fx`, this interface does not support the `inplace` parameter, and refrain from any modifications to the input model after `prepare_qat_fx`.
 
 ```python
-# Set march to BERNOULLI2 for RDK X3, and to BAYES for RDK Ultra.
+# Set march to BERNOULLI2 for RDK X3, and to BAYES for RDK X5.
 horizon.march.set_march(horizon.march.March.BAYES)
 qat_model = horizon.quantization.prepare_qat_fx(
     model,
@@ -312,7 +312,7 @@ class Net(torch.nn.Module):
 data = torch.rand(1, 3, 28, 28)
 net = Net()
 
-# Set march to BERNOULLI2 for RDK X3, and to BAYES for RDK Ultra.
+# Set march to BERNOULLI2 for RDK X3, and to BAYES for RDK X5.
 set_march("bayes")
 
 net.set_qconfig()

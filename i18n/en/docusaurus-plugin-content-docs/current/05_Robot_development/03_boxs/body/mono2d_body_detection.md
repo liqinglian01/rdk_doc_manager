@@ -40,7 +40,6 @@ Game character control based on human pose and gesture recognition: [Play with X
 | --------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------- |
 | RDK X3, RDK X3 Module             | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble)            | Launch MIPI/USB camera and display inference results via Web     |
 | RDK X5, RDK X5 Module             | Ubuntu 22.04 (Humble)                                 | Launch MIPI/USB camera and display inference results via Web     |
-| RDK Ultra                         | Ubuntu 20.04 (Foxy)                                   | Launch MIPI/USB camera or local image replay, display via Web    |
 | x86                               | Ubuntu 20.04 (Foxy)                                   | Launch local image replay and display inference results via Web  |
 
 ## Algorithm Details
@@ -172,7 +171,7 @@ export CAM_TYPE=fb
 # Launch the launch file
 ros2 launch mono2d_body_detection mono2d_body_detection.launch.py publish_image_source:=config/person_body.jpg publish_image_format:=jpg publish_output_image_w:=960 publish_output_image_h:=544
 
-# For RDK Ultra platform, specify the replay image explicitly, e.g.:
+# For RDK platform, specify the replay image explicitly, e.g.:
 # ros2 launch mono2d_body_detection mono2d_body_detection.launch.py picture:=./config/target.jpg
 ```
 

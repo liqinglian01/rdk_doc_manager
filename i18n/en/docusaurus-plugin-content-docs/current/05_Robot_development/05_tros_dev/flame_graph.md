@@ -21,7 +21,6 @@ Code repository: (https://github.com/brendangregg/FlameGraph.git)
 | Platform                                           | Execution Environment                      |
 | -------------------------------------------------- | ------------------------------------------ |
 | RDK X3, RDK X3 Module, RDK X5, RDK X5 Module       | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
-| RDK Ultra                                          | Ubuntu 20.04 (Foxy)                        |
 
 ## Prerequisites
 

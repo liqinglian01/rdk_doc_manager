@@ -25,9 +25,7 @@ import TabItem from '@theme/TabItem';
 | RDK X5, RDK X5 Module | Ubuntu 22.04 (Humble) |
 | X86     | Ubuntu 20.04 (Foxy) |
 
-:::caution
-RDK S100和RDK Ultra平台的模型推理功能体验参考[Boxs算法仓库](/docs/05_Robot_development/03_boxs/detection/yolo.md)。
-:::
+
 
 
 ## 准备工作

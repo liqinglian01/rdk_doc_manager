@@ -971,7 +971,7 @@ def convert_fx(
 
    - 对于非 `module` 的运算，如果需要单独设置 `qconfig` 或指定其运行在 CPU 上，需要将其封装成 `module` ，参考示例中的 `_SeluModule` 。
 
-2. 设置 `march` 。 **RDK X3** 设置bernoulli2， **RDK Ultra** 设置为bayes， **RDK X5** 设置为bayes-e。
+2. 设置 `march` 。 **RDK X3** 设置bernoulli2，**RDK X5** 设置为bayes-e。
 
 3. 设置 `qconfig` 。保留非异构模式下在 `module` 内设置 `qconfig` 的配置方式，除此以外，还可以通过 `prepare_qat_fx` 接口的 `qconfig_dict` 参数传入 `qconfig`，具体用法见接口参数说明。
 
@@ -983,7 +983,7 @@ def convert_fx(
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 和  ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
 4. 设置 `hybrid_dict` 。可选，具体用法见接口参数说明，如果没有主动指定的 CPU 算子，可以不设置 `hybrid_dict` 。
@@ -1070,7 +1070,7 @@ class HybridModel(nn.Module):
         x = self.selu(x)
         return self.dequant(x)
 
-# 设置 march **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# 设置 march **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 data_shape = [1, 3, 224, 224]
 data = torch.rand(size=data_shape)
@@ -1415,7 +1415,7 @@ class TestFuseNet(nn.Module):
         x = self.relu(x)
         return self.dequant(x)
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 device = torch.device("cpu")
 data = torch.arange(1 * 3 * 4 * 4) / 100 + 1
@@ -1851,7 +1851,7 @@ class TestFuseNet(nn.Module):
 
 float_net = TestFuseNet(3)
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 
 # 手动构造不支持的或特殊的 cases
@@ -2104,7 +2104,7 @@ class Net(nn.Module):
             x = self.float_ops(x)
         return x
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 device = torch.device("cuda")
 float_net = Net(quant=True, share_op=True).to(device)
@@ -2246,7 +2246,7 @@ class Net(nn.Module):
             x = self.float_ops(x)
         return x
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 device = torch.device("cuda")
 float_net = Net(quant=True, share_op=True).to(device)
@@ -2368,7 +2368,7 @@ featuremap_similarity(qat_net, bpu_net, (data, data))
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 和 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
 ```python
@@ -2521,7 +2521,7 @@ class Net(nn.Module):
             x = self.float_ops(x)
         return x
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 device = torch.device("cuda")
 float_net = Net(quant=True, share_op=True).to(device)
@@ -2555,7 +2555,7 @@ profile_featuremap(get_raw_features(qat_net, (data, data)), True)
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra**  和 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
     - Mean：数据的均值；
@@ -2568,7 +2568,7 @@ profile_featuremap(get_raw_features(qat_net, (data, data)), True)
 
 :::caution 注意
 
-目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra**  和 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 :::
 
     正常情况下，statistic.txt 中会包含两个上述格式的表格，一个是按照模型 forward 顺序打印的每一层的统计量；另一个是按照量化数据的范围从大到小打印的每一层的统计量信息，方便您快速定位到某些数值范围很大的层。若模型中某些层存在 NaN 或者 inf，那 statistic.txt 中也会额外包含一个哪些层 NaN 或者 inf 的表格，该表格也会在屏幕打印，提示您检查这些异常层。
@@ -2758,7 +2758,7 @@ from torch.quantization import DeQuantStub, QuantStub
 # 这里略去 Resnet18 的定义
 float_net = Resnet18().to(device)
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 float_net.qconfig = get_default_qat_qconfig()
 float_net2 = deepcopy(float_net)
@@ -2882,7 +2882,7 @@ class HyperQuantModel(nn.Module):
 shape = np.random.randint(10, 20, size=4).tolist()
 data = torch.rand(size=shape)
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 model = HyperQuantModel(shape[1])
 
@@ -3068,7 +3068,7 @@ model = TestFuseNet(3)
 set_preserve_qat_mode(float_net, ("convmod1"), ())
 model.convmod1.preserve_qat_mode = True
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 qat_net = prepare_qat_fx(model, {"": default_qat_8bit_fake_quant_qconfig})
 quant_model = horizon.quantization.convert_fx(qat_net)
@@ -3171,7 +3171,7 @@ class HybridModel(nn.Module):
         x = self.selu(x)
         return self.dequant(x)
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 shape = np.random.randint(10, 20, size=4).tolist()
 infer_shape = [1] + shape[1:]
@@ -3258,7 +3258,7 @@ def script_profile(
         example_inputs: 模型输入
         out_dir: 保存结果的路径。若为 None，则保存在当前路径下。默认为 None
         march: 使用的 BPU 架构。若为 None，会自动使用 get_march() 获取当前指定的架构。
-            默认为 None。 **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+            默认为 None。**RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
         mark_node_func: 标记 ScriptModule 中哪些节点的结果需要保存的标记函数。
             若为 None，使用默认的标记函数。默认为 None。
         compare_with_hbdk_parser: 是否将 ScriptModule 中每个 op 的结果和 hbdk 解析
@@ -3333,7 +3333,7 @@ class Net(nn.Module):
         x = self.dequant_stub(x)
         return x
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 device = torch.device("cpu")
 data = torch.rand((1, 10, 5, 5), device=device)
@@ -3346,7 +3346,7 @@ qat_net(*data)
 bpu_net = convert_fx(qat_net)
 script_module = torch.jit.trace(bpu_net.eval(), data)
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 script_profile(bpu_net, data, march=March.BAYES)
 ```
 
@@ -3402,7 +3402,7 @@ def compare_script_models(
         model2: 使用另一个版本 horizon_plugin_pytorch 生成的 ScriptModule
         example_inputs: 模型输入
         march: 使用的 BPU 架构。若为 None，会自动使用 get_march() 获取当前指定的架构。
-            默认为 None。 **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+            默认为 None。**RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
     """
 ```
 
@@ -3467,7 +3467,7 @@ class Net(nn.Module):
         x = self.dequant_stub(x)
         return x
 
-# **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES， **RDK X5** 设置为BAYES_E。
+# **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为BAYES_E。
 set_march(March.BAYES)
 device = torch.device("cpu")
 data = torch.rand((1, 10, 5, 5), device=device)
@@ -3703,7 +3703,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
         :::caution 注意
 
-            目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+            目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
         :::
 
          以图像输入为例，由于原始图像（不管是 RGB 还是 YUV）输入范围是 [0, 255]，不适合对称量化，而做关于 0 对称的归一化之后，输入范围变为 [-1, 1]，可以直接使用固定 scale=1/128.0 进行量化。
@@ -3723,7 +3723,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
         :::caution 注意
 
-            目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+            目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
         :::
 
         :::caution 注意
@@ -3745,7 +3745,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
             :::caution 注意
 
-                目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
             :::
 
             3. 如果遇到 conv-[bn]-[add]-relu 这样的 pattern，可以尝试在 QAT 阶段指定使用 relu6（不一定有效）。
@@ -3778,7 +3778,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
                 :::caution 注意
 
-                    目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                    目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
                 :::
 
             2. 非线性激活算子，如果算子本身在某些区间值域波动较大，比如 reciprocal；这类算子一般内部采用查表实现，由于查表项有限，当输出处于陡峭的区间时，可能导致分辨率不足。尝试以下方式改进：
@@ -3791,7 +3791,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
                 :::caution 注意
 
-                    目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                    目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
                 :::
 
                4. 如果 QAT 精度正常但 quantized 精度不足，可尝试手动调整查表参数。
@@ -3804,7 +3804,7 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
             :::caution 注意
 
-                目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+                目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 
                 Debug 成本：这三种情况中如果需要调整输入范围或算子，则需要重训浮点；如果需要采用 int16 量化，需要重训 QAT；如果只是手动调整查表参数，仅需要重新转换 QAT 模型到 quantized 模型。
             :::
@@ -3824,14 +3824,14 @@ QAT 训练或 quantized 模型部署时，常见的几种异常现象如下：
 
   :::caution 注意
 
-    目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra** 支持设置 ``int16`` 量化。
+    目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 
     Debug 成本：使用 int16 量化后需要重训 QAT。
   :::
 
 :::info 备注
 
-目前只有BPU架构为 ``BAYES`` 的 **RDK Ultra**   和 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
+目前只有BPU架构为 ``BAYES_E`` 的 **RDK X5** 支持设置 ``int16`` 量化。
 
 1. 采用 int16 会带来部署性能的降低，请根据具体情况选择使用；
 2. 部分算子不支持 int16 量化，详见算子支持列表；
@@ -4068,9 +4068,6 @@ QAT/Quantized 精度不符合预期、出现 NAN 或 QAT 初始 loss 相对 floa
 正确做法：根据要部署的处理器选择正确的 BPU 架构，例如：
 
 ```python
-
-## RDK Ultra 需要使用 Bayes
-horizon.march.set_march(horizon.march.March.Bayes)
 
 ## RDK X3 需要使用 Bernoulli2
 horizon.march.set_march(horizon.march.March.Bernoulli2)

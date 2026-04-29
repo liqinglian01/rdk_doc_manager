@@ -55,7 +55,6 @@ import TabItem from '@theme/TabItem';
 | -------------------------------- | ------------ | ----------------------------------------------- |
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) | 启动MIPI/USB摄像头，并通过Web展示推理渲染结果 |
 | RDK X5, RDK X5 Module | Ubuntu 22.04 (Humble) | 启动MIPI/USB摄像头，并通过Web展示推理渲染结果 |
-| RDK Ultra | Ubuntu 20.04 (Foxy) | 启动MIPI/USB摄像头，并通过Web展示推理渲染结果 |
 
 ## 算法信息
 

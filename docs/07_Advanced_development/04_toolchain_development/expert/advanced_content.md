@@ -32,7 +32,7 @@ fused_model = horizon.quantization.fuse_fx(model)
 - 和 `fuse_fx` 类似，此接口不支持 `inplace` 参数，且在 `prepare_qat_fx` 之后请不要对输入的模型做任何修改
 
 ```python
-# 设置 march **RDK X3** 设置BERNOULLI2， **RDK Ultra** 设置为BAYES，**RDK X5** 设置为 BAYES_E 。
+# 设置 march **RDK X3** 设置BERNOULLI2，**RDK X5** 设置为 BAYES_E 。
 horizon.march.set_march(horizon.march.March.BAYES)
 qat_model = horizon.quantization.prepare_qat_fx(
     model,
@@ -284,7 +284,7 @@ class Net(torch.nn.Module):
 data = torch.rand(1, 3, 28, 28)
 net = Net()
 
-# 设置 march **RDK X3** 设置为bernoulli2， **RDK Ultra** 设置为bayes， **RDK X5** 设置为bayes-e。
+# 设置 march **RDK X3** 设置为bernoulli2，**RDK X5** 设置为bayes-e。
 set_march("bayes")
 
 net.set_qconfig()

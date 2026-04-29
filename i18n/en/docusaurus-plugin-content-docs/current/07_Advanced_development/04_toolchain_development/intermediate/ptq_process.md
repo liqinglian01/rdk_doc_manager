@@ -81,7 +81,7 @@ Before formally converting the model, please use the ``hb_mapper checker`` tool 
 
 :::tip Tips
 
-  It is recommended to refer to the script methods ``01_check_X3.sh`` or ``01_check_Ultra.sh`` in the model conversion ``horizon_model_convert_sample`` example package of D-Robotics for examples of caffe, onnx, and other models.
+  It is recommended to refer to the script methods ``01_check_X3.sh`` in the model conversion ``horizon_model_convert_sample`` example package of D-Robotics for examples of caffe, onnx, and other models.
 :::
 
 #### Validate the model using the ``hb_mapper checker`` tool
@@ -104,7 +104,7 @@ hb_mapper checker parameters explanation:
   Specifies the model type of the input for checking, currently only supports setting ``caffe`` or ``onnx``.
 
 --march
-  Specifies the D-Robotics processor type to be adapted, can be set to ``bernoulli2`` or ``bayes``; set to ``bernoulli2`` for RDK X3 and ``bayes`` for RDK Ultra.
+  Specifies the D-Robotics processor type to be adapted, can be set to ``bernoulli2`` or ``bayes``; set to ``bernoulli2`` for RDK X3; for Bayes-architecture targets, set ``bayes`` or ``bayes-e`` per toolchain documentation.
 
 --proto<br/>
   This parameter is only useful when ``model-type`` is set to ``caffe``, and its value is the prototxt file name of the Caffe model.
@@ -203,7 +203,7 @@ The result of each line represents the checking status of a model node, with fou
 
 #### Optimization Guide for Checking Results
 
-Ideally, all operators in the model's network structure should run on the BPU, which means there is only one subgraph. If there are CPU operators causing multiple subgraphs to be split, the "hb_mapper checker" tool will provide the specific reasons for the appearance of the CPU operators. Below are examples of model verification on RDK X3 and RDK Ultra.
+Ideally, all operators in the model's network structure should run on the BPU, which means there is only one subgraph. If there are CPU operators causing multiple subgraphs to be split, the "hb_mapper checker" tool will provide the specific reasons for the appearance of the CPU operators. Below are examples of model verification on RDK X3 and Bayes BPU targets.
 
 - The Caffe model running on "RDK X3" has a structure of Reshape + Pow + Reshape. According to the operator constraint list on "RDK X3", we can see that the Reshape operator is currently running on the CPU, and the shape of Pow is also non-4D, which does not meet the constraints of the X3 BPU operator.
 
@@ -237,7 +237,7 @@ fc_output/op                          CPU  --        Mul
 
 ```
 
-- The ONNX model running on "RDK Ultra" has a structure of Mul + Add + Mul. According to the operator constraint list on "RDK Ultra", we can see that Mul and Add operators are supported on five dimensions for BPU execution, but they need to meet the constraints of the Ultra BPU operators; otherwise, they will fall back to CPU computation.
+- The ONNX model running on "Bayes BPU" has a structure of Mul + Add + Mul. According to the operator constraint list on "Bayes BPU", we can see that Mul and Add operators are supported on five dimensions for BPU execution, but they need to meet the constraints of the Bayes BPU operators; otherwise, they will fall back to CPU computation.
 
 ![model_reshape](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/04_toolchain_development/intermediate/model_reshape_ONNX.png)
 
@@ -392,7 +392,7 @@ For example: If the shape of the input node of the original float model is ?x3x2
 
 hb_mapper makertbin provides two modes, with and without the ``fast-perf`` mode enabled.When the "fast-perf" mode is enabled, it will generate a bin model that can run at the highest performance on the board during the conversion process. The tool mainly performs the following operations:
 
-- Run BPU executable operators on the BPU as much as possible (if using "RDK Ultra", you can specify the operators running on the BPU through the node_info parameter in the yaml file. "RDK X3" is automatically optimized and cannot specify operators through the yaml configuration file).
+- Run BPU executable operators on the BPU as much as possible (if using "Bayes BPU", you can specify the operators running on the BPU through the node_info parameter in the yaml file. "RDK X3" is automatically optimized and cannot specify operators through the yaml configuration file).
 
 - Delete CPU operators at the beginning and end of the model that cannot be deleted, including: Quantize/Dequantize, Transpose, Cast, Reshape, etc.
 
@@ -400,7 +400,7 @@ hb_mapper makertbin provides two modes, with and without the ``fast-perf`` mode 
 
 :::tip Tips
 
-  It is recommended to refer to the script methods of the example models in the D-Robotics Model Conversion "horizon_model_convert_sample" package, such as caffe and onnx example models: "03_build_X3.sh" or "03_build_Ultra.sh".
+  It is recommended to refer to the script methods of the example models in the D-Robotics Model Conversion "horizon_model_convert_sample" package, such as caffe and onnx example models: "03_build_X3.sh".
 :::
 
 The usage of the hb_mapper makertbin command is as follows:
@@ -443,13 +443,12 @@ Explanation of hb_mapper makertbin parameters:
 Used to specify the prototxt file of the Caffe model.
 
 --march
-Microarchitecture of BPU. Set it to "bernoulli2" if using "RDK X3", and set it to "bayes" if using "RDK Ultra".
+Microarchitecture of BPU. Set it to "bernoulli2" if using "RDK X3", and set it to "bayes" if using "Bayes BPU".
 
 :::caution Note
 
 - For "RDK X3 yaml configuration file", fill in the template file [**RDK X3 Caffe model quantization yaml template**](../../../08_FAQ/05_toolchain.md#rdk_x3_caffe_yaml_template) or [**RDK X3 ONNX model quantization yaml template**](../../../08_FAQ/05_toolchain.md#rdk_x3_onnx_yaml_template) directly.
 
-- For "RDK Ultra yaml configuration file", fill in the template file [**RDK Ultra Caffe model quantization yaml template**](../../../08_FAQ/05_toolchain.md#rdk_ultra_caffe_yaml_template) or [**RDK Ultra ONNX model quantization yaml template**](../../../08_FAQ/05_toolchain.md#rdk_ultra_onnx_yaml_template) directly.
 
 - If the hb_mapper makertbin step terminates abnormally or shows an error message, it means that the model conversion has failed. Please check the error message and modification suggestions in the terminal printout or in the ``hb_mapper_makertbin.log`` log file generated in the current path. You can find the solution for the error in the [**Model Quantization Errors and Solutions**](../../../08_FAQ/05_toolchain.md#model_convert_errors_and_solutions) section. If the problem cannot be solved after these steps, please contact the D-Robotics technical support team or submit your question in the [**D-Robotics Official Technical Community**](https://developer.d-robotics.cc/). We will provide support within 24 hours.
 
@@ -474,7 +473,7 @@ In other words, either a Caffe model or an ONNX model can be used.
     # Original ONNX floating-point model file
     onnx_model: '****.onnx'
 
-    # Target processor architecture for conversion, keep the default value, bernoulli2 for D-Robotics RDK X3 and bayes for RDK Ultra
+    # Target processor architecture for conversion, keep the default value, bernoulli2 for D-Robotics RDK X3 and bayes for Bayes BPU
     march: 'bernoulli2'
 
     # Prefix of the model file for execution on the board after conversion
@@ -599,7 +598,7 @@ For specific configuration methods, please refer to: ``run_on_cpu: 'conv_0; conv
 
 :::tip Tip
 - When the model is a multi-input model, it is recommended to explicitly specify optional parameters such as ``input_name`` and ``input_shape`` to avoid errors in parameter correspondence order.
-- When configuring the ``march`` as bayes, which means performing RDK Ultra model conversion, if you configure the optimization level ``optimize_level`` as O3, hb_mapper makerbin will automatically provide caching capabilities. That is, when you use hb_mapper makerbin to compile the model for the first time, it will automatically create a cache file. In subsequent compilations with the same working directory, this file will be automatically called, reducing your compilation time.
+- When configuring the ``march`` as bayes, which means performing Bayes BPU model conversion, if you configure the optimization level ``optimize_level`` as O3, hb_mapper makerbin will automatically provide caching capabilities. That is, when you use hb_mapper makerbin to compile the model for the first time, it will automatically create a cache file. In subsequent compilations with the same working directory, this file will be automatically called, reducing your compilation time.
 :::
 
 :::caution Caution
@@ -617,16 +616,16 @@ The following is a description of the specific parameter information. There will
 | `prototxt`    | **Purpose:** Specifies the filename of the Caffe float model prototxt file.<br/>**Description:** Mandatory for `hb_mapper makertbin` with `model-type` set to `caffe`. | N/A        | Optional          |
 | `caffe_model` | **Purpose:** Specifies the filename of the Caffe float model caffemodel file.<br/>**Description:** Mandatory for `hb_mapper makertbin` with `model-type` set to `caffe`. | N/A        | Optional          |
 | `onnx_model`  | **Purpose:** Specifies the filename of the ONNX float model onnx file.<br/>**Description:** Mandatory for `hb_mapper makertbin` with `model-type` set to `onnx`. | N/A        | Optional          |
-| `march`       | **Purpose:** Specifies the platform architecture supported by the mixed-heterogeneous model to be produced.<br/>**Description:** Two available options correspond to the BPU micro-framework for RDK X3 and RDK Ultra. Choose based on your platform. | `bernoulli2` or `bayes` | Required          |
+| `march`       | **Purpose:** Specifies the platform architecture supported by the mixed-heterogeneous model to be produced.<br/>**Description:** Two available options correspond to the BPU micro-framework for RDK X3 and Bayes BPU targets. Choose based on your platform. | `bernoulli2` or `bayes` | Required          |
 | `output_model_file_prefix` | **Purpose:** Specifies the prefix for the converted mixed-heterogeneous model's output file name.<br/>**Description:** Prefix for the output integer model file name. | N/A        | Required          |
 | `working_dir` | **Purpose:** Specifies the directory where the model conversion output will be stored.<br/>**Description:** If the directory does not exist, the tool will automatically create it. | N/A        | Optional (default: `model_output`) |
 | `layer_out_dump` | **Purpose:** Enables the ability to retain intermediate layer values in the mixed-heterogeneous model.<br/>**Description:** Intermediate layer values are used for debugging purposes. Disable this in normal scenarios. | `True` or `False` | Optional (default: `False`) |
 | `output_nodes` | **Purpose:** Specifies the model's output nodes.<br/>**Description:** Generally, the conversion tool automatically identifies the model's output nodes. This parameter is used to support specifying some intermediate layers as outputs. Provide specific node names, following the same format as the `param_value` description. Note that setting this parameter prevents the tool from automatically detecting outputs; the nodes you specify become the entire output. | N/A        | Optional          |
 | `remove_node_type` | **Purpose:** Sets the type of nodes to remove.<br/>**Description:** Hidden parameter, not setting or leaving blank won't affect the model conversion process. This parameter is used to support specifying node types to delete. Removed nodes must appear at the beginning or end of the model, connected to inputs or outputs. Caution: Nodes will be deleted in order, dynamically updating the model structure. The tool checks if a node is at an input or output before deletion. Order matters. | "Quantize", "Transpose", "Dequantize", "Cast", "Reshape". Separate by ";". | Optional          |
 | `remove_node_name` | **Purpose:** Sets the name of nodes to remove.<br/>**Description:** Hidden parameter, not setting or leaving blank won't affect the model conversion process. This parameter is used to support specifying node names to delete. Removed nodes must appear at the beginning or end of the model, connected to inputs or outputs. Caution: Nodes will be deleted in order, dynamically updating the model structure. The tool checks if a node is at an input or output before deletion. Order matters. | N/A        | Optional          |
-| `set_node_data_type` | **Purpose:** Configures the output data type of a specific op as int16, only supported for **RDK Ultra configuration!**<br/>**Description:** In the model conversion process, most ops default to int8 for input and output data types. This parameter allows you to specify the output data type of a specific op as int16 under certain constraints. See the [int16 configuration details](#int16_config) for more information.<br/>**Note:** This functionality has been merged into the `node_info` parameter, which will be deprecated in future versions. | Supported operators listed in the [model operator support list](./supported_op_list) for RDK Ultra. | Optional          |
+| `set_node_data_type` | **Purpose:** Configures the output data type of a specific op as int16, only supported for **Bayes BPU configuration!**<br/>**Description:** In the model conversion process, most ops default to int8 for input and output data types. This parameter allows you to specify the output data type of a specific op as int16 under certain constraints. See the [int16 configuration details](#int16_config) for more information.<br/>**Note:** This functionality has been merged into the `node_info` parameter, which will be deprecated in future versions. | Supported operators listed in the [model operator support list](./supported_op_list) for Bayes BPU. | Optional          |
 | `debug_mode` | **Purpose:** Saves calibration data for precision debugging analysis.<br/>**Description:** This parameter saves calibration data for precision debugging analysis in .npy format. This data can be directly loaded into the model for inference. If not set, you can save the data yourself and use the precision debugging tool for analysis. | `"dump_calibration_data"` | Optional          |
-| `node_info` | **Purpose:** Supports configuring the input and output data types of specific ops as int16, and forces certain ops to run on CPU or BPU. Only supported for **RDK Ultra configuration!**<br/>**Description:** To reduce YAML parameters, we've combined the capabilities of `set_node_data_type`, `run_on_cpu`, and `run_on_bpu` into this parameter and expanded it to support configuring the input data type of specific ops as int16.<br/>**Usage of `node_info`:**<br/>- Run an op on BPU/CPU (example with BPU):<br/>node_info: `{`<br/>"node_name": `{`<br/>"ON": "BPU",<br/>`}`<br/>`}`<br/>- Run an op on BPU and configure its input and output data types:<br/>node_info: `{`<br/>"node_name": `{`<br/>"ON": "BPU",<br/>"InputType": "int16",<br/>"OutputType": "int16"<br/>`}`<br/>`}`<br/>- Run on multiple operators:<br/> node_info:<br/>`{"/model.0/conv/Conv": {"ON": "BPU","InputType": "int16","OutputType": "int16"},`<br/>`"/model.0/act/Mul": {"ON": "BPU","InputType": "int16","OutputType": "int16"},`<br/>`"/model.2/Concat": {"ON": "BPU","InputType": "int16","OutputType": "int16"}}`<br/>* `InputType`: 'int16' applies to all inputs. For specifying a particular input's data type, append a number, e.g., `'InputType0': 'int16'` for the first input, `'InputType1': 'int16'` for the second input.<br/>* `OutputType` doesn't support specifying a particular output, applying to all outputs. It doesn't support individual types like `OutputType0` or `OutputType1`.<br/>**Value Range:** Refer to the [model operator support list](./supported_op_list) for RDK Ultra for supported int16 ops and those that can run on CPU or BPU.<br/>**Default Configuration:** None | Optional          |
+| `node_info` | **Purpose:** Supports configuring the input and output data types of specific ops as int16, and forces certain ops to run on CPU or BPU. Only supported for **Bayes BPU configuration!**<br/>**Description:** To reduce YAML parameters, we've combined the capabilities of `set_node_data_type`, `run_on_cpu`, and `run_on_bpu` into this parameter and expanded it to support configuring the input data type of specific ops as int16.<br/>**Usage of `node_info`:**<br/>- Run an op on BPU/CPU (example with BPU):<br/>node_info: `{`<br/>"node_name": `{`<br/>"ON": "BPU",<br/>`}`<br/>`}`<br/>- Run an op on BPU and configure its input and output data types:<br/>node_info: `{`<br/>"node_name": `{`<br/>"ON": "BPU",<br/>"InputType": "int16",<br/>"OutputType": "int16"<br/>`}`<br/>`}`<br/>- Run on multiple operators:<br/> node_info:<br/>`{"/model.0/conv/Conv": {"ON": "BPU","InputType": "int16","OutputType": "int16"},`<br/>`"/model.0/act/Mul": {"ON": "BPU","InputType": "int16","OutputType": "int16"},`<br/>`"/model.2/Concat": {"ON": "BPU","InputType": "int16","OutputType": "int16"}}`<br/>* `InputType`: 'int16' applies to all inputs. For specifying a particular input's data type, append a number, e.g., `'InputType0': 'int16'` for the first input, `'InputType1': 'int16'` for the second input.<br/>* `OutputType` doesn't support specifying a particular output, applying to all outputs. It doesn't support individual types like `OutputType0` or `OutputType1`.<br/>**Value Range:** Refer to the [model operator support list](./supported_op_list) for Bayes BPU for supported int16 ops and those that can run on CPU or BPU.<br/>**Default Configuration:** None | Optional          |
 
 
 
@@ -656,9 +655,9 @@ The following is a description of the specific parameter information. There will
 | `calibration_type` | Calibration algorithm type to use.<br/>**Description**: Both `kl` and `max` are public calibration quantization algorithms, whose basic principles can be found in online resources. When using `load`, the QAT model must be exported using a plugin. `mix` is an integrated search strategy that automatically determines sensitive quantization nodes and selects the best method at the node granularity, ultimately constructing a calibration combination that leverages the advantages of multiple methods. `default` is an automated search strategy that attempts to find a relatively better combination of calibration parameters from a series. We suggest starting with `default`. If the final accuracy does not meet expectations, refer to the [Precision Tuning](https://...) section for suggested parameter adjustments. If you just want to verify the model performance without accuracy requirements, try the `skip` mode, which uses random numbers for calibration and does not require calibration data, suitable for initial model structure validation. Note: Using the `skip` mode results in models calibrated with random numbers, which are not suitable for accuracy validation. | `default`, `mix`, `kl`, `max`, `load`, `skip` | Required |
 | `max_percentile` | Parameter for the `max` calibration method, used to adjust the cutoff point for `max` calibration.<br/>**Description**: Only valid when `calibration_type` is set to `max`. Common options include: 0.99999/0.99995/0.99990/0.99950/0.99900. Start with `calibration_type` set to `default`, and adjust this parameter if the final accuracy is unsatisfactory, as advised in the [Precision Tuning](https://...) section. | `0.0` - `1.0` | Optional |
 | `per_channel` | Controls whether to calibrate each channel individually within a featuremap.<br/>**Description**: Effective when `calibration_type` is not set to `default`. Start with `default` and adjust this parameter if necessary, as suggested in the [Precision Tuning](https://...) section. | `True`, `False` | Optional |
-| `run_on_cpu` | Forces operators to run on CPU.<br/>**Description**: Although CPU performance is inferior to BPU, it provides float precision calculations. Specify this parameter if you're certain that some operators need to run on CPU. Set values to specific node names in your model, following the same configuration method as described earlier for `param_value`. **Note**: In RDK Ultra, this parameter functionality has been merged into the `node_info` parameter and is planned to be deprecated in future versions. It continues to be available in RDK X3. | N/A | Optional |
-| `run_on_bpu` | Forces an operator to run on BPU.<br/>**Description**: To maintain the accuracy of the quantized model, occasionally, the conversion tool may place some operators that can run on BPU on CPU. If you have higher performance requirements and are willing to accept slightly more quantization loss, you can explicitly specify that an operator runs on BPU. Set values to specific node names in your model, following the same configuration method as described earlier for `param_value`. **Note**: In RDK Ultra, this parameter functionality has been merged into the `node_info` parameter and is planned to be deprecated in future versions. It continues to be available in RDK X3. | N/A | Optional |
-| `optimization` | Sets the model output format to int8 or int16.<br/>**Description**: If set to `set_model_output_int8`, the model will output in low-precision int8 format; if set to `set_model_output_int16`, the model will output in low-precision int16 format. **Note**: RDK X3 only supports `set_model_output_int8`, while RDK Ultra supports both `set_model_output_int8` and `set_model_output_int16`. | `set_model_output_int8`, `set_model_output_int16` | Optional |
+| `run_on_cpu` | Forces operators to run on CPU.<br/>**Description**: Although CPU performance is inferior to BPU, it provides float precision calculations. Specify this parameter if you're certain that some operators need to run on CPU. Set values to specific node names in your model, following the same configuration method as described earlier for `param_value`. **Note**: In Bayes BPU, this parameter functionality has been merged into the `node_info` parameter and is planned to be deprecated in future versions. It continues to be available in RDK X3. | N/A | Optional |
+| `run_on_bpu` | Forces an operator to run on BPU.<br/>**Description**: To maintain the accuracy of the quantized model, occasionally, the conversion tool may place some operators that can run on BPU on CPU. If you have higher performance requirements and are willing to accept slightly more quantization loss, you can explicitly specify that an operator runs on BPU. Set values to specific node names in your model, following the same configuration method as described earlier for `param_value`. **Note**: In Bayes BPU, this parameter functionality has been merged into the `node_info` parameter and is planned to be deprecated in future versions. It continues to be available in RDK X3. | N/A | Optional |
+| `optimization` | Sets the model output format to int8 or int16.<br/>**Description**: If set to `set_model_output_int8`, the model will output in low-precision int8 format; if set to `set_model_output_int16`, the model will output in low-precision int16 format. **Note**: RDK X3 only supports `set_model_output_int8`, while Bayes BPU supports both `set_model_output_int8` and `set_model_output_int16`. | `set_model_output_int8`, `set_model_output_int16` | Optional |
 
 
 
@@ -668,7 +667,7 @@ The following is a description of the specific parameter information. There will
 |--------------|-------------|-------------|------------------|
 | `compile_mode` | **Purpose**: Select the compilation strategy.<br/>**Description**: Choose between `latency` for inference time optimization or `bandwidth` for DDR access bandwidth optimization. For models without significant bandwidth exceedance, use the `latency` strategy is recommended.| **Value Range**: `latency`, `bandwidth`.<br/> **Default**: `latency`. | Required |
 | `debug` | **Purpose**: Enable debug information in the compilation process.<br/>**Description**: Enabling this parameter saves performance analysis results in the model, allowing you to view layer-wise BPU operator performance (including compute, compute time, and data movement time) in the generated static performance assessment files. It is recommended to keep it disabled by default.| **Value Range**: `True`, `False`.<br/> **Default**: `False`. | Optional |
-| `core_num` | **Purpose**: Number of cores for model execution.<br/>**Description**: D-Robotics Platform supports using multiple AI accelerator cores simultaneously for inference tasks. Multiple cores are beneficial for larger input sizes, with double-core speed typically around 1.5 times that of single-core. If your model has large inputs and追求极致速度, set `core_num=2`. **Note**: This option is not supported for RDK Ultra, please do not configure.| **Value Range**: `1`, `2`.<br/> **Default**: `1`. | Optional |
+| `core_num` | **Purpose**: Number of cores for model execution.<br/>**Description**: D-Robotics Platform supports using multiple AI accelerator cores simultaneously for inference tasks. Multiple cores are beneficial for larger input sizes, with double-core speed typically around 1.5 times that of single-core. If your model has large inputs and追求极致速度, set `core_num=2`. **Note**: This option is not supported for Bayes BPU, please do not configure.| **Value Range**: `1`, `2`.<br/> **Default**: `1`. | Optional |
 | `optimize_level` | **Purpose**: Model compilation optimization level.<br/>**Description**: The optimization levels range from `O0` (no optimization, fastest compile) to `O3` (higher optimization, slower compile). Normal performance models should use `O3` for optimal performance. Lower levels can be used for faster development or debugging processes.| **Value Range**: `O0`, `O1`, `O2`, `O3`.<br/> **Default**: None. | Required |
 | `input_source` | **Purpose**: Set the source of input data for the on-board bin model.<br/>**Description**: This parameter is for engineering environment compatibility. Configure after model validation. Options include `ddr` (memory), `pyramid`, and `resizer`. Note: If set to `resizer`, the model's h*w should be less than 18432. In an engineering environment, adapting `pyramid` and `resizer` sources requires specific configuration, e.g., if the model input name is `data` and the source is memory (ddr), set as ``{`"data": "ddr"`}``.| **Value Range**: `ddr`, `pyramid`, `resizer`<br/> **Default**: None (auto-selected based on `input_type_rt`). | Optional |
 | `max_time_per_fc` | **Purpose**: Maximum continuous execution time per function call (in us).<br/>**Description**: In the compiled data instruction model, each inference on BPU is represented by one or more function calls (BPU execution granularity). A value of 0 means no limit. This parameter limits the max execution time per function call, allowing the model to be interrupted if necessary. See the section on Model Priority Control for details. - This parameter is for implementing model preemption; ignore if not needed.<br/> - Model preemption is only supported on development boards, not PC simulators.| **Value Range**: `0` or `1000-4294967295`.<br/> **Default**: `0`. | Optional |
@@ -682,9 +681,9 @@ The following is a description of the specific parameter information. There will
 | `op_register_files` | **Purpose**: Names of Python files implementing the custom operator(s).<br/>**Description**: Multiple files can be separated by `;`.| **Range**: None.<br/> **Default**: None.| Optional |
 | `custom_op_dir` | **Purpose**: Path to the directory containing the Python files for the custom operator(s).<br/>**Description**: Please use relative path when setting the path.| **Range**: None.<br/> **Default**: None.| Optional |
 
-##### RDK Ultra int16 Configuration Instructions\{#int16_config\}
+##### Bayes BPU int16 Configuration Instructions\{#int16_config\}
 
-In the process of model conversion, most operators in the model will be quantized to int8 for computation. By configuring the "node_info" parameter, you can specify in detail that the input/output data type of a specific op is int16 for computation (the specific supported operator range can be referred to the RDK Ultra operator support list in the "Supported Operator List" chapter).
+In the process of model conversion, most operators in the model will be quantized to int8 for computation. By configuring the "node_info" parameter, you can specify in detail that the input/output data type of a specific op is int16 for computation (the specific supported operator range can be referred to the Bayes BPU operator support list in the "Supported Operator List" chapter).
 The basic principle is as follows:
 
 After you configure the input/output data type of a certain op as int16, the model conversion will automatically update and check the int16 configuration of the op's input/output context. For example, when configuring the input/output data type of op_1 as int16, it actually implicitly specifies that the previous/next op of op_1 needs to support int16 computation.
@@ -1534,10 +1533,10 @@ This tool can assist you in analyzing the quantization error of the calibration 
 
 :::tip Tips
 
-If you are using the **RDK Ultra** product, you can also try precision tuning by configuring some ops to calculate in int16 ( **RDK X3** does not support int16 calculation for ops):
+If you are using the **Bayes BPU** product, you can also try precision tuning by configuring some ops to calculate in int16 ( **RDK X3** does not support int16 calculation for ops):
 
 During the model conversion process, most ops are calculated using int8 data by default. In some cases, using int8 calculation for some ops may result in noticeable accuracy loss.
-For **RDK Ultra** products, the algorithm toolchain already provides the ability to specify certain ops to calculate in int16 bit, as described in the [**int16 configuration**](#int16_config) parameter configuration. By configuring ops that are sensitive to quantization loss (with cosine similarity as a reference) to calculate in int16 bit, accuracy loss in some scenarios can be resolved.
+For **Bayes BPU** products, the algorithm toolchain already provides the ability to specify certain ops to calculate in int16 bit, as described in the [**int16 configuration**](#int16_config) parameter configuration. By configuring ops that are sensitive to quantization loss (with cosine similarity as a reference) to calculate in int16 bit, accuracy loss in some scenarios can be resolved.
 :::
 
 During the process of model conversion, accuracy loss may occur due to the quantization process from floating point to fixed point. The main reasons for accuracy loss may include:
@@ -1571,7 +1570,7 @@ Using the accuracy debug tool mainly involves the following steps:
 
 :::caution Note
 
-For the current version of the accuracy debug tool: For the **RDK Ultra** corresponding to the ``bayes`` architecture model, both command line and API methods are supported for debugging, while for the **RDK X3** corresponding to the ``bernoulli2`` architecture model, only the API method is supported for debug.
+For the current version of the accuracy debug tool: For the **Bayes BPU** corresponding to the ``bayes`` architecture model, both command line and API methods are supported for debugging, while for the **RDK X3** corresponding to the ``bernoulli2`` architecture model, only the API method is supported for debug.
 :::
 
 The overall process is shown in the following diagram:
@@ -2221,7 +2220,7 @@ Here's how the chart is structured:
 
 :::caution 注意
 
-  runall can be used on only **RDK Ultra**
+  runall can be used on only **Bayes BPU**
 :::
 
 **Command Line Format**:

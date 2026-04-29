@@ -129,9 +129,6 @@ robot_dev_config的tag号（版本信息），请查看[版本发布记录](/doc
 ## 使用build.sh编译X3版本tros.b
 bash ./robot_dev_config/build.sh -p X3
 
-## 使用build.sh编译RDK Ultra版本tros.b
-bash ./robot_dev_config/build.sh -p Rdkultra
-
 ## 使用build.sh编译X5版本tros.b
 bash ./robot_dev_config/build.sh -p X5
 

@@ -103,9 +103,7 @@ After successful installation, you can type the command hb_mapper --help to veri
 
 In this chapter, we introduce the basic usage process of the D-Robotics algorithm toolchain PTQ solution, so that you can quickly get started. Here we take yolov5s model running on the RDK X3 development board as an example to demonstrate the usage for you. For more detailed content of the D-Robotics algorithm toolchain PTQ solution, please read the [**Advanced Guide - PTQ Principles and Steps**](./intermediate/ptq_process) chapter.
 
-:::tip Tips
-  To convert models supported by RDK Ultra, replace the ``0x_xx_X3.sh`` script command in the steps of the following chapters with the ``0x_xx_Ultra.sh`` script command for model conversion.
-:::
+
 
 ### Development Environment Preparation
 
@@ -124,17 +122,14 @@ Run the following command to check if the yolov5s floating-point model exists:
 After the command is executed, if the following log appears, it means that the model is ready:
 
 ```bash
-    -rwxr-xr-x 1 10488 10501      640 Jul 31 18:35 01_check_Ultra.sh
     -rwxr-xr-x 1 10488 10501      645 Jul 31 18:35 01_check_X3.sh
     -rwxr-xr-x 1 10488 10501      661 Jul 31 18:24 02_preprocess.sh
-    -rwxr-xr-x 1 10488 10501      609 Jul 31 18:34 03_build_Ultra.sh
     -rwxr-xr-x 1 10488 10501      606 Aug 14 16:49 03_build_X3.sh
     -rwxr-xr-x 1 10488 10501     2752 Mar  9 11:34 README.cn.md
     -rwxr-xr-x 1 10488 10501     1422 Jul 31 18:24 README.md
     -rwxr-xr-x 1 10488 10501 29999538 Mar  9 14:01 YOLOv5s.onnx
     -rwxr-xr-x 1 10488 10501    13039 Jul 31 18:24 postprocess.py
     -rwxr-xr-x 1 10488 10501     3133 Jul 31 18:24 preprocess.py
-    -rwxr-xr-x 1 10488 10501    11304 Jul 31 18:34 yolov5s_config_Ultra.yaml
     -rwxr-xr-x 1 10488 10501    11275 Jul 31 18:25 yolov5s_config_X3.yaml
 
 ```
@@ -154,7 +149,7 @@ cd yolov5s_v2.0/04_detection/03_yolov5s/mapper
 - Model Validation
 
 ```bash
-    # Check the model structure and operator support, and provide hardware allocation information for each operator (BPU/CPU). RDK X3 execution script: 01_check_X3.sh; RDK Ultra execution script: 01_check_Ultra.sh
+    # Check the model structure and operator support (BPU/CPU). Use the RDK X3 script:
     bash 01_check_X3.sh
 ```
 
@@ -187,7 +182,7 @@ After the command execution is completed, if the following log appears and there
 - Model conversion
 
 ```bash
-    # The configuration file yolov5s_config_X3.yaml required for conversion is already placed in the same folder as the script 03_build_X3.sh. RDK X3 execution script: 03_build_X3.sh; RDK Ultra execution script: 03_build_Ultra.sh
+    # The configuration file yolov5s_config_X3.yaml is beside 03_build_X3.sh. Run:
     bash 03_build_X3.sh
 ```
 
@@ -203,7 +198,7 @@ After the model conversion is completed, the model files and static performance 
 -   torch-jit-export_subgraph_0.html        # Static performance evaluation file (better readability)
 -   torch-jit-export_subgraph_0.json        # Static performance evaluation file
 -   hb_model_modifier.log                   # Log information generated during the model conversion steps
--   cache.json                              # Cache file (automatically generated when RDK Ultra optimization level is configured as O3)
+-   cache.json                              # Cache file (may be generated when `optimize_level` is set to O3)
 -   yolov5s_672x672_nv12.bin     # Model file for loading and running on the D-Robotics processor
 -   yolov5s_672x672_nv12_calibrated_model.onnx      # Intermediate model file for subsequent model accuracy verification
 -   yolov5s_672x672_nv12_optimized_float_model.onnx # Intermediate model file for subsequent model accuracy verification

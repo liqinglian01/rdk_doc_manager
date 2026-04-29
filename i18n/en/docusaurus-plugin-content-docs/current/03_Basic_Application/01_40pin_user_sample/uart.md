@@ -8,8 +8,6 @@ RDK X3 enables UART3 by default on the 40-pin connector, with physical pin numbe
 
 RDK X5 enables UART1 by default on the 40pin connector, using physical pins 8 and 10, and IO voltage of 3.3V.
 
-RDK Ultra enables UART2 by default on the 40-pin connector, with physical pin numbers 8 and 10, and IO voltage of 3.3V.
-
 Refer to `/app/40pin_samples/test_serial.py` for detailed information on how to use the serial port.
 
 ## Loopback test
@@ -24,7 +22,7 @@ Connect TXD and RXD together directly on the hardware using a jumper cap.
 ### Test procedure
 
 - Run `python3 /app/40pin_samples/test_serial.py`
-- From the printed serial devices (where `/dev/ttyS0` is the system debugging port and it is not recommended to test it unless you fully understand its purpose), select the bus number and the chip number as input options. For example, for RDK X3 choose to test `/dev/ttyS3`, for RDK X5 choose to test `/dev/ttyS1`, for RDK Ultra choose to test `/dev/ttyS2`. Press Enter to confirm, and enter the baud rate parameter:
+- From the printed serial devices (where `/dev/ttyS0` is the system debugging port and it is not recommended to test it unless you fully understand its purpose), select the bus number and the chip number as input options. For example, for RDK X3 choose to test `/dev/ttyS3`, for RDK X5 choose to test `/dev/ttyS1`. Press Enter to confirm, and enter the baud rate parameter:
 
 ```
 List of enabled UART:

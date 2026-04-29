@@ -23,9 +23,6 @@ import TabItem from '@theme/TabItem';
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
 | RDK X5, RDK X5 Module | Ubuntu 22.04 (Humble) |
 | RDK S100, RDK S100P | Ubuntu 22.04 (Humble) |
-| RDK X5, RDK X5 Module | Ubuntu 22.04 (Humble) |
-| RDK S100, RDK S100P | Ubuntu 22.04 (Humble) |
-| RDK Ultra | Ubuntu 20.04 (Foxy) |
 | X86     | Ubuntu 20.04 (Foxy) |
 
 ### 准备工作
@@ -324,7 +321,7 @@ RDK和X86平台使用方式相同，其中以RDK平台为例：
 | ---- | ------ | -------------------- | -------- |  -------- | ------------------------------------------------------------ |
 | 1    | F37    | ![F37](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/F37.jpg)       | 200W像素 | RDK X3, RDK X3 Module | [F37](https://developer.d-robotics.cc/accessory#23) |
 | 2    | GC4663 | ![GC4663](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/GC4663.jpg) | 400W像素 | RDK X3, RDK X3 Module | [GC4663](https://developer.d-robotics.cc/accessory#23) |
-| 3    | IMX219 | ![IMX219](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/IMX219.jpg) | 800W像素 | RDK X3, RDK X3 Module, RDK Ultra, RDK X5, RDK X5 Module, RDK S100 | [IMX219](https://detail.tmall.com/item.htm?abbucket=9&id=710344235988&rn=259e73f46059c2e6fc9de133ba9ddddf&spm=a1z10.5-b-s.w4011-22651484606.159.55df6a83NWrGPi) |
+| 3    | IMX219 | ![IMX219](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/IMX219.jpg) | 800W像素 | RDK X3, RDK X3 Module, RDK X5, RDK X5 Module, RDK S100 | [IMX219](https://detail.tmall.com/item.htm?abbucket=9&id=710344235988&rn=259e73f46059c2e6fc9de133ba9ddddf&spm=a1z10.5-b-s.w4011-22651484606.159.55df6a83NWrGPi) |
 | 4    | IMX477 | ![IMX477](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/IMX477.jpg) | 200W像素 | RDK X3, RDK X3 Module | [IMX477](https://www.waveshare.net/shop/IMX477-160-12.3MP-Camera.htm) |
 | 5    | OV5647 | ![OV5647](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/OV5647.jpg) | 200W像素 | RDK X3, RDK X3 Module, RDK X5, RDK X5 Module | [OV5647](https://www.waveshare.net/shop/RPi-Camera-G.htm) |
 | 6    | IMX415 | ![IMX415](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/05_Robot_development/02_quick_demo/image/demo_sensor/IMX415.jpg) | 200W像素 | RDK X5, RDK X5 Module | [IMX415](https://e.tb.cn/h.hNHZxXLFdgg6oHj?tk=b1Id4UgKNVn) |
@@ -1021,7 +1018,6 @@ RDK和X86平台使用方式相同，其中以RDK平台为例：
 | ------- | ------------ |
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
 | RDK X5, RDK X5 Module | Ubuntu 22.04 (Humble) |
-| RDK Ultra | Ubuntu 20.04 (Foxy) |
 
 ### 准备工作
 

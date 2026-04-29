@@ -21,7 +21,6 @@ Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=2
 
 在使用串口登录前，需要确认开发板串口线跟电脑正确连接，连接方法可参考对应开发板的调试串口章节：
 
-- [rdk_ultra 调试串口章节](../01_Quick_start/hardware_introduction/rdk_ultra.md#debug_uart)
 - [rdk_x3 调试串口章节](../01_Quick_start/hardware_introduction/rdk_x3.md#debug_uart)
 - [rdk_x5 调试串口章节](../01_Quick_start/hardware_introduction/rdk_x5.md#debug_uart)
 

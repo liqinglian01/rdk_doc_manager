@@ -28,7 +28,7 @@ import TabItem from '@theme/TabItem';
 
 
 <Tabs groupId="tros-distro">
-<TabItem value="RDK X3/X5/Ultra" label="RDK X3/X5/Ultra">
+<TabItem value="RDK X3/X5" label="RDK X3/X5">
 
 RDK X3平台请注意：
 

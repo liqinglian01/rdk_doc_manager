@@ -80,12 +80,6 @@ sudo srpi-config
 
 </TabItem>
 
-<TabItem value="ultra" label="RDK Ultra">
-
-![image-20230510155124570](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20230830194924570.png)
-
-</TabItem>
-
 <TabItem value="rdkx5&x5md" label="RDK X5 & RDK X5 Module">
 
 ![image-20241217-202319](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20241217-202319.png)

@@ -13,7 +13,7 @@ This section addresses frequently asked questions related to AI model deployment
 
 ### Q1: What information should I provide when seeking technical support for toolchain issues?
 **A:** To help technical support quickly identify and resolve your issue with the Horizon algorithm toolchain, please provide as much of the following information as possible:
-1.  **Target RDK hardware platform and processor architecture:** For example, RDK X3 (BPU Bernoulli2), RDK Ultra (BPU Bayes), RDK X5 (BPU Bayes-e), Super100 (BPU Nash-e), Super100P (BPU Nash-m).
+1.  **Target RDK hardware platform and processor architecture:** For example, RDK X3 (BPU Bernoulli2), RDK X5 (BPU Bayes-e), Super100 (BPU Nash-e), Super100P (BPU Nash-m).
 2.  **Algorithm toolchain conversion environment information:**
   * `horizon_nn` package version (check with `pip list | grep horizon`).
   * Python version (e.g., Py3.8, Py3.10).
@@ -52,25 +52,18 @@ This section addresses frequently asked questions related to AI model deployment
 * **RDK X3 OpenExplore Product Release and Resources:**
   [https://developer.d-robotics.cc/forumDetail/136488103547258769](https://developer.d-robotics.cc/forumDetail/136488103547258769)
 
-### Q4: What community algorithm resources and toolchain manuals are available for the RDK Ultra platform?
-**A:** For algorithm development on the RDK Ultra platform, refer to the following OpenExplorer community resources:
-* **RDK Ultra Algorithm Toolchain Community Manual (OpenExplorer):**
-  [https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/index.html](https://developer.d-robotics.cc/api/v1/fileData/horizon_j5_open_explorer_cn_doc/index.html)
-* **RDK Ultra OpenExplore Product Release and Resources:**
-  [https://developer.d-robotics.cc/forumDetail/118363912788935318](https://developer.d-robotics.cc/forumDetail/118363912788935318)
-
-### Q5: What community algorithm resources and toolchain manuals are available for the RDK X5 platform?
+### Q4: What community algorithm resources and toolchain manuals are available for the RDK X5 platform?
 **A:** For algorithm development on the RDK X5 platform, refer to the following OpenExplorer community resources:
 * **RDK X5 Algorithm Toolchain Community Manual (OpenExplorer):**
   [https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html](https://developer.d-robotics.cc/api/v1/fileData/x5_doc-v126cn/index.html) (check for the latest version)
 * **RDK X5 OpenExplore Product Release and Resources:**
   [https://developer.d-robotics.cc/forumDetail/251934919646096384](https://developer.d-robotics.cc/forumDetail/251934919646096384)
 
-### Q6: The algorithm toolchain Docker image is based on Ubuntu 20.04. Will this affect running the generated models (.bin or .hbm) on RDK boards with Ubuntu 22.04?
+### Q4: The algorithm toolchain Docker image is based on Ubuntu 20.04. Will this affect running the generated models (.bin or .hbm) on RDK boards with Ubuntu 22.04?
 **A:** **No, it will not affect it.**
 The Horizon OpenExplorer algorithm toolchain Docker image is mainly for providing an isolated environment with all necessary conversion tools and dependencies. The generated model files (e.g., `.bin` for PTQ, `.hbm` for QAT) are binary instructions and weights for the specific BPU architecture on the RDK board. These files are decoupled from the Ubuntu version on the board, as long as the runtime libraries (e.g., `libdnn.so`) on the board are compatible with the toolchain version used for conversion.
 
-### Q7: How do I deploy YOLO series models (e.g., YOLOv5, YOLOv8, YOLOv10) on the RDK platform?
+### Q4: How do I deploy YOLO series models (e.g., YOLOv5, YOLOv8, YOLOv10) on the RDK platform?
 **A:** Horizon provides comprehensive tutorials and examples for deploying YOLO series models on the RDK platform.
 
 * **YOLOv5 on RDK X3:**
@@ -83,18 +76,18 @@ The Horizon OpenExplorer algorithm toolchain Docker image is mainly for providin
 * **YOLOv8 on RDK X3:**
   * **Python multi-process 30fps reference:** [CSDN Blog - YOLOv8 RDK X3 Deployment](https://blog.csdn.net/SA2672873269/article/details/139780749)
 
-* **YOLOv10 on Bayes architecture platforms (RDK X5/Ultra):**
+* **YOLOv10 on Bayes architecture platforms (e.g. RDK X5):**
   * **Python multi-thread 30fps reference:** [CSDN Blog - YOLOv10 Bayes Platform Deployment](https://blog.csdn.net/SA2672873269/article/details/139224272)
 
 * **General resource:** Strongly recommended to check the **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo)), which contains official deployment examples, preprocessing/post-processing code, and optimization tips for various YOLO versions and other mainstream models.
 
-### Q8: When deploying YOLOv5, I get an error like `can't reshape xxx in (84,84,3,85)`. How do I fix this?
+### Q4: When deploying YOLOv5, I get an error like `can't reshape xxx in (84,84,3,85)`. How do I fix this?
 **A:** This error is usually caused by a mismatch between the **number of classes (num_classes)** preset in the post-processing code and the actual number of classes in your trained/exported model.
 For example, `85` typically means `(x, y, w, h, confidence + num_classes)`. For COCO (80 classes), `num_classes` is 80, so `5 + 80 = 85`. If your model is trained for 10 classes, it should be `5 + 10 = 15`.
 * **Solution:** Locate the YOLOv5 post-processing code (usually a Python script) and modify the class number parameter to match your model.
 * **Reference:** The [YOLOv5s v2.0 Training and Conversion Blog](https://developer.d-robotics.cc/forumDetail/163807123501918330) may also contain relevant instructions.
 
-### Q9: When deploying YOLOv5, I get a large number of irregular detection boxes. Why?
+### Q4: When deploying YOLOv5, I get a large number of irregular detection boxes. Why?
 **A:** This is usually due to a mismatch between the ONNX model's output head structure and the board-side post-processing code.
 * **Possible cause 1: Output head not modified as required by BPU.**
   * Higher versions of YOLOv5 may export ONNX models with decoded detection heads or without separating the three feature maps.
@@ -111,7 +104,7 @@ For example, `85` typically means `(x, y, w, h, confidence + num_classes)`. For 
     4.  Do not add unnecessary activation functions (e.g., Sigmoid) unless required by post-processing.
   * **Reference:** [YOLOv5 Output Layer Modification Guide](https://developer.d-robotics.cc/forumDetail/177840589839214598)
 
-### Q10: When deploying YOLOv5, detection boxes appear in a periodic pattern. Why?
+### Q4: When deploying YOLOv5, detection boxes appear in a periodic pattern. Why?
 **A:**
 * **Possible cause: Output dimensions do not match post-processing.**
   * If your YOLOv5 model outputs 5D tensors (e.g., `[batch, num_anchors, grid_h, grid_w, (x,y,w,h,conf+classes)]` or `[batch, num_anchors*(5+num_classes), grid_h, grid_w]`), the BPU toolchain may misinterpret dimensions, resulting in periodic detection boxes.
@@ -120,7 +113,7 @@ For example, `85` typically means `(x, y, w, h, confidence + num_classes)`. For 
 * **Solution:**
   * When exporting the ONNX model, convert outputs to explicit 4D tensors (e.g., NHWC: `[batch, grid_h, grid_w, num_anchors*(5+num_classes)]`), and ensure post-processing matches this format.
 
-### Q11: When deploying YOLOv5, detection boxes are offset from their correct positions. Why?
+### Q4: When deploying YOLOv5, detection boxes are offset from their correct positions. Why?
 **A:**
 1.  **Mismatch between rendering size and original image size:**
   * Detection box coordinates are relative to the model input size (e.g., 640x640). If you render these coordinates on an image of a different size without scaling, boxes will be offset.
@@ -129,7 +122,7 @@ For example, `85` typically means `(x, y, w, h, confidence + num_classes)`. For 
   * YOLOv5 decoding depends on preset anchors. If anchors used in post-processing differ from those used in training, box positions and sizes will be incorrect.
   * **Solution:** Ensure anchors in post-processing exactly match those used during training.
 
-### Q12: When deploying YOLOv5, all detection boxes cluster in the top-left corner. Why?
+### Q4: When deploying YOLOv5, all detection boxes cluster in the top-left corner. Why?
 **A:**
 * **Possible cause: Parameter passing issue in post-processing library (in some system versions).**
   * In RDK OS 3.0.0 and above, `/app/pydev_demo/07_yolov5_sample` may use a CPython-wrapped post-processing library. If key parameters (e.g., class number) are not correctly passed, decoding fails and boxes cluster in the top-left.
@@ -139,7 +132,7 @@ For example, `85` typically means `(x, y, w, h, confidence + num_classes)`. For 
   * **Recommended:** Use post-processing from the **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo)), which is robust and optimized.
   * **If using onboard samples:** Carefully check that all necessary parameters (class number, input resolution, anchors, thresholds, etc.) are correctly configured and passed.
 
-### Q13: When running `/app/pydev_demo/07_yolov5_sample` with my own model, I get a `Segmentation fault`. What should I do?
+### Q4: When running `/app/pydev_demo/07_yolov5_sample` with my own model, I get a `Segmentation fault`. What should I do?
 **A:**
 * **Reason:** The onboard sample programs (like `07_yolov5_sample`) are designed for the included `.bin` model, with preprocessing, inference, and post-processing tailored for it.
 * If you replace the `.bin` file with your own model without updating the code accordingly, data format mismatches or memory errors can cause segmentation faults.
@@ -148,7 +141,7 @@ For example, `85` typically means `(x, y, w, h, confidence + num_classes)`. For 
   2.  **Refer to the RDK Model Zoo:** For YOLOv5 and similar models, use the deployment examples in the **RDK Model Zoo** ([https://github.com/D-Robotics/rdk_model_zoo](https://github.com/D-Robotics/rdk_model_zoo)).
   3.  **Understand post-processing:** Study YOLOv5 post-processing (anchors decoding, confidence filtering, NMS, etc.) and ensure your code matches your model's output format.
 
-### Q14: If the model inference produces no results or results are far from expected, how should I troubleshoot (pipeline checklist)?
+### Q4: If the model inference produces no results or results are far from expected, how should I troubleshoot (pipeline checklist)?
 **A:** 
 When model deployment yields poor or no results, systematically check the entire inference pipeline:
 
@@ -182,7 +175,7 @@ When model deployment yields poor or no results, systematically check the entire
   * **Use known inputs/outputs:** Test with samples where you know the correct results.
   * **Module-by-module validation:** If possible, validate each pipeline module separately.
 
-### Q15: How can I obtain board-side `hrt_*` performance analysis tools (e.g., `hrt_model_exec`, `hrt_bpu_monitor`)?
+### Q4: How can I obtain board-side `hrt_*` performance analysis tools (e.g., `hrt_model_exec`, `hrt_bpu_monitor`)?
 **A:** The Horizon RDK system image or toolchain/SDK packages usually include command-line tools for model execution, performance analysis, and debugging, typically prefixed with `hrt_` (Horizon Robotics Tool).
 * **Where to find:**
   * These tools may be pre-installed in `/usr/bin` or `/opt/hobot/bin` on the RDK system.

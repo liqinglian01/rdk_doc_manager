@@ -25,9 +25,7 @@ Code repository: [https://github.com/D-Robotics/hobot_dnn](https://github.com/D-
 | RDK X5, RDK X5 Module     | Ubuntu 22.04 (Humble)                       |
 | X86                       | Ubuntu 20.04 (Foxy)                         |
 
-:::caution
-For model inference on RDK S100 and RDK Ultra platforms, please refer to the [Boxs Algorithm Repository](../03_boxs/detection/yolo.md).
-:::
+
 
 ## Prerequisites
 

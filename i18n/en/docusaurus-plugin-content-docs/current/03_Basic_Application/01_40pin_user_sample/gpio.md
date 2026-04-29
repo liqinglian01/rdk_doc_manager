@@ -216,14 +216,6 @@ This function returns IN or OUT.
 
 Edge refers to the change in the electrical signal from low to high (rising edge) or high to low (falling edge), which can be considered as the occurrence of an event. This event can be used to trigger a CPU interrupt signal.
 
-:::info
-
-On the `RDK Ultra` platform, only a specific few pins on the `40 pin` header can be used as interrupt pins. They are numbered as **13**, **16**, **18**, **22**, **27**, **28**, **32**, **33**, **37** in `BOARD` mode.
-
-Please refer to [Pin Configuration and Definitions](./40pin_define#40pin_define) for pin definitions.
-
-:::  
-
 The GPIO library provides three methods to detect input events:
 
 #### wait_for_edge() function

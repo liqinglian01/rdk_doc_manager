@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # D-Robotics RDK套件
 
-本文档为 D-Robotics RDK 套件 X 系列的用户手册，为开发者提供关于RDK X3（旭日X3派）、RDK X3 Module（旭日X3模组）、RDK X5 、RDK X5 Module（旭日X5模组）、RDK Ultra等产品的使用说明和开发指导，内容涵盖硬件设计、系统定制、应用开发、算法工具链等多个方面。
+本文档为 D-Robotics RDK 套件 X 系列的用户手册，为开发者提供关于RDK X3（旭日X3派）、RDK X3 Module（旭日X3模组）、RDK X5 、RDK X5 Module（旭日X5模组）等产品的使用说明和开发指导，内容涵盖硬件设计、系统定制、应用开发、算法工具链等多个方面。
 
 :::tip 💾 下载资源汇总
 
@@ -37,7 +37,6 @@ sidebar_position: 0
 - RDK X3（旭日 X3 派）
 - RDK X3 Module（旭日 X3 模组）
 - RDK X5
-- RDK Ultra
 - RDK S100
 
 搭配 TogetheROS.Bot 机器人中间件，RDK 套件可以帮助开发者快速搭建机器人原型，开展评测和验证工作。
@@ -51,8 +50,6 @@ sidebar_position: 0
 **RDK X3 Module（旭日X3模组）** 是一款紧凑型核心模组，与 RDK X3 保持了同等规格，尺寸和接口兼容树莓派 CM4 模组。通过搭配扩展板，可以为各种应用场景提供高效的计算和通信能力。
 
 **RDK X5** 是一款全功能开发板，具有 10Tops 端侧推理算力与 8 核 ARM A55 处理能力，支持 2 路 MIPI Camera 接入，4 路 USB3.0 接口。通过搭配丰富的传感器和扩展组件，为开发者提供了灵活的硬件扩展和连接选项。
-
-**RDK Ultra** 是一款高性能开发套件，具有 96Tops 端侧推理算力与 8 核 ARM A55 处理能力，支持 4 路 MIPI Camera 接入，4 路 USB3.0 接口，3 路 PCIe3.0 接口，充分满足各类场景的使用需求。
 
 ![image-rdk-serials](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/image-rdk-serials.jpg)
 

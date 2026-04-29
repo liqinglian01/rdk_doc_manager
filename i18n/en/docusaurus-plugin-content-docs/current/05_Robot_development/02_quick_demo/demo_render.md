@@ -23,7 +23,6 @@ Code repository: [https://github.com/D-Robotics/hobot_websocket](https://github.
 | ------- | ------------- | ------------------------------ |
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble)  | Launch MIPI camera and display images via Web |
 | RDK X5, RDK X5 Module, RDK S100 | Ubuntu 22.04 (Humble)  | Launch MIPI camera and display images via Web |
-| RDK Ultra | Ubuntu 20.04 (Foxy) | Launch MIPI camera and display images via Web |
 | X86     | Ubuntu 20.04 (Foxy) | Launch USB camera and display images via Web |
 
 ### Prerequisites
@@ -292,7 +291,6 @@ TogetheROS.Bot is compatible with ROS 2 Foxy and Humble distributions. For conve
 | --------------------------------- | ------------------------ |
 | RDK X3, RDK X3 Module             | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) |
 | RDK X5, RDK X5 Module, RDK S100   | Ubuntu 22.04 (Humble)    |
-| RDK Ultra                         | Ubuntu 20.04 (Foxy)      |
 
 ### Prerequisites
 
@@ -507,7 +505,7 @@ TogetheROS.Bot is compatible with ROS 2 Foxy and supports previewing compressed-
 
 | Platform                              | Operating System                     | Example Functionality                                               |
 | ------------------------------------- | ------------------------------------ | ------------------------------------------------------------------- |
-| RDK X3, RDK X3 Module, RDK Ultra      | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) | Launch MIPI camera to capture images and preview them using RQt on PC |
+| RDK X3, RDK X3 Module      | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) | Launch MIPI camera to capture images and preview them using RQt on PC |
 
 ### Prerequisites
 

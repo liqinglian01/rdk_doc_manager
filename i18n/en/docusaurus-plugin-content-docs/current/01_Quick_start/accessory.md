@@ -144,27 +144,6 @@ This section summarizes the third-party accessory list officially certified by D
 | Audio Adapter | Waveshare | Audio Driver HAT  | Supports 4-MIC ring recording, dual-channel playback, audio loopback | [Purchase Link](https://www.waveshare.net/shop/Audio-Driver-HAT.htm)  |
 | Audio Adapter | Waveshare | WM8960 Audio HAT | Supports dual-channel recording and playback, compatible with RDK X3 2.0, RDK X3 Module | [Purchase Link](https://www.waveshare.net/shop/WM8960-Audio-HAT.htm)  |
 
-## RDK Ultra Accessory List
-
-### Basic Accessories
-
-| Type | Supplier | Model | Description | Purchase Link |
-| --- | --------- | -------- | --------------- | --------- |
-| Power | Standard | 12V/3A | 12V/3A power adapter | Contact supplier |
-
-### Cameras
-
-| Type | Supplier | Model | Description | Supported Resolutions | Purchase Link |
-| --- | --------- | -------- | --------------- | --------- | --------- |
-| MIPI | Standard | IMX219 Camera | IMX219 sensor, 8MP | 1920x1080@30fps(default), 640x480@30fps, 1632x1232@30fps, 3264x2464@15fps(max) | Provided with kit |
-| USB | Third-party | USB Camera | Driver-free USB camera | Depends on specific model | Contact supplier |
-
-### Displays
-
-| Type | Supplier | Model | Description | Resolution | Purchase Link |
-| --- | --------- | -------- | --------------- | --------- | --------- |
-| HDMI | Standard | HDMI Monitor | Standard HDMI monitor | Up to 1080P | Contact supplier |
-
 ## Detailed Camera Resolution Support List
 
 The following is the detailed resolution support for each camera model on different RDK platforms:

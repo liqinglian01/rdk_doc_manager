@@ -41,7 +41,6 @@ import TabItem from '@theme/TabItem';
 | -------------------------------- | ------------ | -------------------------------------------------------- |
 | RDK X3, RDK X3 Module | Ubuntu 20.04 (Foxy), Ubuntu 22.04 (Humble) | 启动MIPI/USB摄像头，并通过Web展示推理渲染结果 |
 | RDK X5, RDK X5 Module | Ubuntu 22.04 (Humble) | 启动MIPI/USB摄像头，并通过Web展示推理渲染结果 |
-| RDK Ultra | Ubuntu 20.04 (Foxy) | 启动MIPI/USB摄像头/本地回灌，并通过Web展示推理渲染结果 |
 | X86                              | Ubuntu 20.04 (Foxy) | 启动本地回灌，并通过Web展示推理渲染结果                |
 
 ## 算法信息
@@ -177,9 +176,6 @@ export CAM_TYPE=fb
 
 # 启动launch文件
 ros2 launch mono2d_body_detection mono2d_body_detection.launch.py publish_image_source:=config/person_body.jpg publish_image_format:=jpg publish_output_image_w:=960 publish_output_image_h:=544
-
-# RDK Ultra平台需要指定回灌图片，例如：
-# ros2 launch mono2d_body_detection mono2d_body_detection.launch.py picture:=./config/target.jpg
 ```
 
 ### X86平台

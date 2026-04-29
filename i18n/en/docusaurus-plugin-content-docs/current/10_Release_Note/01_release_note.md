@@ -503,7 +503,6 @@ This release brings many anticipated features and improvements for a better deve
 
 **New Features:**
 
-- Supports `RDK Ultra` platform.
 - Added Trigger event, rosbag visualization node.
 - USB image acquisition node supports device number auto-adaptation.
 - Added VIO algorithm node.
