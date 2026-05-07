@@ -10,8 +10,6 @@ import TabItem from '@theme/TabItem';
 
 The Hobot.GPIO library only supports PWM on pins with additional hardware PWM controllers. Unlike the RPi.GPIO library, the Hobot.GPIO library does not implement software simulated PWM. 
 
-RDK X3 supports 2 PWM channels, corresponding to pins 33 and 32 on the 40-pin header.
-
 RDK X5 supports four PWM groups, with two output channels per group, providing a total of eight PWM outputs, as shown in the table below:
 
 | PMW Group | PWM Channel | 40PIN Pin |
@@ -48,8 +46,7 @@ def main():
     # Pin Setup:
     # Board pin-numbering scheme
     GPIO.setmode(GPIO.BOARD)
-    # Supported frequency range for RDK X3: 48KHz ~ 192MHz
-    # Supported frequency range for RDK X5: 1Hz ~ 12MHz
+    # Supported frequency range: X3: 48KHz ~ 192MHz; X5: 0.05Hz ~ 1MHz
     p = GPIO.PWM(output_pin, 48000)
     # Initial duty cycle of 25%. Increase by 5% every 0.25 seconds until 100% is reached, then decrease by 5% every 0.25 seconds
     val = 25

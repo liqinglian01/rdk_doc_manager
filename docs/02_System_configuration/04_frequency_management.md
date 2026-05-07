@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 ## RDK X3
 
 :::info 注意
-以下内容适用于`RDK X3`和`RDK X3 Module`开发板
+以下内容适用于`RDK X3`和`RDK X3 Module`开发板。
 :::
 
 ### Thermal控制
@@ -106,7 +106,7 @@ sudo bash -c "echo 1000000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_set
 #### CPU超频
 
 :::info 注意
-以下内容适用于`RDK X3`和`RDK X3 Module`开发板
+以下内容适用于`RDK X3`和`RDK X3 Module`开发板，不适用于`RDK Ultra`开发板
 :::
 
 Video: https://www.bilibili.com/video/BV1rm4y1E73q/?p=14

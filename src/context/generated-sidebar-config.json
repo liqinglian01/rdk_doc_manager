@@ -1,33 +1,28 @@
 {
-  "quick_start/accessory": {
-    "versions": [],
-    "products": [
-      "rdk-x5",
-      "rdk-x3"
-    ]
-  },
-  "quick_start/classification": {
+  "quick_start/hardware_introduction/rdk_x3": {
     "versions": [
       {
         "operator": "",
+        "version": "3.0.0",
+        "original": "\"3.0.0\""
+      }
+    ],
+    "products": [
+      "RDK X3",
+      "RDK X3 Module"
+    ]
+  },
+  "quick_start/hardware_introduction/rdk_x5": {
+    "versions": [
+      {
+        "operator": ">=",
         "version": "3.5.0",
-        "original": "\"3.5.0\""
+        "original": "\">=3.5.0\""
       }
     ],
     "products": [
-      "RDK X5"
-    ]
-  },
-  "quick_start/hardware_introduction/rdk_ultra": {
-    "versions": [
-      {
-        "operator": "",
-        "version": "4.0.5",
-        "original": "\"4.0.5\""
-      }
-    ],
-    "products": [
-      "RDK S100"
+      "RDK X5",
+      "RDK X5 Module"
     ]
   },
   "quick_start/install_os/rdk_x3": {
@@ -39,16 +34,16 @@
       }
     ],
     "products": [
-      "RDk-X3"
+      "RDK X3"
     ],
     "isCategory": true
   },
   "quick_start/install_os/rdk_x3_module": {
     "versions": [
       {
-        "operator": "",
+        "operator": ">=",
         "version": "3.0.0",
-        "original": "3.0.0"
+        "original": ">=3.0.0"
       }
     ],
     "products": [
@@ -59,9 +54,9 @@
   "quick_start/install_os/rdk_x5": {
     "versions": [
       {
-        "operator": "",
+        "operator": ">=",
         "version": "3.5.0",
-        "original": "3.5.0"
+        "original": ">=3.5.0"
       }
     ],
     "products": [
@@ -72,38 +67,13 @@
   "quick_start/install_os/rdk_x5_module": {
     "versions": [
       {
-        "operator": "",
+        "operator": ">=",
         "version": "3.5.0",
-        "original": "3.5.0"
+        "original": ">=3.5.0"
       }
     ],
     "products": [
       "RDK X5 Module"
-    ],
-    "isCategory": true
-  },
-  "system_configuration/network_blueteeth": {
-    "versions": [
-      {
-        "operator": ">=",
-        "version": "3.5.1",
-        "original": "\">= 3.5.1\""
-      }
-    ],
-    "products": [
-      "RDK X5"
-    ]
-  },
-  "basic_application": {
-    "versions": [
-      {
-        "operator": ">",
-        "version": "3.5.0",
-        "original": "> 3.5.0"
-      }
-    ],
-    "products": [
-      "RDK X5"
     ],
     "isCategory": true
   }

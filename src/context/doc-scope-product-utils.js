@@ -4,8 +4,19 @@ import { PRODUCT_VERSION_MATRIX, VERSION_PRODUCT_MATRIX } from './doc-scope-matr
 export function normalizeProductKey(s) {
   return String(s)
     .trim()
-    .toLowerCase()
+    .toLocaleLowerCase('en-US')
     .replace(/\s+/g, ' ');
+}
+
+/** @param {string|null|undefined} a
+ * @param {string|null|undefined} b
+ * @returns {boolean} 是否与矩阵中的同一产品等价（大小写 / 多空格不敏感）
+ */
+export function productKeysEqual(a, b) {
+  if (a == null || b == null) {
+    return false;
+  }
+  return normalizeProductKey(a) === normalizeProductKey(b);
 }
 
 /**

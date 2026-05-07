@@ -7,6 +7,7 @@ sidebar_position: 1
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import DocScope from '@site/src/components/DocScope';
 ```
 
 开发板上的 40PIN 功能管脚，接口定义请查看本章节。
@@ -64,29 +65,27 @@ sudo srpi-config
 
 开发板提供40PIN标准接口，方便用户进行外围扩展，其中数字IO采用3.3V电平设计。40PIN接口定义如下：
 
-<Tabs groupId="rdk-type">
-<TabItem value="x3" label="RDK X3">
+
+<DocScope products="RDK X3">
 
 ![image-20220828203147852](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20220828203147852.png)
 
 开发板40PIN接口位置提供了丝印网表，方便用户对照操作，PIN1、PIN40位置如下：
 ![image-20220828203207798](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20220828203207798.png)
 
-</TabItem>
+</DocScope>
 
-<TabItem value="x3md" label="RDK X3 Module">
+<DocScope products="RDK X3 Module">
 
 ![image-20230510155124570](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/07_Advanced_development/01_hardware_development/rdk_x3_module/image/rdk_x3_module/image-20230510155124570.png)
 
-</TabItem>
+</DocScope>
 
-<TabItem value="rdkx5&x5md" label="RDK X5 & RDK X5 Module">
+<DocScope products="RDK X5,RDK X5 Module">
 
 ![image-20241217-202319](https://rdk-doc.oss-cn-beijing.aliyuncs.com/doc/img/03_Basic_Application/01_40pin_user_sample/image/40pin_user_sample/image-20241217-202319.png)
 
-</TabItem>
-
-</Tabs>
+</DocScope>
 
 ## GPIO 读写操作示例
 

@@ -164,7 +164,7 @@ ov5647 sensor stop
 ```
 
 
-## Camera image capture and saving (vio_capture)
+## Camera Image Local Saving (RDK X5)
 
 This `vio_capture` example demonstrates the image capture of a `MIPI` camera and provides the functionality to save the captured images locally in both `RAW` and `YUV` formats (mutually exclusive). The flowchart of the example is shown below:
 
@@ -175,10 +175,10 @@ This `vio_capture` example demonstrates the image capture of a `MIPI` camera and
   - Connect the development board to a display monitor via an HDMI cable.
   - Power on the development board and log in via the command line interface.
   - **If you need to obtain raw data, please follow the steps below**:
-    - Edit the configuration file of the corresponding camera. Taking `IMX219` as an example, edit `/etc/camera_configs/x5/imx219/1080/vpm.json`.
+    - Edit the configuration file of the corresponding camera. Taking `IMX219` as an example, edit `/etc/camera_configs/imx219/1080/vpm.json`.
     - Modify the `isp_dma_output_format` field to `4` and save the changes.
   - **If you need to obtain images in the `NV12` format, please follow the steps below**:
-    - Edit the configuration file of the corresponding camera. Taking `IMX219` as an example, edit `/etc/camera_configs/x5/imx219/1080/vpm.json`.
+    - Edit the configuration file of the corresponding camera. Taking `IMX219` as an example, edit `/etc/camera_configs/imx219/1080/vpm.json`.
     - Modify the `isp_stream_output_format` field to `0`; modify the `isp_dma_output_format` field to `9`; modify the `pym_mode` field to `0`; and save the changes.
 
 - **Execution:**

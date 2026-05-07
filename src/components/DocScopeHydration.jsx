@@ -1,11 +1,12 @@
 import React, { useLayoutEffect } from 'react';
 import { useDocScopeFilter } from '@site/src/context/DocScopeFilterContext';
 import { scopeProductsMatchCurrent } from '@site/src/context/doc-scope-product-utils';
+import { matchVersion } from '@site/src/context/doc-scope-version-utils';
 
 function matchesScope(spec, version, product) {
   const versions = spec.versions || [];
   const products = spec.products || [];
-  const vOk = versions.length === 0 || versions.includes(version);
+  const vOk = versions.length === 0 || matchVersion(version, versions);
   const pOk = scopeProductsMatchCurrent(products, product);
   return vOk && pOk;
 }

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useId, useRef, useState, useMemo } from 'react';
 import { useDocScopeFilter } from '@site/src/context/DocScopeFilterContext';
+import { productKeysEqual } from '@site/src/context/doc-scope-product-utils';
 
 function ScopeMenu({ label, value, options, onPick }) {
   const baseId = useId();
@@ -56,9 +57,9 @@ function ScopeMenu({ label, value, options, onPick }) {
                 <button
                   type="button"
                   role="option"
-                  aria-selected={opt === value}
+                  aria-selected={productKeysEqual(opt, value)}
                   className={
-                    opt === value
+                    productKeysEqual(opt, value)
                       ? 'doc-scope-menu__option doc-scope-menu__option--active'
                       : 'doc-scope-menu__option'
                   }

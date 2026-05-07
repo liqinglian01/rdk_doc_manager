@@ -8,6 +8,7 @@
  * :::
  *
  * - versions / products 为英文逗号分隔；省略或写 * 表示不限制该维度。
+ * - versions 支持精确版本及范围：3.0.0、> 3.0.0、>= 3.5.0、< 3.5.0、<= 3.5.0（与 sidebar_versions 一致）。
  * - products 中 "RDK X5" 为精确匹配，"RDK-X5" 为 RDK X5 系列匹配。
  * - 指令名使用 doc_scope，避免与 Docusaurus 内置 :::tip 等冲突。
  */

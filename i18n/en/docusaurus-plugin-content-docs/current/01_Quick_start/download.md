@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # 1.7 Download Resources Summary
 
-This document summarizes the download resources related to the D-Robotics RDK suite, aiming to provide users with convenient and comprehensive access to resources. It covers various resource download directories for products such as RDK X3 (Sunrise X3 Pi), RDK X3 Module, RDK X5, and RDK X5 Module series.
+This document summarizes the download resources related to the D-Robotics RDK suite, aiming to provide users with convenient and comprehensive access to resources. It covers various resource download directories for products such as RDK X3 (Sunrise X3 Pi), RDK X3 Module, RDK X5, RDK X5 Module,.
 
 :::tip Quick Navigation
 - 📦 [System & Manual Resources](#system-and-manual-resources-summary)
@@ -58,8 +58,8 @@ This document summarizes the download resources related to the D-Robotics RDK su
     </tr>
     <tr>
       <td>🔬 **OpenExplore**</td>
-      <td>[RDK X5 OpenExplore](../04_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-x5)</td>
-      <td>[RDK X3 OpenExplore](../04_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-x3)</td>
+      <td>[RDK X5 OpenExplore](../05_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-x5)</td>
+      <td>[RDK X3 OpenExplore](../05_Advanced_development/04_toolchain_development/intermediate/environment_config.md#rdk-x3)</td>
       <td>Contains numerous conversion examples and source code, used with Docker on x86 development machines</td>
     </tr>
     <tr>
@@ -163,6 +163,7 @@ This document summarizes the download resources related to the D-Robotics RDK su
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/RDK X5 Module Carrier Board V1P1.pdf">Official Carrier Board Schematics</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK_X3_2.0_IO_Schematics.pdf">RDK X3-2.0 Schematics</a></td>
       <td>N/A</td>
+      <td>Not Currently Available</td>
       <td>Circuit design schematics for reference design use</td>
     </tr>
     <tr>
@@ -171,6 +172,7 @@ This document summarizes the download resources related to the D-Robotics RDK su
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p1_dxf.zip">Module Structure_V1P1 </a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p2_dxf.zip">Module Structure_V1P2 </a><br/></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK_X3_2D_2.0.pdf">RDK X3-2.0 2D</a></td>
       <td>Not Currently Available</td>
+      <td>Not Currently Available</td>
       <td>2D drawings</td>
     </tr>
     <tr>
@@ -178,6 +180,7 @@ This document summarizes the download resources related to the D-Robotics RDK su
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5/RDK_X5_LPDDR4_4266MHz_V1P0_pcb.stp">RDK X5 3D</a></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p0_0708.stp">Module Structure_V1P0</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/rdk_x5_md_hw_v1p1-0709.stp">Module Structure_V1P1</a><br/><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5_module/RDK X5 Module V1P2 3D.stp">Module Structure_V1P2</a><br/></td>
       <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x3/RDK_X3_3D_Step_Models.STEP">RDK X3-2.0 3D</a></td>
+      <td>Not Currently Available</td>
       <td>Not Currently Available</td>
       <td>3D models</td>
     </tr>
@@ -245,7 +248,7 @@ Complete specification materials for RDK X3/X5 related products, accessories and
       </td>
     </tr>
     <tr>
-      <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5/d_robotics_rdk_RDK_stereo_camera_gs130wi_en_v1_1.pdf">RDK Stereo Camera  
+      <td><a href="https://archive.d-robotics.cc/downloads/hardware/rdk_x5/2026.04.09_RDK Stereo Camera GS130WI_en_v1_1.pdf">RDK Stereo Camera  
        GS130WI</a></td>
       <td> - </td>
       <td>Used in applications such as robot vision, machine vision inspection, and motion posture sensing.</td>

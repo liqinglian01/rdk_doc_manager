@@ -18,38 +18,38 @@ const config = {
   // tagline: 'Dinosaurs are cool',
   favicon: "img/logo.png",
   // Set the production url of your site here
-  url: "https://developer.d-robotics.cc/",
+  url: "https://developer.d-robotics.cc",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/rdk_x5_doc/",
+  baseUrl: "/rdk_x_doc/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "D-Robotics", // Usually your GitHub org/user name.
-  projectName: "rdk_x5_doc", // Usually your repo name.
+  projectName: "rdk_x_doc", // Usually your repo name.
 
   // onBrokenLinks: 'throw',
 
   //add by xgs for build reduce bug
-  onBrokenLinks: "warn", // 或 'ignore'
+  onBrokenLinks: "warn", // 临时启用以检查失效链接（检查后改回 ignore）
   onBrokenMarkdownLinks: "warn",
 
-  // //add vy xgs for analysis
-  // scripts: [
-  //   {
-  //     src: "https://hm.baidu.com/hm.js?24dd63cad43b63889ea6bede5fd1ab9e",
-  //     async: true,
-  //   },
-  //   // Dify Chatbot Configuration
-  //   {
-  //     src: "/rdk_doc_filter/js/dify-config.js",
-  //   },
-  //   {
-  //     src: "https://rdk.d-robotics.cc/embed.min.js",
-  //     id: "MltLQTHPb5EeP7uz",
-  //     defer: true,
-  //   },
-  // ],
+  //add vy xgs for analysis
+  scripts: [
+    {
+      src: "https://hm.baidu.com/hm.js?24dd63cad43b63889ea6bede5fd1ab9e",
+      async: true,
+    },
+    // Dify Chatbot Configuration
+    {
+      src: "/rdk_x_doc/js/dify-config.js",
+    },
+    {
+      src: "https://rdk.d-robotics.cc/embed.min.js",
+      id: "MltLQTHPb5EeP7uz",
+      defer: true,
+    },
+  ],
 
   // add by xgs for translate
   i18n: {
@@ -58,9 +58,11 @@ const config = {
     localeConfigs: {
       en: {
         label: "EN",
+        htmlLang: "en",
       },
       "zh-Hans": {
         label: "CN",
+        htmlLang: "zh-Hans",
       },
     },
   },
@@ -102,9 +104,75 @@ const config = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "docs_s",
-        path: "docs_s",
-        routeBasePath: "rdk_s",
+        id: "sdk_doc",
+        path: "sdk_doc",
+        routeBasePath: "sdk_doc",
+        sidebarPath: "./sidebars.js",
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "accessories_doc",
+        path: "accessories_doc",
+        routeBasePath: "accessories_doc",
+        sidebarPath: "./sidebars.js",
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "toolchain_doc",
+        path: "toolchain_doc",
+        routeBasePath: "toolchain_doc",
+        sidebarPath: "./sidebars.js",
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "samples_doc",
+        path: "samples_doc",
+        routeBasePath: "samples_doc",
+        sidebarPath: "./sidebars.js",
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "model_zoo_doc",
+        path: "model_zoo_doc",
+        routeBasePath: "model_zoo_doc",
+        sidebarPath: "./sidebars.js",
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "tros_doc",
+        path: "tros_doc",
+        routeBasePath: "tros_doc",
+        sidebarPath: "./sidebars.js",
+        showLastUpdateTime: true,
+        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
+      },
+    ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "xburn_doc",
+        path: "xburn_doc",
+        routeBasePath: "xburn_doc",
         sidebarPath: "./sidebars.js",
         showLastUpdateTime: true,
         remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],

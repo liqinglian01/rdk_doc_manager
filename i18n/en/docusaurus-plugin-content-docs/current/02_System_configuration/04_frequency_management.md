@@ -9,8 +9,6 @@ import TabItem from '@theme/TabItem';
 ```
 
 
-
-
 ## X3 Thermal Control
 
 :::info Note

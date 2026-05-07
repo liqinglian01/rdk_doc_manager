@@ -1,6 +1,7 @@
 /**
  * 监听文件变化，自动重新生成侧边栏配置文件
- * 用于开发环境，当修改 _sidebar_scope.json 或 Markdown 文件的 Front Matter 时自动更新配置
+ * 用于开发环境，当修改 _sidebar_scope.json 或 Markdown 的 Front Matter 时自动更新配置。
+ * 监听范围：docs/、docs_s/（若存在）、i18n/en/docusaurus-plugin-content-docs/current/（若存在）。
  */
 const fs = require('fs');
 const path = require('path');
@@ -8,6 +9,11 @@ const { spawn } = require('child_process');
 
 const docsDir = path.join(__dirname, '../docs');
 const docsSDir = path.join(__dirname, '../docs_s');
+/** 英文翻译文档根目录（与 docs 目录结构一致，docId 与默认语言相同） */
+const i18nEnDocsCurrentDir = path.join(
+  __dirname,
+  '../i18n/en/docusaurus-plugin-content-docs/current',
+);
 const configFilePath = path.join(__dirname, '../src/context/generated-sidebar-config.json');
 
 let isGenerating = false;
@@ -33,10 +39,12 @@ function regenerateConfig() {
   
   console.log('\n🔄 检测到文件变化，重新生成配置文件...\n');
   
-  // 运行生成脚本
-  const generate = spawn('node', [path.join(__dirname, 'generate-sidebar-config.js')], {
+  // 禁用 shell：项目路径含空格时（如 rdk x5），shell: true 会把路径截断，导致 MODULE_NOT_FOUND
+  const scriptPath = path.join(__dirname, 'generate-sidebar-config.js');
+  const generate = spawn(process.execPath, [scriptPath], {
     stdio: 'inherit',
-    shell: true
+    shell: false,
+    cwd: path.join(__dirname, '..'),
   });
   
   generate.on('close', (code) => {
@@ -86,8 +94,15 @@ function main() {
   if (fs.existsSync(docsSDir)) {
     watchDirectory(docsSDir);
   }
+
+  // 监听英文 i18n 当前文档目录
+  if (fs.existsSync(i18nEnDocsCurrentDir)) {
+    watchDirectory(i18nEnDocsCurrentDir);
+  }
   
-  console.log('\n✅ 监听器已启动，修改 _sidebar_scope.json 或 Markdown 文件的 Front Matter 将自动更新配置文件\n');
+  console.log(
+    '\n✅ 监听器已启动，修改 _sidebar_scope.json 或 Markdown 文件的 Front Matter（含 i18n/en/.../current）将自动更新配置文件\n',
+  );
   console.log('💡 提示：按 Ctrl+C 停止监听\n');
 }
 

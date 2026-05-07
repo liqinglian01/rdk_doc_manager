@@ -36,13 +36,13 @@ export default function NavbarLogo() {
   } = useThemeConfig();
 
   const title = isEnglish ? 'Documentation Center' : '文档中心';
-  const href = isEnglish ? '/rdk_doc_filter/en/' : '/rdk_doc_filter/';
 
   const fallbackAlt = logo?.alt ?? title;
   const alt = logo?.alt ?? fallbackAlt;
 
+  // 使用文档站点首页（自动包含 baseUrl 与当前语言前缀）。勿写死 /rdk_doc_filter/ 等路径，否则会 404。
   return (
-    <Link href={href} className="navbar__brand">
+    <Link to="/" className="navbar__brand">
       {logo && (
         <LogoThemedImage
           logo={logo}

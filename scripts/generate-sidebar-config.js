@@ -26,7 +26,7 @@ const { VERSION_PRODUCT_MATRIX } = require(matrixJsonPath);
 function normalizeProductKey(s) {
   return String(s)
     .trim()
-    .toLowerCase()
+    .toLocaleLowerCase('en-US')
     .replace(/\s+/g, ' ');
 }
 
@@ -71,6 +71,11 @@ function normalizeScopeProductList(products) {
 const configFilePath = path.join(__dirname, '../src/context/generated-sidebar-config.json');
 const docsDir = path.join(__dirname, '../docs');
 const docsSDir = path.join(__dirname, '../docs_s');
+/** 英文翻译文档根目录（结构同 docs/，生成的 docId 与主站一致，后扫描可覆盖同名条目的 Front Matter） */
+const i18nEnDocsCurrentDir = path.join(
+  __dirname,
+  '../i18n/en/docusaurus-plugin-content-docs/current',
+);
 
 /**
  * 解析版本范围表达式
@@ -330,6 +335,13 @@ function main() {
   if (fs.existsSync(docsSDir)) {
     console.log('扫描 docs_s 目录:');
     scanDirectory(docsSDir, docsSDir, config);
+    console.log('');
+  }
+
+  // 扫描英文 i18n current 目录（与 watch-sidebar-config 监听范围一致）
+  if (fs.existsSync(i18nEnDocsCurrentDir)) {
+    console.log('扫描 i18n/en/docusaurus-plugin-content-docs/current 目录:');
+    scanDirectory(i18nEnDocsCurrentDir, i18nEnDocsCurrentDir, config);
     console.log('');
   }
   

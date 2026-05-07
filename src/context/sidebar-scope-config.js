@@ -1,4 +1,5 @@
 import { scopeProductsMatchCurrent } from './doc-scope-product-utils.js';
+import { matchVersion } from './doc-scope-version-utils.js';
 
 /**
  * 侧边栏显示范围配置
@@ -53,79 +54,6 @@ try {
 } catch (e) {
   // 配置文件不存在时使用空对象
   generatedFrontmatterConfig = {};
-}
-
-/**
- * 比较两个版本号
- * @param {string} v1 版本1
- * @param {string} v2 版本2
- * @returns {number} -1: v1 < v2, 0: v1 == v2, 1: v1 > v2
- */
-function compareVersions(v1, v2) {
-  const parts1 = v1.split('.').map(Number);
-  const parts2 = v2.split('.').map(Number);
-  
-  const maxLength = Math.max(parts1.length, parts2.length);
-  
-  for (let i = 0; i < maxLength; i++) {
-    const p1 = parts1[i] || 0;
-    const p2 = parts2[i] || 0;
-    
-    if (p1 < p2) return -1;
-    if (p1 > p2) return 1;
-  }
-  
-  return 0;
-}
-
-/**
- * 检查版本是否匹配配置
- * @param {string} currentVersion 当前版本
- * @param {Array} versionConfigs 版本配置数组
- * @returns {boolean} 是否匹配
- */
-function matchVersion(currentVersion, versionConfigs) {
-  if (!versionConfigs || versionConfigs.length === 0) {
-    return true; // 没有版本限制，默认匹配
-  }
-  
-  for (const config of versionConfigs) {
-    // 如果是字符串，当作精确匹配
-    if (typeof config === 'string') {
-      if (config === currentVersion) {
-        return true;
-      }
-      continue;
-    }
-    
-    // 如果是对象，检查操作符
-    if (typeof config === 'object' && config.version) {
-      const { operator, version } = config;
-      const cmp = compareVersions(currentVersion, version);
-      
-      switch (operator) {
-        case '>':
-          if (cmp > 0) return true;
-          break;
-        case '>=':
-          if (cmp >= 0) return true;
-          break;
-        case '<':
-          if (cmp < 0) return true;
-          break;
-        case '<=':
-          if (cmp <= 0) return true;
-          break;
-        case '':
-        default:
-          // 精确匹配
-          if (cmp === 0) return true;
-          break;
-      }
-    }
-  }
-  
-  return false;
 }
 
 /**

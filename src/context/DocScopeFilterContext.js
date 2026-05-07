@@ -1,5 +1,12 @@
-import React, { createContext, useCallback, useContext, useMemo } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
 import { useHistory, useLocation } from '@docusaurus/router';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { PRODUCT_VERSION_MATRIX, VERSION_PRODUCT_MATRIX } from './doc-scope-matrix.js';
 import {
   resolveCanonicalProductKeyForMatrix,
@@ -8,15 +15,32 @@ import {
 
 export { PRODUCT_VERSION_MATRIX, VERSION_PRODUCT_MATRIX } from './doc-scope-matrix.js';
 
-const DEFAULT_VERSION = '3.0.0';
-const DEFAULT_PRODUCT = VERSION_PRODUCT_MATRIX[DEFAULT_VERSION][0];
+/** 与矩阵一致：中文站默认 X3 线；英文站默认 X5 线（文档侧重不同） */
+const DEFAULT_VERSION_ZH = '3.0.0';
+const DEFAULT_PRODUCT_ZH = VERSION_PRODUCT_MATRIX[DEFAULT_VERSION_ZH][0];
+const DEFAULT_VERSION_EN = '3.5.0';
+const DEFAULT_PRODUCT_EN = VERSION_PRODUCT_MATRIX[DEFAULT_VERSION_EN][0];
 
-const STORAGE_KEY_VERSION = 'doc_scope_version';
-const STORAGE_KEY_PRODUCT = 'doc_scope_product';
+const LEGACY_STORAGE_VERSION = 'doc_scope_version';
+const LEGACY_STORAGE_PRODUCT = 'doc_scope_product';
+
+function storageKeys(locale) {
+  return {
+    version: `${LEGACY_STORAGE_VERSION}__${locale}`,
+    product: `${LEGACY_STORAGE_PRODUCT}__${locale}`,
+  };
+}
+
+function defaultsForLocale(locale) {
+  if (locale === 'en') {
+    return { version: DEFAULT_VERSION_EN, product: DEFAULT_PRODUCT_EN };
+  }
+  return { version: DEFAULT_VERSION_ZH, product: DEFAULT_PRODUCT_ZH };
+}
 
 const defaultCtx = {
-  version: DEFAULT_VERSION,
-  product: DEFAULT_PRODUCT,
+  version: DEFAULT_VERSION_ZH,
+  product: DEFAULT_PRODUCT_ZH,
   setVersion: () => {},
   setProduct: () => {},
   matrix: VERSION_PRODUCT_MATRIX,
@@ -28,26 +52,33 @@ export function useDocScopeFilter() {
   return useContext(DocScopeFilterContext);
 }
 
-function normalizeVersionFromQuery(v) {
+function normalizeVersionFromQuery(v, locale) {
+  const fallback = defaultsForLocale(locale).version;
   if (v && VERSION_PRODUCT_MATRIX[v]) {
     return v;
   }
-  return DEFAULT_VERSION;
+  return fallback;
 }
 
-function saveToStorage(version, product) {
+function saveToStorage(version, product, locale) {
   try {
-    localStorage.setItem(STORAGE_KEY_VERSION, version);
-    localStorage.setItem(STORAGE_KEY_PRODUCT, product);
+    const { version: vk, product: pk } = storageKeys(locale);
+    localStorage.setItem(vk, version);
+    localStorage.setItem(pk, product);
   } catch (e) {
     // localStorage 不可用时忽略
   }
 }
 
-function loadFromStorage() {
+function loadFromStorage(locale) {
   try {
-    const v = localStorage.getItem(STORAGE_KEY_VERSION);
-    const pRaw = localStorage.getItem(STORAGE_KEY_PRODUCT);
+    const { version: vk, product: pk } = storageKeys(locale);
+    let v = localStorage.getItem(vk);
+    let pRaw = localStorage.getItem(pk);
+    if (!v && locale === 'zh-Hans') {
+      v = localStorage.getItem(LEGACY_STORAGE_VERSION);
+      pRaw = localStorage.getItem(LEGACY_STORAGE_PRODUCT);
+    }
     if (v && VERSION_PRODUCT_MATRIX[v]) {
       const p = resolveProductForVersion(pRaw, v);
       return { version: v, product: p };
@@ -60,26 +91,39 @@ function loadFromStorage() {
 
 /**
  * 从 URL 查询参数解析版本和产品，如果没有则从 localStorage 读取，最后使用默认值。
+ * 产品名任意大小写均可（如 rdK X3）会通过矩阵规范为正式写法。
  */
-function parseFilter(search) {
+function parseFilter(search, locale) {
   const normalized = !search
     ? ''
     : search.startsWith('?')
       ? search.slice(1)
       : search;
   const q = new URLSearchParams(normalized);
-  if (q.get('v')) {
-    const v = normalizeVersionFromQuery(q.get('v'));
-    const list = VERSION_PRODUCT_MATRIX[v];
-    const pRaw = q.get('p');
+  const vRaw = q.get('v');
+  const pRaw = q.get('p');
+
+  if (vRaw) {
+    const v = normalizeVersionFromQuery(vRaw, locale);
     const p = resolveProductForVersion(pRaw, v);
     return { version: v, product: p };
   }
-  const stored = loadFromStorage();
+  if (pRaw != null && String(pRaw).trim() !== '') {
+    const canon = resolveCanonicalProductKeyForMatrix(pRaw);
+    if (canon) {
+      const vers = PRODUCT_VERSION_MATRIX[canon];
+      if (vers && vers.length > 0) {
+        const v = vers[0];
+        const p = resolveProductForVersion(canon, v);
+        return { version: v, product: p };
+      }
+    }
+  }
+  const stored = loadFromStorage(locale);
   if (stored) {
     return stored;
   }
-  return { version: DEFAULT_VERSION, product: DEFAULT_PRODUCT };
+  return defaultsForLocale(locale);
 }
 
 function replaceSearch(history, location, nextSearch) {
@@ -98,27 +142,42 @@ function replaceSearch(history, location, nextSearch) {
 export function DocScopeFilterProvider({ children }) {
   const location = useLocation();
   const history = useHistory();
+  const { i18n } = useDocusaurusContext();
+  const locale = i18n.currentLocale;
 
-  const { version, product } = useMemo(
-    () => parseFilter(location.search),
-    [location.search],
+  const { version, product: productFromUrl } = useMemo(
+    () => parseFilter(location.search, locale),
+    [location.search, locale],
   );
 
-  useMemo(() => {
-    saveToStorage(version, product);
-  }, [version, product]);
+  const def = defaultsForLocale(locale);
+
+  const product = useMemo(() => {
+    const k = resolveCanonicalProductKeyForMatrix(productFromUrl);
+    if (k) {
+      return k;
+    }
+    return productFromUrl && String(productFromUrl).trim() !== ''
+      ? productFromUrl
+      : def.product;
+  }, [productFromUrl, def.product]);
+
+  useEffect(() => {
+    saveToStorage(version, product, locale);
+  }, [version, product, locale]);
 
   const setVersion = useCallback(
     (v) => {
-      const newV = normalizeVersionFromQuery(v);
-      const list = VERSION_PRODUCT_MATRIX[newV] || VERSION_PRODUCT_MATRIX[DEFAULT_VERSION];
+      const newV = normalizeVersionFromQuery(v, locale);
+      const list =
+        VERSION_PRODUCT_MATRIX[newV] || VERSION_PRODUCT_MATRIX[def.version];
       const nextP = list[0];
       const next = new URLSearchParams(location.search);
       next.set('v', newV);
       next.set('p', nextP);
       replaceSearch(history, location, `?${next.toString()}`);
     },
-    [location, history],
+    [location, history, locale, def.version],
   );
 
   const setProduct = useCallback(

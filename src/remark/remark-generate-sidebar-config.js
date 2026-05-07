@@ -3,7 +3,7 @@
  * 并生成静态的配置文件
  *
  * 支持的 Front Matter 字段：
- * - sidebar_versions: 该文档在哪些版本下显示（逗号分隔）
+ * - sidebar_versions: 该文档在哪些版本下显示（逗号分隔，支持 >、>=、<、<= 与精确版本）
  * - sidebar_products: 该文档在哪些产品下显示（逗号分隔）；RDK X5 精确匹配，RDK-X5 匹配 RDK X5 系列
  * - sidebar_only: 该文档仅在特定版本/产品下显示（优先级最高）
  *
@@ -17,6 +17,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { normalizeScopeProductList } from '../context/doc-scope-product-utils.js';
+import { parseVersionScopeList } from '../context/doc-scope-version-utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -103,7 +104,7 @@ export default function remarkGenerateSidebarConfig() {
 
     // 解析侧边栏控制字段（产品名与矩阵不区分大小写，写入前尽量规范化为矩阵内写法）
     const sidebarData = {
-      versions: parseScopeList(frontmatter.sidebar_versions),
+      versions: parseVersionScopeList(frontmatter.sidebar_versions),
       products: normalizeScopeProductList(parseScopeList(frontmatter.sidebar_products)),
     };
 

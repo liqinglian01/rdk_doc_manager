@@ -138,73 +138,71 @@ export const groupsEn = [
  */
 export const sites = [
   // ---------- 产品 ----------
-  { id: "product-rdk-manual", group: "products", title: "RDK X 系列用户手册", description: "RDK X3/X5 文档", href: "/rdk_doc_filter/Quick_start", tags: ["用户手册"] },
+  { id: "product-rdk-manual", group: "products", title: "RDK X 系列用户手册", description: "RDK X3/X5 用户手册", href: "/RDK", tags: ["用户手册"] },
   
   // ---------- 系统软件 ----------
-  { id: "system-software-sdk", group: "system-software", title: "SDK", description: "系统软件 SDK 文档入口。", href: "/system-software/sdk", tags: ["系统软件"] },
+  { id: "system-software-sdk", group: "system-software", title: "SDK", description: "SDK 用户手册。", href: "/sdk_doc/intro", tags: ["系统软件"] },
  
 
   // ---------- 机器人应用 ----------
-  { id: "tros", group: "robot-app", title: "TROS", description: "面向机器人应用开发的统一框架，各平台同步发版。", href: "/tros/", tags: ["多平台"] },
+  { id: "tros", group: "robot-app", title: "TROS", description: "面向机器人应用开发的用户手册。", href: "/tros_doc/intro", tags: ["多平台"] },
 
   // ---------- Model Zoo ----------
  
-  { id: "model-zoo-hub",   group: "model-zoo", title: "Model Zoo X 系列",  description: "Model Zoo 子站（链接聚合页）。",          href: "/model-zoo/" },
+  { id: "model-zoo-hub",   group: "model-zoo", title: "Model Zoo X 系列",  description: "Model Zoo 用户手册。", href: "/model_zoo_doc/intro" },
  
 
 
   // ---------- 示例 ----------
-  { id: "examples", group: "examples", title: "RDK X3 应用开发示例", description: "X3 / X5 / S100 / S600 示例集合（同一仓库内分 sidebar）。", href: "/examples/" },
-  { id: "examples", group: "examples", title: "RDK X5系列应用开发示例", description: "X3 / X5 / S100 / S600 示例集合（同一仓库内分 sidebar）。", href: "/examples/" },
+  { id: "examples", group: "examples", title: "应用开发示例", description: "RDK 示例集合。", href: "/samples_doc/intro" },
+ 
  
 
   // ---------- 产品与配件 ----------
-  { id: "accessories", group: "accessories", title: "RDK Magicbox 文档", description: "RDK IMU Module / Stereo Camera Module / GS130W / GS130WI。", href: "/accessories/" },
-  { id: "accessories", group: "accessories", title: "配件文档", description: "RDK IMU Module / Stereo Camera Module / GS130W / GS130WI。", href: "/accessories/" },
+  { id: "accessories", group: "accessories", title: "RDK Magicbox 文档", description: "Magicbox 用户手册", href: "https://developer.d-robotics.cc/magicbox_doc/magicbox" },
+  { id: "accessories", group: "accessories", title: "配件文档", description: "RDK IMU Module / Stereo Camera Module / GS130W / GS130WI。", href: "/accessories_doc/intro" },
 
   // ---------- 软件 ----------
-  { id: "software-rdk-studio", group: "software", title: "RDK Studio", description: "官方集成开发工具。", href: "/software/rdk-studio/" },
-  { id: "software-xburn",      group: "software", title: "Xburn",      description: "系统烧录工具。",    href: "/software/xburn/" },
-
+  { id: "software-rdk-studio", group: "software", title: "RDK Studio", description: "官方集成开发工具。", href: "https://developer.d-robotics.cc/rdk_studio_doc/category/1-product-intro" },
+  { id: "software-xburn",      group: "software", title: "Xburn",      description: "系统烧录工具。",    href: "/xburn_doc/intro"},
   // ---------- 算法工具链 ----------
-  { id: "algorithm-toolchain", group: "toolchain", title: "算法工具链", description: "模型转换 / 量化 / 精度调优 / 部署。", href: "/algorithm-toolchain/" },
+  { id: "algorithm-toolchain", group: "toolchain", title: "算法工具链", description: "模型转换 / 量化 / 精度调优 / 部署。", href: "/toolchain_doc/intro" },
 ];
 
 // 英文版本站点
 export const sitesEn = [
   // ---------- 产品 ----------
-  { id: "product-rdk-manual", group: "products", title: "RDK X3/X5 User Manual", description: "RDK X3/X5 Documentation", href: "/rdk_doc_filter/en/Quick_start", tags: ["User Manual"] },
-  { id: "product-rdk-manual", group: "products", title: "RDK S100/S600 User Manual", description: "RDK S100/S600 Documentation", href: "/rdk_doc_filter/en/rdk_s/Quick_start", tags: ["User Manual"] },
-  
-  // ---------- 系统软件 ----------
-  { id: "system-software-sdk", group: "system-software", title: "SDK", description: "System Software SDK Documentation Entrance.", href: "/system-software/sdk", tags: ["System Software"] },
+  { id: "product-rdk-manual", group: "products", title: "RDK X3/X5 User Manual", description: "RDK X3/X5 Documentation", href: "/RDK", tags: ["User Manual"] },
  
+  
+  // ---------- System Software ----------
+  { id: "system-software-sdk", group: "system-software", title: "SDK", description: "SDK Documentation.", href: "/sdk_doc/intro", tags: ["System Software"] },
 
-  // ---------- 机器人应用 ----------
-  { id: "tros", group: "robot-app", title: "TROS", description: "Unified framework for robot application development, synchronous release across platforms.", href: "/tros/", tags: ["Multi-platform"] },
+
+  // ---------- Robot Applications ----------
+  { id: "tros", group: "robot-app", title: "TROS", description: "Unified framework for robot application development, synchronous release across platforms.", href: "/tros_doc/intro", tags: ["Multi-platform"] },
 
   // ---------- Model Zoo ----------
  
-  { id: "model-zoo-hub",   group: "model-zoo", title: "Model Zoo X Series",  description: "Model Zoo sub-site (link aggregation page).",          href: "/model-zoo/" },
-  { id: "model-zoo-hub",   group: "model-zoo", title: "Model Zoo S Series",  description: "Model Zoo sub-site (link aggregation page).",          href: "/model-zoo/" },
+  { id: "model-zoo-hub",   group: "model-zoo", title: "Model Zoo X Series",  description: "Model Zoo sub-site (link aggregation page).",          href: "/model_zoo_doc/intro" },
+ 
 
 
-  // ---------- 示例 ----------
-  { id: "examples", group: "examples", title: "Application Development Examples", description: "RDK X3 example collection (separated by sidebar in the same repository).", href: "/examples/" },
-  { id: "examples", group: "examples", title: "Application Development Examples", description: "RDK X5 example collection (separated by sidebar in the same repository).", href: "/examples/" },
-  { id: "examples", group: "examples", title: "Application Development Examples", description: "RDK S100 example collection (separated by sidebar in the same repository).", href: "/examples/" },
-  { id: "examples", group: "examples", title: "Application Development Examples", description: "RDK S600 example collection (separated by sidebar in the same repository).", href: "/examples/" },
+  // ---------- Examples ----------
+  { id: "examples", group: "examples", title: "Application Development Examples", description: "RDK X3 example collection.", href: "/samples_doc/intro" },
 
-  // ---------- 产品与配件 ----------
-  { id: "accessories", group: "accessories", title: "RDK Magicbox Documentation", description: "RDK IMU Module / Stereo Camera Module / GS130W / GS130WI.", href: "/accessories/" },
-  { id: "accessories", group: "accessories", title: "Accessories Documentation", description: "RDK IMU Module / Stereo Camera Module / GS130W / GS130WI.", href: "/accessories/" },
+ 
 
-  // ---------- 软件 ----------
-  { id: "software-rdk-studio", group: "software", title: "RDK Studio", description: "Official integrated development tool.", href: "/software/rdk-studio/" },
-  { id: "software-xburn",      group: "software", title: "Xburn",      description: "System burning tool.",    href: "/software/xburn/" },
+  // ---------- Products & Accessories ----------
+  { id: "accessories", group: "accessories", title: "RDK Magicbox Documentation", description: "Magicbox product documentation.", href: "https://developer.d-robotics.cc/magicbox_doc/en/magicbox" },
+  { id: "accessories", group: "accessories", title: "Accessories Documentation", description: "RDK IMU Module / Stereo Camera Module / GS130W / GS130WI.", href: "/accessories_doc/intro" },
 
-  // ---------- 算法工具链 ----------
-  { id: "algorithm-toolchain", group: "toolchain", title: "Algorithm Toolchain", description: "Model conversion / quantization / precision tuning / deployment.", href: "/algorithm-toolchain/" },
+  // ---------- Software ----------
+  { id: "software-rdk-studio", group: "software", title: "RDK Studio", description: "Official integrated development tool.", href: "https://developer.d-robotics.cc/rdk_studio_doc/en/category/1-product-intro" },
+  { id: "software-xburn",      group: "software", title: "Xburn",      description: "System burning tool.",    href: "/xburn_doc/intro" },
+
+  // ---------- Algorithm Toolchain ----------
+  { id: "algorithm-toolchain", group: "toolchain", title: "Algorithm Toolchain", description: "Model conversion / quantization / precision tuning / deployment.", href: "/toolchain_doc/intro" },
 ];
 
 export function sitesByGroup(sitesData) {
