@@ -167,7 +167,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "model-zoo-hub",
       categoryId: "model-zoo",
-      href: "https://developer.d-robotics.cc/model_zoo_doc/intro",
+      href: "https://liqinglian01.github.io/model_zoo_x_doc/model_zoo_intro",
       zh: {
         title: "Model Zoo X 系列",
         description: "Model Zoo 用户手册。",
@@ -175,7 +175,7 @@ const DOC_CENTER_CONFIG = {
       en: {
         title: "Model Zoo X Series",
         description: "Model Zoo sub-site (link aggregation page).",
-        href: "https://developer.d-robotics.cc/model_zoo_doc/en/intro",
+        href: "https://liqinglian01.github.io/model_zoo_x_doc/en/model_zoo_intro/",
       },
     },
     {
