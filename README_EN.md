@@ -2,17 +2,14 @@
 
 English | [简体中文](./README.md)
 
-A Docusaurus-based multilingual documentation site for RDK, supporting multi-dimensional content filtering (version × product).
+A Docusaurus-based multilingual documentation center portal for RDK, focused on homepage aggregation only (no local docs hosting in this repository).
 
 ## Features
 
 - 📝 **Multilingual Support**: Chinese (zh-Hans) and English (en) language switching
-- 🔧 **Multi-dimensional Filtering**: Dynamically display content based on version and product
-- 📄 **Dual Documentation Sets**: Support for main docs (docs) and S-series docs (docs_s)
-- 🔍 **Local Search**: Integrated local search with Chinese and English support
-- 📊 **Mermaid Diagrams**: Support for Mermaid flowcharts and diagrams
-- 💬 **Giscus Comments**: Integrated Giscus comment system
-- 👀 **File Watching**: Auto-update configuration when files change during development
+- 🧭 **Documentation Center First**: Home page works as a unified portal for all document sites
+- 🗂️ **Single Source of Truth**: Categories and document entries are managed in `src/data/sites.js` for easy add/remove
+- 🌐 **External Link Aggregation**: Every card can point to an external documentation site
 - 🚀 **GitHub Pages**: Support for GitHub Pages deployment
 
 ## Quick Start
@@ -29,35 +26,35 @@ npm install
 
 ### Development Mode
 
-Start Chinese documentation (with file watching):
+Start Chinese portal:
 ```bash
 npm run start
 ```
-Access URL: http://localhost:3000/rdk_doc_filter/
+Access URL: http://localhost:3000/rdk_x_doc/
 
-Start English documentation (with file watching):
+Start English portal:
 ```bash
 npm run start:en
 ```
-Access URL: http://localhost:3000/rdk_doc_filter/en/
+Access URL: http://localhost:3000/rdk_x_doc/en/
 
 Start Chinese documentation (without file watching):
 ```bash
 npm run start:no-watch
 ```
-Access URL: http://localhost:3000/rdk_doc_filter/
+Access URL: http://localhost:3000/rdk_x_doc/
 
 Start English documentation (without file watching):
 ```bash
 npm run start:no-watch:en
 ```
-Access URL: http://localhost:3000/rdk_doc_filter/en/
+Access URL: http://localhost:3000/rdk_x_doc/en/
 
 Start with specific port:
 ```bash
 npm run start:port
 ```
-Access URL: http://localhost:3001/rdk_doc_filter/
+Access URL: http://localhost:3001/rdk_x_doc/
 
 ## Build & Deploy
 
@@ -74,8 +71,8 @@ npm run serve
 ```
 
 Access URLs:
-- Chinese documentation: http://localhost:3000/rdk_doc_filter/
-- English documentation: http://localhost:3000/rdk_doc_filter/en/
+- Chinese portal: http://localhost:3000/rdk_x_doc/
+- English portal: http://localhost:3000/rdk_x_doc/en/
 
 ### Deploy to GitHub Pages
 
@@ -87,61 +84,38 @@ npm run deploy
 
 ```
 .
-├── docs/                 # Main documentation directory
-├── docs_s/               # S-series documentation directory
 ├── i18n/                 # Multilingual translation files
-├── scripts/              # Script files
-│   ├── generate-sidebar-config.js   # Generate sidebar configuration
-│   └── watch-sidebar-config.js     # Watch file changes
 ├── src/
 │   ├── components/       # React components
-│   ├── context/          # Context state management
+│   ├── data/             # Doc center category/card configuration
 │   ├── pages/            # Page components
-│   ├── remark/           # Remark plugins
 │   └── theme/            # Docusaurus theme components
 ├── static/               # Static resources
 ├── docusaurus.config.js  # Docusaurus configuration
-├── sidebars.js           # Sidebar configuration
 └── package.json
 ```
 
 ## Core Features
 
-### Multi-dimensional Content Filtering
+### Unified Doc Center Maintenance
 
-Configure document visibility for specific versions and products via Front Matter:
+The home page category tree and site cards are now maintained from one place: `src/data/sites.js`.
 
-```markdown
----
-sidebar_versions: ">= 3.5.0"
-sidebar_products: "RDK X5"
----
-```
+- `DOC_CENTER_CONFIG.categories`: add/remove top-level categories
+- `DOC_CENTER_CONFIG.entries`: add/remove documentation cards
+- Chinese and English copy live in the same config object to avoid duplicated edits
 
-Or create `_sidebar_scope.json` in folders:
+### Portal-Only Mode
 
-```json
-{
-  "sidebar_versions": ">= 3.5.0",
-  "sidebar_products": "RDK X5"
-}
-```
+All local docs plugin routes are disabled in this repository.  
+Documentation content should be hosted in dedicated doc sites and aggregated here via `src/data/sites.js`.
 
-### DocScope Component
-
-Control content display using `:::doc_scope` directive:
-
-```markdown
-:::doc_scope versions="3.0.0" products="RDK X3"
-This content only shows under RDK X3 3.0.0
-:::
-```
+Local Chinese/English documentation content directories have been removed from this repository (including `docs/`, doc subsite folders, and docs-content translations under `i18n/en`).
 
 ## Common Commands
 
 | Command | Description |
 |---------|-------------|
-| `npm run generate-sidebar-config` | Manually generate sidebar config |
 | `npm run clear` | Clear Docusaurus cache |
 | `npm run swizzle` | Customize theme components |
 | `npm run write-translations` | Extract translation content |
@@ -150,8 +124,4 @@ This content only shows under RDK X3 3.0.0
 
 - **Docusaurus**: 3.7.0
 - **React**: 18.x
-- **Remark**: Markdown parsing plugins
-- **Rehype**: HTML processing plugins
-- **Mermaid**: Diagram rendering
-- **Giscus**: Comment system
 

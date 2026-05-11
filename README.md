@@ -2,17 +2,14 @@
 
 [English](./README_EN.md) | 简体中文
 
-基于 Docusaurus 的 RDK 多语言文档网站，支持多维度内容过滤（版本 × 产品）。
+基于 Docusaurus 的 RDK 多语言文档中心门户，仅承载首页聚合能力，不在本仓承载业务文档内容。
 
 ## 特性
 
 - 📝 **多语言支持**：中文（zh-Hans）和英文（en）双语切换
-- 🔧 **多维度过滤**：根据版本和产品动态显示对应内容
-- 📄 **双文档集**：支持主文档（docs）和 S 系列文档（docs_s）
-- 🔍 **本地搜索**：集成本地搜索功能，支持中英文搜索
-- 📊 **Mermaid 图表**：支持 Mermaid 流程图和图表
-- 💬 **Giscus 评论**：集成 Giscus 评论系统
-- 👀 **文件监听**：开发时自动监听文件变化并更新配置
+- 🧭 **纯文档中心入口**：首页聚合所有文档站点，统一分类导航
+- 🗂️ **单一配置管理**：分类与文档入口统一在 `src/data/sites.js` 中维护，支持快速新增/删除
+- 🌐 **外链聚合**：所有卡片均可配置为外部文档地址，支持统一入口跳转
 - 🚀 **GitHub Pages**：支持 GitHub Pages 部署
 
 ## 快速开始
@@ -29,35 +26,35 @@ npm install
 
 ### 开发模式
 
-启动中文文档（带文件监听）：
+启动中文门户：
 ```bash
 npm run start
 ```
-访问链接：http://localhost:3000/rdk_doc_filter/
+访问链接：http://localhost:3000/rdk_x_doc/
 
-启动英文文档（带文件监听）：
+启动英文门户：
 ```bash
 npm run start:en
 ```
-访问链接：http://localhost:3000/rdk_doc_filter/en/
+访问链接：http://localhost:3000/rdk_x_doc/en/
 
 启动中文文档（不带文件监听）：
 ```bash
 npm run start:no-watch
 ```
-访问链接：http://localhost:3000/rdk_doc_filter/
+访问链接：http://localhost:3000/rdk_x_doc/
 
 启动英文文档（不带文件监听）：
 ```bash
 npm run start:no-watch:en
 ```
-访问链接：http://localhost:3000/rdk_doc_filter/en/
+访问链接：http://localhost:3000/rdk_x_doc/en/
 
 启动指定端口：
 ```bash
 npm run start:port
 ```
-访问链接：http://localhost:3001/rdk_doc_filter/
+访问链接：http://localhost:3001/rdk_x_doc/
 
 ## 构建与部署
 
@@ -74,8 +71,8 @@ npm run serve
 ```
 
 访问链接：
-- 中文文档：http://localhost:3000/rdk_doc_filter/
-- 英文文档：http://localhost:3000/rdk_doc_filter/en/
+- 中文门户：http://localhost:3000/rdk_x_doc/
+- 英文门户：http://localhost:3000/rdk_x_doc/en/
 
 ### GitHub Pages 部署
 
@@ -87,61 +84,38 @@ npm run deploy
 
 ```
 .
-├── docs/                 # 主文档目录
-├── docs_s/               # S 系列文档目录
 ├── i18n/                 # 多语言翻译文件
-├── scripts/              # 脚本文件
-│   ├── generate-sidebar-config.js   # 生成侧边栏配置
-│   └── watch-sidebar-config.js     # 监听文件变化
 ├── src/
 │   ├── components/       # React 组件
-│   ├── context/          # Context 状态管理
+│   ├── data/             # 文档中心分类与入口配置
 │   ├── pages/            # 页面组件
-│   ├── remark/           # Remark 插件
 │   └── theme/            # Docusaurus 主题组件
 ├── static/               # 静态资源
 ├── docusaurus.config.js  # Docusaurus 配置
-├── sidebars.js           # 侧边栏配置
 └── package.json
 ```
 
 ## 核心功能说明
 
-### 多维度内容过滤
+### 文档中心统一维护
 
-通过 Front Matter 配置文档在特定版本和产品下的显示：
+文档中心首页的分类和卡片入口统一维护在 `src/data/sites.js`：
 
-```markdown
----
-sidebar_versions: ">= 3.5.0"
-sidebar_products: "RDK X5"
----
-```
+- `DOC_CENTER_CONFIG.categories`：管理分类（新增/删除分类）
+- `DOC_CENTER_CONFIG.entries`：管理文档入口（新增/删除卡片）
+- 中文、英文文案在同一配置对象中分别维护，避免多处重复修改
 
-或在文件夹下创建 `_sidebar_scope.json` 配置：
+### 纯门户模式说明
 
-```json
-{
-  "sidebar_versions": ">= 3.5.0",
-  "sidebar_products": "RDK X5"
-}
-```
+本仓已关闭所有本地 docs 插件路由，仅保留门户首页能力。  
+文档内容应部署在独立文档站点，并通过 `src/data/sites.js` 维护外链聚合入口。
 
-### DocScope 组件
-
-在文档中使用 `:::doc_scope` 指令控制内容显示：
-
-```markdown
-:::doc_scope versions="3.0.0" products="RDK X3"
-此内容仅在 RDK X3 3.0.0 版本下显示
-:::
-```
+当前仓库已移除本地中文/英文文档正文目录（包括 `docs/`、各子文档目录及 `i18n/en` 下 docs 内容翻译）。
 
 ## 常用命令
 
 | 命令 | 说明 |
 |------|------|
-| `npm run generate-sidebar-config` | 手动生成侧边栏配置 |
 | `npm run clear` | 清除 Docusaurus 缓存 |
 | `npm run swizzle` | 自定义主题组件 |
 | `npm run write-translations` | 提取翻译内容 |
@@ -150,8 +124,4 @@ sidebar_products: "RDK X5"
 
 - **Docusaurus**: 3.7.0
 - **React**: 18.x
-- **Remark**: Markdown 解析插件
-- **Rehype**: HTML 处理插件
-- **Mermaid**: 图表渲染
-- **Giscus**: 评论系统
 

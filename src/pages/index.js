@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { useHistory, useLocation } from "@docusaurus/router";
 import { groups, sitesByGroup, groupsEn, sitesEn } from "@site/src/data/sites";
 import SiteCard from "@site/src/components/SiteCard";
 import styles from "./index.module.css";
@@ -75,10 +76,21 @@ function GroupSection({ group, items }) {
 }
 
 export default function Home() {
-  const { i18n } = useDocusaurusContext();
+  const { i18n, siteConfig } = useDocusaurusContext();
+  const history = useHistory();
+  const location = useLocation();
   const isEnglish = i18n.currentLocale === 'en';
   const currentGroups = isEnglish ? groupsEn : groups;
   const grouped = sitesByGroup(isEnglish ? sitesEn : undefined);
+
+  useEffect(() => {
+    // 启动后若落在英文文档中心首页，则自动回到默认中文文档中心首页
+    const normalized = location.pathname.replace(/\/+$/, "");
+    const enRoot = `${siteConfig.baseUrl}en`.replace(/\/+$/, "");
+    if (normalized === enRoot) {
+      history.replace(siteConfig.baseUrl);
+    }
+  }, [location.pathname, history, siteConfig.baseUrl]);
   
   return (
     <Layout

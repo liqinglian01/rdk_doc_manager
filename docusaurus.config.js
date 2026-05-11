@@ -4,45 +4,26 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import "dotenv/config";
-import { createRequire } from "module";
 import { themes as prismThemes } from "prism-react-renderer";
-
-const require = createRequire(import.meta.url);
-import remarkDirective from "remark-directive";
-import remarkDocScope from "./src/remark/remark-doc-scope.js";
-import remarkGenerateSidebarConfig from "./src/remark/remark-generate-sidebar-config.js";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "RDK X5 DOC",
-  // tagline: 'Dinosaurs are cool',
+  title: "RDK 文档中心",
   favicon: "img/logo.png",
-  // Set the production url of your site here
-  url: "https://developer.d-robotics.cc",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/rdk_x_doc/",
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: "D-Robotics", // Usually your GitHub org/user name.
-  projectName: "rdk_x_doc", // Usually your repo name.
-
-  // onBrokenLinks: 'throw',
-
-  //add by xgs for build reduce bug
-  onBrokenLinks: "warn", // 临时启用以检查失效链接（检查后改回 ignore）
+  url: "https://liqinglian01.github.io/",
+  baseUrl: "/rdk_doc_manager/",
+  organizationName: "liqinglian01",
+  projectName: "rdk_doc_manager",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
-  //add vy xgs for analysis
   scripts: [
     {
       src: "https://hm.baidu.com/hm.js?24dd63cad43b63889ea6bede5fd1ab9e",
       async: true,
     },
-    // Dify Chatbot Configuration
     {
-      src: "/rdk_x_doc/js/dify-config.js",
+      src: "/rdk_doc_manager/js/dify-config.js",
     },
     {
       src: "https://rdk.d-robotics.cc/embed.min.js",
@@ -51,7 +32,6 @@ const config = {
     },
   ],
 
-  // add by xgs for translate
   i18n: {
     defaultLocale: "zh-Hans",
     locales: ["zh-Hans", "en"],
@@ -72,160 +52,36 @@ const config = {
       "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: {
-          routeBasePath: "/", // 修改默认文档路径
-          sidebarPath: "./sidebars.js",
-          showLastUpdateTime: true,
-          remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-        },
-        blog: { showReadingTime: true },
+        docs: false,
+        blog: false,
         pages: { exclude: ["/imager/**", "**/dl/**"] },
         theme: { customCss: "./src/css/custom.css" },
         sitemap: { lastmod: "date" },
       }),
     ],
   ],
-  // add by xgs for S100_doc 2025 年 4 月 21 日 16:34:51
-  plugins: [
-    [
-      require.resolve("./plugins/docusaurus-plugin-umami-analytics"),
-      {
-        // Umami Cloud 使用 cloud.umami.is；也可用 UMAMI_WEBSITE_ID / UMAMI_SCRIPT_SRC 覆盖
-        websiteId:
-          process.env.UMAMI_WEBSITE_ID ?? "82f6d0fb-4583-4bc9-a7aa-909cd7e753a2",
-        src: process.env.UMAMI_SCRIPT_SRC ?? "https://cloud.umami.is/script.js",
-        enableScroll: true,
-        enableCopy: true,
-        enableToc: true,
-        enableSearch: true,
-        enableReadComplete: true,
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "sdk_doc",
-        path: "sdk_doc",
-        routeBasePath: "sdk_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "accessories_doc",
-        path: "accessories_doc",
-        routeBasePath: "accessories_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "toolchain_doc",
-        path: "toolchain_doc",
-        routeBasePath: "toolchain_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "samples_doc",
-        path: "samples_doc",
-        routeBasePath: "samples_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "model_zoo_doc",
-        path: "model_zoo_doc",
-        routeBasePath: "model_zoo_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "tros_doc",
-        path: "tros_doc",
-        routeBasePath: "tros_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "xburn_doc",
-        path: "xburn_doc",
-        routeBasePath: "xburn_doc",
-        sidebarPath: "./sidebars.js",
-        showLastUpdateTime: true,
-        remarkPlugins: [remarkDirective, remarkDocScope, remarkGenerateSidebarConfig],
-      },
-    ],
-  ],
+
   markdown: {
     mermaid: true,
   },
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
-      // ✅ 新增：支持 h2 ~ h5 add by xgs for table of contents
-    tableOfContents: {
-      minHeadingLevel: 2,
-      maxHeadingLevel: 5,
-    },
       navbar: {
-        title: "D-Robotics",
+        title: "RDK 文档中心",
         logo: {
           alt: "地瓜机器人社区 logo",
           src: "img/logo.png",
-          href: "https://d-robotics.cc/", // 修改为文档根路径
+          href: "https://d-robotics.cc/",
         },
         items: [
-          
-          // add by xgs for S100_doc 2025 年 4 月 21 日 16:34:51 新增S100_doc npm install 去新增插件
-          // {
-          //   to: '/docs_s/',  // 与routeBasePath保持一致
-          //   label: 'RDK S Series',
-          //   position: 'left',
-          //   // activeBaseRegex: '/docs_s/',
-          // },
-          
-          {
-            type: 'custom-DocScopeSelectors',
-            position: 'left',
-          },
-
-          {
-            href: "https://developer.d-robotics.cc/",
-            label: "Community",
-            position: "left",
-          },
-
           {
             href: "https://github.com/D-Robotics",
             label: "GitHub",
             position: "right",
           },
-          // add by xgs for translate show
           {
             type: "localeDropdown",
             position: "right",
@@ -270,28 +126,7 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
-  themes: [
-    "@docusaurus/theme-mermaid",
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        // 性能优化
-        hashed: true, // 启用长期缓存
-        language: ["en", "zh"], // 中英文支持
-        highlightSearchTermsOnTargetPage: true,
-        explicitSearchResultPath: true,
-        docsRouteBasePath: ["/", "rdk_s"], // 支持多个文档路径
-        
-        // 优化索引大小和加载速度
-        indexDocs: true,
-        indexBlog: false, // 禁用博客索引
-        indexPages: false, // 禁用页面索引
-        
-        // 搜索行为优化
-        searchResultContextMaxLength: 50, // 减少上下文长度
-      },
-    ],
-  ],
+  themes: ["@docusaurus/theme-mermaid"],
 };
 
 export default config;

@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./styles.module.css";
 
 export default function SiteCard({ title, description, href, tags, external, accent, versions }) {
+  const { i18n } = useDocusaurusContext();
+  const isEnglish = i18n.currentLocale === "en";
   const isExternal = external || /^https?:\/\//.test(href);
   const linkProps = isExternal
     ? { href, target: "_blank", rel: "noopener noreferrer" }
@@ -13,8 +16,12 @@ export default function SiteCard({ title, description, href, tags, external, acc
   const totalVersions = hasVersions ? versions.length : 0;
 
   const allTags = [
-    ...(hasVersions ? [{ text: `最新 ${latest}`, kind: "version" }] : []),
-    ...(hasVersions && totalVersions > 1 ? [{ text: `共 ${totalVersions} 个版本`, kind: "count" }] : []),
+    ...(hasVersions
+      ? [{ text: isEnglish ? `Latest ${latest}` : `最新 ${latest}`, kind: "version" }]
+      : []),
+    ...(hasVersions && totalVersions > 1
+      ? [{ text: isEnglish ? `${totalVersions} versions` : `共 ${totalVersions} 个版本`, kind: "count" }]
+      : []),
     ...((tags ?? []).map((t) => ({ text: t, kind: "plain" }))),
   ];
 
@@ -42,7 +49,9 @@ export default function SiteCard({ title, description, href, tags, external, acc
       <p className={styles.description}>{description}</p>
       <div className={styles.cardFooter}>
         <span className={styles.cta}>
-          {isExternal ? "访问外链" : "进入文档"} →
+          {isExternal
+            ? (isEnglish ? "Visit external link" : "访问外链")
+            : (isEnglish ? "Open documentation" : "进入文档")} →
         </span>
       </div>
     </Link>
