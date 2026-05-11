@@ -30,31 +30,31 @@ npm install
 ```bash
 npm run start
 ```
-访问链接：http://localhost:3000/rdk_x_doc/
+访问链接：http://localhost:3000/rdk_doc_manage1/
 
 启动英文门户：
 ```bash
 npm run start:en
 ```
-访问链接：http://localhost:3000/rdk_x_doc/en/
+访问链接：http://localhost:3000/rdk_doc_manage1/en/
 
 启动中文文档（不带文件监听）：
 ```bash
 npm run start:no-watch
 ```
-访问链接：http://localhost:3000/rdk_x_doc/
+访问链接：http://localhost:3000/rdk_doc_manage1/
 
 启动英文文档（不带文件监听）：
 ```bash
 npm run start:no-watch:en
 ```
-访问链接：http://localhost:3000/rdk_x_doc/en/
+访问链接：http://localhost:3000/rdk_doc_manage1/en/
 
 启动指定端口：
 ```bash
 npm run start:port
 ```
-访问链接：http://localhost:3001/rdk_x_doc/
+访问链接：http://localhost:3001/rdk_doc_manage1/
 
 ## 构建与部署
 
@@ -71,8 +71,8 @@ npm run serve
 ```
 
 访问链接：
-- 中文门户：http://localhost:3000/rdk_x_doc/
-- 英文门户：http://localhost:3000/rdk_x_doc/en/
+- 中文门户：http://localhost:3000/rdk_doc_manage1/
+- 英文门户：http://localhost:3000/rdk_doc_manage1/en/
 
 ### GitHub Pages 部署
 

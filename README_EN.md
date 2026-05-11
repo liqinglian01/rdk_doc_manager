@@ -30,31 +30,31 @@ Start Chinese portal:
 ```bash
 npm run start
 ```
-Access URL: http://localhost:3000/rdk_x_doc/
+Access URL: http://localhost:3000/rdk_doc_manage1/
 
 Start English portal:
 ```bash
 npm run start:en
 ```
-Access URL: http://localhost:3000/rdk_x_doc/en/
+Access URL: http://localhost:3000/rdk_doc_manage1/en/
 
 Start Chinese documentation (without file watching):
 ```bash
 npm run start:no-watch
 ```
-Access URL: http://localhost:3000/rdk_x_doc/
+Access URL: http://localhost:3000/rdk_doc_manage1/
 
 Start English documentation (without file watching):
 ```bash
 npm run start:no-watch:en
 ```
-Access URL: http://localhost:3000/rdk_x_doc/en/
+Access URL: http://localhost:3000/rdk_doc_manage1/en/
 
 Start with specific port:
 ```bash
 npm run start:port
 ```
-Access URL: http://localhost:3001/rdk_x_doc/
+Access URL: http://localhost:3001/rdk_doc_manage1/
 
 ## Build & Deploy
 
@@ -71,8 +71,8 @@ npm run serve
 ```
 
 Access URLs:
-- Chinese portal: http://localhost:3000/rdk_x_doc/
-- English portal: http://localhost:3000/rdk_x_doc/en/
+- Chinese portal: http://localhost:3000/rdk_doc_manage1/
+- English portal: http://localhost:3000/rdk_doc_manage1/en/
 
 ### Deploy to GitHub Pages
 

@@ -10,10 +10,11 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config = {
   title: "RDK 文档中心",
   favicon: "img/logo.png",
-  url: "https://liqinglian01.github.io/",
-  baseUrl: "/rdk_doc_manager/",
+  url: "https://liqinglian01.github.io",
+  // 必须与仓库名一致：GitHub Pages 项目站点路径为 /<repo>/
+  baseUrl: "/rdk_doc_manage1/",
   organizationName: "liqinglian01",
-  projectName: "rdk_doc_manager",
+  projectName: "rdk_doc_manage1",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
@@ -23,7 +24,7 @@ const config = {
       async: true,
     },
     {
-      src: "/rdk_doc_manager/js/dify-config.js",
+      src: "/rdk_doc_manage1/js/dify-config.js",
     },
     {
       src: "https://rdk.d-robotics.cc/embed.min.js",
