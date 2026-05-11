@@ -231,4 +231,14 @@
 
 }
 
+/* 暂未上架：可点击唤起提示，不跳转外链 */
+.cardPending {
+  cursor: pointer;
+}
+
+.cardPending:focus-visible {
+  outline: 2px solid var(--card-accent);
+  outline-offset: 3px;
+}
+
 

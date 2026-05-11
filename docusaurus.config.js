@@ -12,9 +12,9 @@ const config = {
   favicon: "img/logo.png",
   url: "https://liqinglian01.github.io",
   // 必须与仓库名一致：GitHub Pages 项目站点路径为 /<repo>/
-  baseUrl: "/rdk_doc_manage1/",
+  baseUrl: "/rdk_doc_manager/",
   organizationName: "liqinglian01",
-  projectName: "rdk_doc_manage1",
+  projectName: "rdk_doc_manager",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 

@@ -68,6 +68,7 @@ function GroupSection({ group, items }) {
             versions={item.versions}
             external={item.external}
             accent={group.accent}
+            pendingRelease={item.pendingRelease}
           />
         ))}
       </div>

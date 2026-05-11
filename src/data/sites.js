@@ -5,6 +5,7 @@
  * - 新增/删除分类：修改 DOC_CENTER_CONFIG.categories
  * - 新增/删除文档入口：修改 DOC_CENTER_CONFIG.entries
  * - 首页、分组锚点、卡片数据均由该配置自动派生
+ * - pendingRelease: true 时点击卡片仅提示「文档待上架」，不跳转（RDK 用户手册 / TROS / Model Zoo / Magicbox / RDK Studio 等正常外链）
  */
 const DOC_CENTER_CONFIG = {
   categories: [
@@ -117,7 +118,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "product-rdk-manual",
       categoryId: "products",
-      href: "https://developer.d-robotics.cc/RDK",
+      href: "https://liqinglian01.github.io/rdk_x_doc1/RDK",
       zh: {
         title: "RDK X 系列用户手册",
         description: "RDK X3/X5 用户手册",
@@ -126,13 +127,14 @@ const DOC_CENTER_CONFIG = {
       en: {
         title: "RDK X3/X5 User Manual",
         description: "RDK X3/X5 Documentation",
-        href: "https://developer.d-robotics.cc/en/RDK",
+        href: "https://liqinglian01.github.io/rdk_x_doc1/en/RDK",
         tags: ["User Manual"],
       },
     },
     {
       id: "system-software-sdk",
       categoryId: "system-software",
+      pendingRelease: true,
       href: "https://developer.d-robotics.cc/sdk_doc/intro",
       zh: {
         title: "SDK",
@@ -149,7 +151,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "tros",
       categoryId: "robot-app",
-      href: "https://developer.d-robotics.cc/tros_doc/intro",
+      href: "https://liqinglian01.github.io/tros_x_doc/tros",
       zh: {
         title: "TROS",
         description: "面向机器人应用开发的用户手册。",
@@ -158,7 +160,7 @@ const DOC_CENTER_CONFIG = {
       en: {
         title: "TROS",
         description: "Unified framework for robot application development, synchronous release across platforms.",
-        href: "https://developer.d-robotics.cc/tros_doc/en/intro",
+        href: "https://liqinglian01.github.io/tros_x_doc/en/tros",
         tags: ["Multi-platform"],
       },
     },
@@ -179,6 +181,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "examples",
       categoryId: "examples",
+      pendingRelease: true,
       href: "https://developer.d-robotics.cc/samples_doc/intro",
       zh: {
         title: "应用开发示例",
@@ -207,6 +210,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "accessories",
       categoryId: "accessories",
+      pendingRelease: true,
       href: "https://developer.d-robotics.cc/accessories_doc/intro",
       zh: {
         title: "配件文档",
@@ -235,6 +239,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "software-xburn",
       categoryId: "software",
+      pendingRelease: true,
       href: "https://developer.d-robotics.cc/xburn_doc/intro",
       zh: {
         title: "Xburn",
@@ -249,6 +254,7 @@ const DOC_CENTER_CONFIG = {
     {
       id: "algorithm-toolchain",
       categoryId: "toolchain",
+      pendingRelease: true,
       href: "https://developer.d-robotics.cc/toolchain_doc/intro",
       zh: {
         title: "算法工具链",
@@ -285,6 +291,7 @@ function toSite(entry, locale) {
     href,
     tags: i18n.tags || [],
     external: /^https?:\/\//.test(href),
+    pendingRelease: Boolean(entry.pendingRelease),
   };
 }
 

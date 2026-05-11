@@ -3,7 +3,16 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./styles.module.css";
 
-export default function SiteCard({ title, description, href, tags, external, accent, versions }) {
+export default function SiteCard({
+  title,
+  description,
+  href,
+  tags,
+  external,
+  accent,
+  versions,
+  pendingRelease,
+}) {
   const { i18n } = useDocusaurusContext();
   const isEnglish = i18n.currentLocale === "en";
   const isExternal = external || /^https?:\/\//.test(href);
@@ -25,16 +34,26 @@ export default function SiteCard({ title, description, href, tags, external, acc
     ...((tags ?? []).map((t) => ({ text: t, kind: "plain" }))),
   ];
 
-  return (
-    <Link
-      className={styles.card}
-      {...linkProps}
-      style={accent ? { "--card-accent": accent } : undefined}
-    >
+  const pendingNotice = isEnglish
+    ? "This documentation is not yet available online. Stay tuned."
+    : "该文档暂未上架，敬请期待。";
+
+  const showPendingNotice = () => {
+    window.alert(pendingNotice);
+  };
+
+  const cardAccentStyle = accent ? { "--card-accent": accent } : undefined;
+
+  const content = (
+    <>
       <div className={styles.cardHeader}>
         <h3 className={styles.title}>
           {title}
-          {isExternal ? <span className={styles.externalIcon} aria-hidden>↗</span> : null}
+          {isExternal && !pendingRelease ? (
+            <span className={styles.externalIcon} aria-hidden>
+              ↗
+            </span>
+          ) : null}
         </h3>
         {allTags.length ? (
           <div className={styles.tags}>
@@ -49,11 +68,44 @@ export default function SiteCard({ title, description, href, tags, external, acc
       <p className={styles.description}>{description}</p>
       <div className={styles.cardFooter}>
         <span className={styles.cta}>
-          {isExternal
-            ? (isEnglish ? "Visit external link" : "访问外链")
-            : (isEnglish ? "Open documentation" : "进入文档")} →
+          {pendingRelease
+            ? isEnglish
+              ? "Coming soon →"
+              : "敬请期待 →"
+            : `${isExternal ? (isEnglish ? "Visit external link" : "访问外链") : isEnglish ? "Open documentation" : "进入文档"} →`}
         </span>
       </div>
+    </>
+  );
+
+  if (pendingRelease) {
+    return (
+      <div
+        role="button"
+        tabIndex={0}
+        className={`${styles.card} ${styles.cardPending}`}
+        style={cardAccentStyle}
+        onClick={showPendingNotice}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            showPendingNotice();
+          }
+        }}
+        aria-label={isEnglish ? `${title}, ${pendingNotice}` : `${title}，${pendingNotice}`}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      className={styles.card}
+      {...linkProps}
+      style={cardAccentStyle}
+    >
+      {content}
     </Link>
   );
 }
