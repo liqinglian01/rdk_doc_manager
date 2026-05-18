@@ -1,16 +1,71 @@
-import React, { useState, useEffect, useLayoutEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback, useMemo, useRef } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useLocation } from '@docusaurus/router';
+
+const FLOAT_TEXT_SIZE = 20;
+const FLOAT_COLLAPSED_LINE_HEIGHT = 22;
+const FLOAT_COLLAPSED_PADDING = 8;
+const FLOAT_COLLAPSED_WIDTH = 50;
+const FLOAT_EXPANDED_HEIGHT = 50;
+
+function computeCollapsedHeight(textLength) {
+  return Math.max(
+    110,
+    textLength * FLOAT_COLLAPSED_LINE_HEIGHT + FLOAT_COLLAPSED_PADDING * 2,
+  );
+}
 
 function computeBottomRight(textLength) {
   if (typeof window === 'undefined') {
     return { x: 0, y: 0 };
   }
-  const collapsedWidth = 40;
-  const collapsedHeight = Math.max(80, textLength * 15);
+  const collapsedWidth = FLOAT_COLLAPSED_WIDTH;
+  const collapsedHeight = computeCollapsedHeight(textLength);
   return {
     x: window.innerWidth - collapsedWidth - 10,
     y: window.innerHeight - collapsedHeight - 10,
   };
+}
+
+function normalizePath(path) {
+  if (!path) return '/';
+  const normalized = path.replace(/\/+$/, '');
+  return normalized || '/';
+}
+
+function resolveSitePath(pathname, baseUrl) {
+  const normalizedPathname = normalizePath(pathname);
+  const normalizedBaseUrl = normalizePath(baseUrl || '/');
+
+  if (normalizedBaseUrl === '/') {
+    return normalizedPathname;
+  }
+  if (normalizedPathname === normalizedBaseUrl) {
+    return '/';
+  }
+  if (normalizedPathname.startsWith(`${normalizedBaseUrl}/`)) {
+    return normalizedPathname.slice(normalizedBaseUrl.length);
+  }
+  return normalizedPathname;
+}
+
+function matchRule(path, rule) {
+  const normalizedPath = normalizePath(path);
+  const normalizedRule = normalizePath(rule);
+
+  if (normalizedRule === '/*') return true;
+
+  if (normalizedRule.endsWith('/*')) {
+    const prefix = normalizedRule.slice(0, -2);
+    return normalizedPath === prefix || normalizedPath.startsWith(`${prefix}/`);
+  }
+
+  return normalizedPath === normalizedRule;
+}
+
+function matchesAnyRule(path, rules) {
+  if (!Array.isArray(rules) || rules.length === 0) return false;
+  return rules.some((rule) => typeof rule === 'string' && matchRule(path, rule));
 }
 
 export default function FeedbackFloat() {
@@ -20,21 +75,46 @@ export default function FeedbackFloat() {
   const [isClick, setIsClick] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(true); // 默认为收齐状态
   const [isDraggingStarted, setIsDraggingStarted] = useState(false); // 标记是否真正开始拖动
+  const { siteConfig, i18n } = useDocusaurusContext();
   const location = useLocation();
   const floatRef = useRef(null);
   const startPosRef = useRef({ x: 0, y: 0 });
   const startFloatPosRef = useRef({ x: 0, y: 0 });
 
-  // 控制哪些页面显示 - 包括所有文档页面
-  const show = location.pathname.startsWith('/rdk_doc_filter/') || location.pathname.startsWith('/en/rdk_doc_filter/');
+  const feedbackCfg = siteConfig.customFields?.feedbackFloat || {};
+  const localeSurveyUrl =
+    feedbackCfg.questionnaireUrlByLocale &&
+    typeof feedbackCfg.questionnaireUrlByLocale === 'object'
+      ? feedbackCfg.questionnaireUrlByLocale[i18n.currentLocale]
+      : '';
+  const fallbackSurveyUrl =
+    typeof feedbackCfg.questionnaireUrl === 'string'
+      ? feedbackCfg.questionnaireUrl
+      : '';
+  const surveyUrl =
+    typeof localeSurveyUrl === 'string' && localeSurveyUrl.trim()
+      ? localeSurveyUrl.trim()
+      : fallbackSurveyUrl.trim();
+  const sitePath = useMemo(
+    () => resolveSitePath(location.pathname, siteConfig.baseUrl),
+    [location.pathname, siteConfig.baseUrl],
+  );
+  const showRules = Array.isArray(feedbackCfg.showOnPathRules) && feedbackCfg.showOnPathRules.length > 0
+    ? feedbackCfg.showOnPathRules
+    : ['/', '/en'];
+  const hideRules = Array.isArray(feedbackCfg.hideOnPathRules) ? feedbackCfg.hideOnPathRules : [];
+  const show =
+    feedbackCfg.enabled !== false &&
+    matchesAnyRule(sitePath, showRules) &&
+    !matchesAnyRule(sitePath, hideRules);
 
   // 限制拖动范围
   const clampPosition = useCallback((x, y, isCollapsedState, textLength) => {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     // 根据文本长度计算浮标大小
-    const floatWidth = isCollapsedState ? 40 : Math.max(100, textLength * 12); // 横排时根据文本长度计算宽度
-    const floatHeight = isCollapsedState ? Math.max(80, textLength * 15) : 40; // 竖排时根据文本长度计算高度
+    const floatWidth = isCollapsedState ? FLOAT_COLLAPSED_WIDTH : Math.max(120, textLength * 14); // 横排时根据文本长度计算宽度
+    const floatHeight = isCollapsedState ? computeCollapsedHeight(textLength) : FLOAT_EXPANDED_HEIGHT; // 竖排时根据文本长度计算高度
     
     // 限制在窗口内
     const clampedX = Math.max(10, Math.min(x, windowWidth - floatWidth - 10));
@@ -48,9 +128,9 @@ export default function FeedbackFloat() {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const edgeThreshold = 50;
-    const collapsedWidth = 40;
-    const collapsedHeight = Math.max(80, textLength * 15); // 根据文本长度计算竖排高度
-    const expandedSize = Math.max(100, textLength * 12); // 根据文本长度计算横排宽度
+    const collapsedWidth = FLOAT_COLLAPSED_WIDTH;
+    const collapsedHeight = computeCollapsedHeight(textLength); // 根据文本长度计算竖排高度
+    const expandedSize = Math.max(120, textLength * 14); // 根据文本长度计算横排宽度
     
     // 检查是否靠近左边缘
     if (x < edgeThreshold) {
@@ -65,7 +145,7 @@ export default function FeedbackFloat() {
     }
     
     // 检查是否靠近下边缘
-    if (windowHeight - y - 40 < edgeThreshold) {
+    if (windowHeight - y - FLOAT_EXPANDED_HEIGHT < edgeThreshold) {
       setIsCollapsed(true);
       return { x: windowWidth - collapsedWidth - 10, y: windowHeight - collapsedHeight - 10 };
     }
@@ -74,8 +154,7 @@ export default function FeedbackFloat() {
     return { x, y };
   }, []);
 
-  // 根据当前路径检测语言
-  const isEnglish = location.pathname.includes('/en/');
+  const isEnglish = i18n.currentLocale === 'en';
   const feedbackText = isEnglish ? 'Feedback' : '意见反馈';
   const textLength = feedbackText.length;
 
@@ -171,17 +250,17 @@ export default function FeedbackFloat() {
   const handleClick = (e) => {
     e.stopPropagation();
     if (isClick && !isDraggingStarted) {
-      // 只有当不是拖动时才打开反馈页面
-      window.open('https://github.com/liqinglian01/rdk_doc_filter/issues', '_blank');
-      // 点击时保持收齐状态
+      if (surveyUrl) {
+        window.open(surveyUrl, '_blank');
+      }
     }
   };
 
   // 根据文本长度计算浮标大小
-  const collapsedWidth = 40;
-  const collapsedHeight = Math.max(80, textLength * 15); // 竖排时根据文本长度计算高度
-  const expandedWidth = Math.max(100, textLength * 12); // 横排时根据文本长度计算宽度
-  const expandedHeight = 40;
+  const collapsedWidth = FLOAT_COLLAPSED_WIDTH;
+  const collapsedHeight = computeCollapsedHeight(textLength); // 竖排时根据文本长度计算高度
+  const expandedWidth = Math.max(120, textLength * 14); // 横排时根据文本长度计算宽度
+  const expandedHeight = FLOAT_EXPANDED_HEIGHT;
 
   return (
     <div
@@ -220,14 +299,15 @@ export default function FeedbackFloat() {
       title={feedbackText}
     >
       <span style={{ 
-        fontSize: '14px', 
+        fontSize: `${FLOAT_TEXT_SIZE}px`, 
         fontWeight: 'bold',
         whiteSpace: 'nowrap',
         textAlign: 'center',
+        letterSpacing: isCollapsed ? '2px' : '1px',
         writingMode: isCollapsed ? 'vertical-rl' : 'horizontal-tb',
         textOrientation: 'upright',
-        lineHeight: isCollapsed ? '20px' : '1',
-        padding: isCollapsed ? '5px' : '0',
+        lineHeight: isCollapsed ? `${FLOAT_COLLAPSED_LINE_HEIGHT}px` : '1',
+        padding: isCollapsed ? `${FLOAT_COLLAPSED_PADDING}px` : '0',
       }}>
         {feedbackText}
       </span>

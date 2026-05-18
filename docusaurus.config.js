@@ -17,6 +17,23 @@ const config = {
   projectName: "rdk_doc_manager",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
+  customFields: {
+    feedbackFloat: {
+      enabled: true,
+      questionnaireUrl: "https://horizonrobotics.feishu.cn/wiki/EZs4w6IxMixCDbklSuvcYHhtnaf",
+      questionnaireUrlByLocale: {
+        "zh-Hans": "https://horizonrobotics.feishu.cn/wiki/EZs4w6IxMixCDbklSuvcYHhtnaf?table=tblIRpryehWqWy88&view=vewEkEvyTe",
+        en: "https://horizonrobotics.feishu.cn/wiki/EZs4w6IxMixCDbklSuvcYHhtnaf?table=tbl3YxZ2U4e0vkX5&view=vewEkEvyTe",
+      },
+      // 站点内路径规则（基于 baseUrl 之后的路径）：
+      // - "/" 精确匹配中文首页
+      // - "/en" 精确匹配英文首页
+      // - "/*" 匹配全部页面
+      // - "/en/*" 匹配英文全部页面
+      showOnPathRules: ["/", "/en"],
+      hideOnPathRules: [],
+    },
+  },
 
   scripts: [
     {
@@ -79,10 +96,17 @@ const config = {
         },
         items: [
           {
+            href: "https://developer.d-robotics.cc/",
+            label: "Community",
+            position: "left",
+          },
+
+          {
             href: "https://github.com/D-Robotics",
             label: "GitHub",
             position: "right",
           },
+
           {
             type: "localeDropdown",
             position: "right",
