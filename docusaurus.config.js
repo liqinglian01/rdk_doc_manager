@@ -17,6 +17,16 @@ const config = {
   projectName: "rdk_doc_manager",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
+  headTags: [
+    {
+      tagName: "script",
+      attributes: {
+        defer: "defer",
+        src: "https://cloud.umami.is/script.js",
+        "data-website-id": "fbd84605-92b5-43f6-aa3e-4861b62ea8df",
+      },
+    },
+  ],
   customFields: {
     feedbackFloat: {
       enabled: true,
